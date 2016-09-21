@@ -42,7 +42,58 @@ If you want to simply download the file to be used in the browser you can find t
 
 ## API
 
-TODO: Document
+The API is extremely simple and is designed to make it as easy as possible to implement traditional inheritance.
+
+``` javascript
+Oopsy.extend([constructor][, prototype][, statics])
+```
+
+It is very flexible and can be used to extend *classes*:
+
+``` javascript
+var BaseObject = Oopsy.extend(function(options) {
+  this.options = options || {}
+})
+
+var ChildObject = BaseObject.extend({
+  getOption: function(name) {
+    return this.options[name]
+  },
+  setOption: function(name, value) {
+    this.options[name] = value
+  }
+})
+
+var Person = ChildObject.extend(function(name, options) {
+  Person.super_.call(this, options)
+
+  this.name = name
+
+  Person.people.push(this)
+}, {
+  greet: function(name) {
+    return 'Hello ' + name + ', my name is ' + this.name
+  }
+}, {
+  people: []
+})
+```
+
+All constructors extended by Oopsy are given a static `super_` property which references the super constructor. 
+
+Also, this can be used to extend existing *classes* such as `EventEmitter`:
+
+``` javascript
+var EventEmitter = require('events').EventEmitter
+var Oopsy = require('oopsy')
+
+var BaseObject = Oopsy.extend(function() {
+  EventEmitter.call(this)
+}, EventEmitter.prototype, EventEmitter)
+```
+
+However, this last approach has the caveats of `instanceof` not identifying this kind of inheritance and `super_` will
+only reference the constructor that is extended.
 
 ## Bugs
 
