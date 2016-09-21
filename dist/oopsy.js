@@ -124,7 +124,7 @@
    * If <code>constructor</code> is provided, it will be used as the constructor for the child, otherwise a simple
    * constructor which only calls the super constructor will be used instead.
    *
-   * The super prototype can be accessed via a special <code>__super</code> property on the child constructor.
+   * The super constructor can be accessed via a special <code>__super</code> property on the child constructor.
    *
    * @param {Function} [constructor] - the constructor for the child
    * @param {Object} [prototype] - the prototype properties to be defined for the child
@@ -149,7 +149,7 @@
     constructor.prototype = create(superConstructor.prototype, prototype)
     constructor.prototype.constructor = constructor
 
-    constructor.__super = superConstructor.prototype
+    constructor.__super = superConstructor
 
     return constructor
   }

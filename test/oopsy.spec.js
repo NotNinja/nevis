@@ -21,3 +21,14 @@
  */
 
 'use strict'
+
+var expect = require('chai').expect
+
+var Oopsy = require('../lib/oopsy')
+
+describe('Oopsy', function() {
+  it('should be a constructor', function() {
+    expect(Oopsy).to.be.a('function')
+    expect(new Oopsy()).to.be.an('object')
+  })
+})
