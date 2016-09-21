@@ -1,6 +1,6 @@
 # Contributing
 
-If you have any questions about [OOPsy](https://github.com/Skelp/oopsy) please feel free to
+If you have any questions about [Oopsy](https://github.com/Skelp/oopsy) please feel free to
 [raise an issue](https://github.com/Skelp/oopsy/issues/new).
 
 Please [search existing issues](https://github.com/Skelp/oopsy/issues) for the same feature and/or issue before raising
@@ -15,6 +15,14 @@ $ npm install
 # run test suite
 $ npm test
 ```
+
+If you're using a version of [Node.js](https://nodejs.org) that is older than 0.12, then linting is not performed by
+this step. Please consider upgrading to at least 0.12 or your pull request may fail on the CI build.
+
+Likewise, [Node.js](https://nodejs.org) versions older than 0.10 will also not be able to compile the source code using
+[Rollup](http://rollupjs.org) so the test suite will not be executed against any changes you've made to `lib/oopsy.js`.
+For this reason, 0.10 is not supported from a development perspective, but our CI builds do run the test suite against
+the pre-compiled code for this version to ensure that it works.
 
 All pull requests should be made to the `develop` branch.
 

@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define('oopsy', factory) :
-  (global.OOPsy = factory());
+  (global.Oopsy = factory());
 }(this, (function () { 'use strict';
 
   /*
@@ -30,7 +30,7 @@
    * A bare-bones constructor for surrogate prototype swapping.
    *
    * @private
-   * @class Constructor
+   * @constructor Constructor
    */
   var Constructor = function() {}
   /**
@@ -113,9 +113,9 @@
    * The base constructor from which all others should extend.
    *
    * @public
-   * @class OOPsy
+   * @constructor Oopsy
    */
-  function OOPsy() {}
+  function Oopsy() {}
 
   /**
    * Extends the constructor to which this method is associated with the <code>prototype</code> and/or
@@ -124,7 +124,7 @@
    * If <code>constructor</code> is provided, it will be used as the constructor for the child, otherwise a simple
    * constructor which only calls the super constructor will be used instead.
    *
-   * The super prototype can be accessed via a special <code>__super</code> property on the child constructor.
+   * The super constructor can be accessed via a special <code>super_</code> property on the child constructor.
    *
    * @param {Function} [constructor] - the constructor for the child
    * @param {Object} [prototype] - the prototype properties to be defined for the child
@@ -133,7 +133,7 @@
    * @public
    * @static
    */
-  OOPsy.extend = function(constructor, prototype, statics) {
+  Oopsy.extend = function(constructor, prototype, statics) {
     var superConstructor = this
 
     if (typeof constructor !== 'function') {
@@ -149,12 +149,12 @@
     constructor.prototype = create(superConstructor.prototype, prototype)
     constructor.prototype.constructor = constructor
 
-    constructor.__super = superConstructor.prototype
+    constructor.super_ = superConstructor
 
     return constructor
   }
 
-  var oopsy = OOPsy
+  var oopsy = Oopsy
 
   return oopsy;
 
