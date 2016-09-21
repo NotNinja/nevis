@@ -1,0 +1,41 @@
+{
+  "name": "oopsy",
+  "version": "0.1.0",
+  "description": "Simple OOP for JavaScript",
+  "homepage": "https://github.com/Skelp/oopsy",
+  "authors": [
+    {
+      "name": "Alasdair Mercer",
+      "email": "alasdair@skelp.io",
+      "homepage": "https://skelp.io"
+    }
+  ],
+  "license": "MIT",
+  "keywords": [
+    "oop",
+    "class",
+    "extend",
+    "inheritance"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Skelp/oopsy.git"
+  },
+  "main": "dist/oopsy.js",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "ignore": [
+    "lib/",
+    "test/",
+    ".*",
+    "AUTHORS.md",
+    "CHANGES.md",
+    "CONTRIBUTING.md",
+    "Gruntfile.js",
+    "package.json",
+    "README.md"
+  ]
+}

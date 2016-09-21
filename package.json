@@ -1,0 +1,46 @@
+{
+  "name": "oopsy",
+  "version": "0.1.0alpha",
+  "description": "Simple OOP for JavaScript",
+  "homepage": "https://github.com/Skelp/oopsy",
+  "bugs": {
+    "url": "https://github.com/Skelp/oopsy/issues"
+  },
+  "author": {
+    "name": "Alasdair Mercer",
+    "email": "alasdair@skelp.io",
+    "url": "https://skelp.io"
+  },
+  "license": "MIT",
+  "keywords": [
+    "oop",
+    "class",
+    "extend",
+    "inheritance"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Skelp/oopsy.git"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint-config-skelp": "^0.1.5",
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-eslint": "^18.1.0",
+    "grunt-mocha-test": "^0.13.2",
+    "grunt-rollup": "^0.8.0",
+    "load-grunt-tasks": "^3.5.0",
+    "mocha": "^3.0.2",
+    "rollup-plugin-commonjs": "^5.0.4",
+    "rollup-plugin-uglify": "^1.0.1",
+    "semver": "^5.3.0"
+  },
+  "main": "dist/oopsy.js",
+  "scripts": {
+    "build": "grunt build",
+    "test": "grunt test"
+  }
+}

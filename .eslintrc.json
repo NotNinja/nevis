@@ -1,0 +1,10 @@
+{
+  "extends": "skelp/v2/es5",
+  "env": {
+    "node": true
+  },
+  "rules": {
+    "no-empty-function": "off",
+    "no-invalid-this": "off"
+  }
+}
