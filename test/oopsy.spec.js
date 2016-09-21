@@ -22,6 +22,7 @@
 
 'use strict'
 
+var EventEmitter = require('events').EventEmitter
 var expect = require('chai').expect
 
 var Oopsy = require('../lib/oopsy')
@@ -99,6 +100,23 @@ describe('Oopsy', function() {
       expect(Child.super_).to.equal(SubBase)
       expect(SubBase.super_).to.equal(Base)
       expect(Base.super_).to.equal(Oopsy)
+    })
+
+    it('should allow semi-inheritance of existing classes', function() {
+      var Child = Base.extend(function() {
+        Child.super_.apply(this, arguments)
+
+        EventEmitter.call(this)
+      }, EventEmitter.prototype, EventEmitter)
+      var child = new Child('Foo')
+
+      expect(Child.super_).to.equal(Base)
+      expect(child).to.be.an.instanceof(Oopsy)
+      expect(child).to.be.an.instanceof(Base)
+      expect(child).to.be.an.instanceof(Child)
+      expect(child).not.to.be.an.instanceof(EventEmitter)
+      expect(child.name).to.equal('Foo')
+      expect(child.listenerCount()).to.equal(0)
     })
 
     context('when no constructor is passed', function() {
