@@ -116,7 +116,7 @@ describe('Oopsy', function() {
       expect(child).to.be.an.instanceof(Child)
       expect(child).not.to.be.an.instanceof(EventEmitter)
       expect(child.name).to.equal('Foo')
-      expect(child.listenerCount()).to.equal(0)
+      expect(child.listeners()).to.eql([])
     })
 
     context('when no constructor is passed', function() {
