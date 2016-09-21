@@ -101,8 +101,8 @@ module.exports = function(grunt) {
 
   require('load-grunt-tasks')(grunt)
 
-  var buildTasks = [ 'clean', 'rollup' ]
-  var testTasks = [ 'mochaTest' ]
+  var buildTasks = [ 'compile' ]
+  var testTasks = [ 'compile', 'mochaTest' ]
 
   if (semver.satisfies(process.version, '>=4')) {
     buildTasks.unshift('eslint')
@@ -113,5 +113,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', [ 'build' ])
   grunt.registerTask('build', buildTasks)
+  grunt.registerTask('compile', [ 'clean', 'rollup' ])
   grunt.registerTask('test', testTasks)
 }
