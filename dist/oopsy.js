@@ -30,7 +30,7 @@
    * A bare-bones constructor for surrogate prototype swapping.
    *
    * @private
-   * @class Constructor
+   * @constructor Constructor
    */
   var Constructor = function() {}
   /**
@@ -113,7 +113,7 @@
    * The base constructor from which all others should extend.
    *
    * @public
-   * @class Oopsy
+   * @constructor Oopsy
    */
   function Oopsy() {}
 
