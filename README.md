@@ -8,7 +8,7 @@
                                                     .o..P'
                                                     `Y8P'
 
-[OOPsy](https+://github.com/Skelp/oopsy) makes it easier to use the Object-Orientated Programming (OOP) model in
+[OOPsy](https://github.com/Skelp/oopsy) makes it easier to use the Object-Orientated Programming (OOP) model in
 JavaScript.
 
 [![Build Status](https://img.shields.io/travis/Skelp/oopsy/develop.svg?style=flat-square)](https://travis-ci.org/Skelp/oopsy)
