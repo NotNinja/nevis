@@ -29,7 +29,7 @@ Install using the package manager for your desired environment(s):
 ``` bash
 $ npm install --save oopsy
 # OR:
-$ bower install --save oopsy
+$ bower install --save skelp-oopsy
 ```
 
 You'll need to have at least [Node.js](https://nodejs.org) installed and you'll only need [Bower](https://bower.io) if
