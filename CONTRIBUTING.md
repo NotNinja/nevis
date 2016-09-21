@@ -1,6 +1,6 @@
 # Contributing
 
-If you have any questions about [OOPsy](https://github.com/Skelp/oopsy) please feel free to
+If you have any questions about [Oopsy](https://github.com/Skelp/oopsy) please feel free to
 [raise an issue](https://github.com/Skelp/oopsy/issues/new).
 
 Please [search existing issues](https://github.com/Skelp/oopsy/issues) for the same feature and/or issue before raising

@@ -1,14 +1,14 @@
-      .oooooo.     .oooooo.   ooooooooo.
-     d8P'  `Y8b   d8P'  `Y8b  `888   `Y88.
-    888      888 888      888  888   .d88'  .oooo.o oooo    ooo
-    888      888 888      888  888ooo88P'  d88(  "8  `88.  .8'
-    888      888 888      888  888         `"Y88b.    `88..8'
-    `88b    d88' `88b    d88'  888         o.  )88b    `888'
-     `Y8bood8P'   `Y8bood8P'  o888o        8""888P'     .8'
-                                                    .o..P'
-                                                    `Y8P'
+      .oooooo.
+     d8P'  `Y8b
+    888      888  .ooooo.  oo.ooooo.   .oooo.o oooo    ooo
+    888      888 d88' `88b  888' `88b d88(  "8  `88.  .8'
+    888      888 888   888  888   888 `"Y88b.    `88..8'
+    `88b    d88' 888   888  888   888 o.  )88b    `888'
+     `Y8bood8P'  `Y8bod8P'  888bod8P' 8""888P'     .8'
+                            888                .o..P'
+                           o888o               `Y8P'
 
-[OOPsy](https://github.com/Skelp/oopsy) makes it easier to use the Object-Orientated Programming (OOP) model in
+[Oopsy](https://github.com/Skelp/oopsy) makes it easier to use the Object-Orientated Programming (OOP) model in
 JavaScript.
 
 [![Build Status](https://img.shields.io/travis/Skelp/oopsy/develop.svg?style=flat-square)](https://travis-ci.org/Skelp/oopsy)
@@ -46,7 +46,7 @@ TODO: Document
 
 ## Bugs
 
-If you have any problems with OOPsy or would like to see changes currently in development you can do so
+If you have any problems with Oopsy or would like to see changes currently in development you can do so
 [here](https://github.com/Skelp/oopsy/issues).
 
 ## Contributors
@@ -55,7 +55,7 @@ If you want to contribute, you're a legend! Information on how you can do so can
 [CONTRIBUTING.md](https://github.com/Skelp/oopsy/blob/master/CONTRIBUTING.md). We want your suggestions and pull
 requests!
 
-A list of OOPsy contributors can be found in [AUTHORS.md](https://github.com/Skelp/oopsy/blob/master/AUTHORS.md).
+A list of Oopsy contributors can be found in [AUTHORS.md](https://github.com/Skelp/oopsy/blob/master/AUTHORS.md).
 
 ## License
 

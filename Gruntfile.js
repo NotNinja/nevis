@@ -51,7 +51,7 @@ module.exports = function(grunt) {
         options: {
           format: 'umd',
           moduleId: 'oopsy',
-          moduleName: 'OOPsy',
+          moduleName: 'Oopsy',
           sourceMap: true,
           sourceMapRelativePaths: true,
           plugins: function() {
@@ -68,10 +68,10 @@ module.exports = function(grunt) {
         options: {
           format: 'umd',
           moduleId: 'oopsy',
-          moduleName: 'OOPsy',
+          moduleName: 'Oopsy',
           sourceMap: true,
           sourceMapRelativePaths: true,
-          banner: '/*! OOPsy v<%= pkg.version %> | (C) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %> | MIT License */',
+          banner: '/*! Oopsy v<%= pkg.version %> | (C) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %> | MIT License */',
           plugins: function() {
             return [
               commonjs(),

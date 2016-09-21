@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define('oopsy', factory) :
-  (global.OOPsy = factory());
+  (global.Oopsy = factory());
 }(this, (function () { 'use strict';
 
   /*
@@ -113,9 +113,9 @@
    * The base constructor from which all others should extend.
    *
    * @public
-   * @class OOPsy
+   * @class Oopsy
    */
-  function OOPsy() {}
+  function Oopsy() {}
 
   /**
    * Extends the constructor to which this method is associated with the <code>prototype</code> and/or
@@ -133,7 +133,7 @@
    * @public
    * @static
    */
-  OOPsy.extend = function(constructor, prototype, statics) {
+  Oopsy.extend = function(constructor, prototype, statics) {
     var superConstructor = this
 
     if (typeof constructor !== 'function') {
@@ -154,7 +154,7 @@
     return constructor
   }
 
-  var oopsy = OOPsy
+  var oopsy = Oopsy
 
   return oopsy;
 
