@@ -32,7 +32,6 @@
     "grunt-eslint": "^18.1.0",
     "grunt-mocha-test": "^0.13.2",
     "grunt-rollup": "^0.8.0",
-    "load-grunt-tasks": "^3.5.0",
     "mocha": "^3.0.2",
     "rollup-plugin-commonjs": "^5.0.4",
     "rollup-plugin-uglify": "^1.0.1",

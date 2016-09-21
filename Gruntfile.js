@@ -21,20 +21,12 @@
  */
 
 module.exports = function(grunt) {
-  var commonjs = require('rollup-plugin-commonjs')
+  var commonjs
   var semver = require('semver')
-  var uglify = require('rollup-plugin-uglify')
+  var uglify
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-
-    clean: {
-      build: [ 'dist/**' ]
-    },
-
-    eslint: {
-      target: [ 'lib/**/*.js', 'test/**/*.js' ]
-    },
 
     mochaTest: {
       test: {
@@ -46,51 +38,6 @@ module.exports = function(grunt) {
       }
     },
 
-    rollup: {
-      umdDevelopment: {
-        options: {
-          format: 'umd',
-          moduleId: 'oopsy',
-          moduleName: 'Oopsy',
-          sourceMap: true,
-          sourceMapRelativePaths: true,
-          plugins: function() {
-            return [
-              commonjs()
-            ]
-          }
-        },
-        files: {
-          'dist/oopsy.js': 'lib/oopsy.js'
-        }
-      },
-      umdProduction: {
-        options: {
-          format: 'umd',
-          moduleId: 'oopsy',
-          moduleName: 'Oopsy',
-          sourceMap: true,
-          sourceMapRelativePaths: true,
-          banner: '/*! Oopsy v<%= pkg.version %> | (C) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %> | MIT License */',
-          plugins: function() {
-            return [
-              commonjs(),
-              uglify({
-                output: {
-                  comments: function(node, comment) {
-                    return comment.type === 'comment2' && /^\!/.test(comment.value)
-                  }
-                }
-              })
-            ]
-          }
-        },
-        files: {
-          'dist/oopsy.min.js': 'lib/oopsy.js'
-        }
-      }
-    },
-
     watch: {
       all: {
         files: [ 'lib/**/*.js', 'test/**/*.js' ],
@@ -99,20 +46,91 @@ module.exports = function(grunt) {
     }
   })
 
-  require('load-grunt-tasks')(grunt)
-
   var buildTasks = [ 'compile' ]
+  var compileTasks = []
   var testTasks = [ 'compile', 'mochaTest' ]
+
+  if (semver.satisfies(process.version, '>=0.12')) {
+    commonjs = require('rollup-plugin-commonjs')
+    uglify = require('rollup-plugin-uglify')
+
+    compileTasks.push('clean', 'rollup')
+
+    grunt.config.merge({
+      clean: {
+        build: [ 'dist/**' ]
+      },
+
+      rollup: {
+        umdDevelopment: {
+          options: {
+            format: 'umd',
+            moduleId: 'oopsy',
+            moduleName: 'Oopsy',
+            sourceMap: true,
+            sourceMapRelativePaths: true,
+            plugins: function() {
+              return [
+                commonjs()
+              ]
+            }
+          },
+          files: {
+            'dist/oopsy.js': 'lib/oopsy.js'
+          }
+        },
+        umdProduction: {
+          options: {
+            format: 'umd',
+            moduleId: 'oopsy',
+            moduleName: 'Oopsy',
+            sourceMap: true,
+            sourceMapRelativePaths: true,
+            banner: '/*! Oopsy v<%= pkg.version %> | (C) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %> | MIT License */',
+            plugins: function() {
+              return [
+                commonjs(),
+                uglify({
+                  output: {
+                    comments: function(node, comment) {
+                      return comment.type === 'comment2' && /^\!/.test(comment.value)
+                    }
+                  }
+                })
+              ]
+            }
+          },
+          files: {
+            'dist/oopsy.min.js': 'lib/oopsy.js'
+          }
+        }
+      }
+    })
+
+    grunt.loadNpmTasks('grunt-contrib-clean')
+    grunt.loadNpmTasks('grunt-rollup')
+  } else {
+    grunt.log.writeln('"clean" and "rollup" tasks are disabled because Node.js version is <0.12! Please consider upgrading Node.js...')
+  }
 
   if (semver.satisfies(process.version, '>=4')) {
     buildTasks.unshift('eslint')
     testTasks.unshift('eslint')
+
+    grunt.config.set('eslint', {
+      target: [ 'lib/**/*.js', 'test/**/*.js' ]
+    })
+
+    grunt.loadNpmTasks('grunt-eslint')
   } else {
     grunt.log.writeln('"eslint" task is disabled because Node.js version is <4! Please consider upgrading Node.js...')
   }
 
+  grunt.loadNpmTasks('grunt-contrib-watch')
+  grunt.loadNpmTasks('grunt-mocha-test')
+
   grunt.registerTask('default', [ 'build' ])
   grunt.registerTask('build', buildTasks)
-  grunt.registerTask('compile', [ 'clean', 'rollup' ])
+  grunt.registerTask('compile', compileTasks)
   grunt.registerTask('test', testTasks)
 }
