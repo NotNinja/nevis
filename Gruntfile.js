@@ -102,17 +102,24 @@ module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt)
 
   var buildTasks = [ 'compile' ]
+  var compileTasks = []
   var testTasks = [ 'compile', 'mochaTest' ]
+
+  if (semver.satisfies(process.version, '>=0.12')) {
+    compileTasks.push('clean', 'rollup')
+  } else {
+    grunt.log.writeln('"compile" task is disabled because Node.js version is <0.12! Please consider upgrading Node.js...')
+  }
 
   if (semver.satisfies(process.version, '>=4')) {
     buildTasks.unshift('eslint')
     testTasks.unshift('eslint')
   } else {
-    grunt.log.writeln('eslint task is disabled because Node.js version is too low!')
+    grunt.log.writeln('"eslint" task is disabled because Node.js version is <4! Please consider upgrading Node.js...')
   }
 
   grunt.registerTask('default', [ 'build' ])
   grunt.registerTask('build', buildTasks)
-  grunt.registerTask('compile', [ 'clean', 'rollup' ])
+  grunt.registerTask('compile', compileTasks)
   grunt.registerTask('test', testTasks)
 }
