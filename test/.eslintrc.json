@@ -2,5 +2,9 @@
   "extends": "../.eslintrc.json",
   "env": {
     "mocha": true
+  },
+  "rules": {
+    "no-prototype-builtins": "off",
+    "no-unused-expressions": "off"
   }
 }
