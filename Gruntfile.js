@@ -40,7 +40,7 @@ module.exports = function(grunt) {
 
     watch: {
       all: {
-        files: [ 'lib/**/*.js', 'test/**/*.js' ],
+        files: [ 'src/**/*.js', 'test/**/*.js' ],
         tasks: [ 'build', 'mochaTest' ]
       }
     }
@@ -76,7 +76,7 @@ module.exports = function(grunt) {
             }
           },
           files: {
-            'dist/oopsy.js': 'lib/oopsy.js'
+            'dist/oopsy.js': 'src/oopsy.js'
           }
         },
         umdProduction: {
@@ -101,7 +101,7 @@ module.exports = function(grunt) {
             }
           },
           files: {
-            'dist/oopsy.min.js': 'lib/oopsy.js'
+            'dist/oopsy.min.js': 'src/oopsy.js'
           }
         }
       }
@@ -118,7 +118,7 @@ module.exports = function(grunt) {
     testTasks.unshift('eslint')
 
     grunt.config.set('eslint', {
-      target: [ 'lib/**/*.js', 'test/**/*.js' ]
+      target: [ 'src/**/*.js', 'test/**/*.js' ]
     })
 
     grunt.loadNpmTasks('grunt-eslint')

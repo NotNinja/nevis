@@ -30,23 +30,23 @@
    * A bare-bones constructor for surrogate prototype swapping.
    *
    * @private
-   * @constructor Constructor
+   * @constructor
    */
-  var Constructor = function() {}
+  var Constructor = function() {};
   /**
    * A reference to <code>Object.prototype.hasOwnProperty</code>.
    *
    * @private
    * @type {Function}
    */
-  var hasOwnProperty = Object.prototype.hasOwnProperty
+  var hasOwnProperty = Object.prototype.hasOwnProperty;
   /**
    * A reference to <code>Array.prototype.slice</code>.
    *
    * @private
    * @type {Function}
    */
-  var slice = Array.prototype.slice
+  var slice = Array.prototype.slice;
 
   /**
    * Extends the specified <code>target</code> object with the properties in each of the <code>sources</code> provided.
@@ -66,17 +66,17 @@
       return
     }
 
-    sources = slice.call(arguments, 2)
+    sources = slice.call(arguments, 2);
 
-    var property
-    var source
+    var property;
+    var source;
 
     for (var i = 0, length = sources.length; i < length; i++) {
-      source = sources[i]
+      source = sources[i];
 
       for (property in source) {
         if (!own || hasOwnProperty.call(source, property)) {
-          target[property] = source[property]
+          target[property] = source[property];
         }
       }
     }
@@ -93,17 +93,17 @@
    * @private
    */
   function create(prototype, properties) {
-    var result
+    var result;
     if (typeof Object.create === 'function') {
-      result = Object.create(prototype)
+      result = Object.create(prototype);
     } else {
-      Constructor.prototype = prototype
-      result = new Constructor()
-      Constructor.prototype = null
+      Constructor.prototype = prototype;
+      result = new Constructor();
+      Constructor.prototype = null;
     }
 
     if (properties) {
-      extend(true, result, properties)
+      extend(true, result, properties);
     }
 
     return result
@@ -113,7 +113,7 @@
    * The base constructor from which all others should extend.
    *
    * @public
-   * @constructor Oopsy
+   * @constructor
    */
   function Oopsy() {}
 
@@ -134,29 +134,27 @@
    * @static
    */
   Oopsy.extend = function(constructor, prototype, statics) {
-    var superConstructor = this
+    var superConstructor = this;
 
     if (typeof constructor !== 'function') {
-      statics = prototype
-      prototype = constructor
+      statics = prototype;
+      prototype = constructor;
       constructor = function() {
         return superConstructor.apply(this, arguments)
-      }
+      };
     }
 
-    extend(false, constructor, superConstructor, statics)
+    extend(false, constructor, superConstructor, statics);
 
-    constructor.prototype = create(superConstructor.prototype, prototype)
-    constructor.prototype.constructor = constructor
+    constructor.prototype = create(superConstructor.prototype, prototype);
+    constructor.prototype.constructor = constructor;
 
-    constructor.super_ = superConstructor
+    constructor.super_ = superConstructor;
 
     return constructor
-  }
+  };
 
-  var oopsy = Oopsy
-
-  return oopsy;
+  return Oopsy;
 
 })));
 

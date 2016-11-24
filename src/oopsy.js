@@ -20,13 +20,11 @@
  * SOFTWARE.
  */
 
-'use strict'
-
 /**
  * A bare-bones constructor for surrogate prototype swapping.
  *
  * @private
- * @constructor Constructor
+ * @constructor
  */
 var Constructor = function() {}
 /**
@@ -109,9 +107,9 @@ function create(prototype, properties) {
  * The base constructor from which all others should extend.
  *
  * @public
- * @constructor Oopsy
+ * @constructor
  */
-function Oopsy() {}
+export default function Oopsy() {}
 
 /**
  * Extends the constructor to which this method is associated with the <code>prototype</code> and/or
@@ -149,5 +147,3 @@ Oopsy.extend = function(constructor, prototype, statics) {
 
   return constructor
 }
-
-module.exports = Oopsy
