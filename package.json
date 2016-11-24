@@ -29,7 +29,7 @@
     "grunt-cli": "^1.2.0",
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-eslint": "^18.1.0",
+    "grunt-eslint": "^19.0.0",
     "grunt-mocha-test": "^0.13.2",
     "grunt-rollup": "^0.8.0",
     "mocha": "^3.0.2",

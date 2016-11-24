@@ -1,5 +1,5 @@
 {
-  "extends": "skelp/v2/es5",
+  "extends": "skelp/v3/es5",
   "env": {
     "node": true
   },
