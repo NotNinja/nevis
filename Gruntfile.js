@@ -21,7 +21,6 @@
  */
 
 module.exports = function(grunt) {
-  var commonjs
   var semver = require('semver')
   var uglify
 
@@ -51,7 +50,6 @@ module.exports = function(grunt) {
   var testTasks = [ 'compile', 'mochaTest' ]
 
   if (semver.satisfies(process.version, '>=0.12')) {
-    commonjs = require('rollup-plugin-commonjs')
     uglify = require('rollup-plugin-uglify')
 
     compileTasks.push('clean', 'rollup')
@@ -68,12 +66,7 @@ module.exports = function(grunt) {
             moduleId: 'oopsy',
             moduleName: 'Oopsy',
             sourceMap: true,
-            sourceMapRelativePaths: true,
-            plugins: function() {
-              return [
-                commonjs()
-              ]
-            }
+            sourceMapRelativePaths: true
           },
           files: {
             'dist/oopsy.js': 'src/oopsy.js'
@@ -89,7 +82,6 @@ module.exports = function(grunt) {
             banner: '/*! Oopsy v<%= pkg.version %> | (C) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %> | MIT License */',
             plugins: function() {
               return [
-                commonjs(),
                 uglify({
                   output: {
                     comments: function(node, comment) {
