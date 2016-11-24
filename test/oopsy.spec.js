@@ -25,7 +25,7 @@
 var EventEmitter = require('events').EventEmitter
 var expect = require('chai').expect
 
-var Oopsy = require('../lib/oopsy')
+var Oopsy = require('../dist/oopsy')
 
 describe('Oopsy', function() {
   it('should be a constructor', function() {

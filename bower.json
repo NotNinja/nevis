@@ -1,6 +1,6 @@
 {
   "name": "skelp-oopsy",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Simple OOP for JavaScript",
   "homepage": "https://github.com/Skelp/oopsy",
   "authors": [
@@ -28,7 +28,7 @@
     "node"
   ],
   "ignore": [
-    "lib/",
+    "src/",
     "test/",
     ".*",
     "AUTHORS.md",

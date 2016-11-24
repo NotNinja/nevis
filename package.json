@@ -1,6 +1,6 @@
 {
   "name": "oopsy",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Simple OOP for JavaScript",
   "homepage": "https://github.com/Skelp/oopsy",
   "bugs": {
@@ -29,14 +29,14 @@
     "grunt-cli": "^1.2.0",
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-eslint": "^18.1.0",
+    "grunt-eslint": "^19.0.0",
     "grunt-mocha-test": "^0.13.2",
-    "grunt-rollup": "^0.8.0",
-    "mocha": "^3.0.2",
-    "rollup-plugin-commonjs": "^5.0.4",
+    "grunt-rollup": "^1.0.1",
+    "mocha": "^3.1.2",
     "rollup-plugin-uglify": "^1.0.1",
     "semver": "^5.3.0"
   },
+  "jsnext:main": "src/oopsy.js",
   "main": "dist/oopsy.js",
   "scripts": {
     "build": "grunt build",
