@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, Skelp
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,25 +25,29 @@
 var EventEmitter = require('events').EventEmitter
 var expect = require('chai').expect
 
-var Oopsy = require('../dist/oopsy')
+var Nevis = require('../src/nevis')
 
-describe('Oopsy', function() {
+describe('Nevis', function() {
   it('should be a constructor', function() {
-    expect(Oopsy).to.be.a('function')
-    expect(new Oopsy()).to.be.an('object')
+    expect(Nevis).to.be.a('function')
+    expect(new Nevis()).to.be.an('object')
   })
 
   describe('.extend', function() {
-    var Base = Oopsy.extend(function(name) {
-      this.name = name
-    }, {
-      greet: function(name) {
-        return 'Hello ' + name + ', my name is ' + this.name
-      }
-    }, {
-      foo: function() {
-        return 'bar'
-      }
+    var Base
+
+    before(function() {
+      Base = Nevis.extend(function(name) {
+        this.name = name
+      }, {
+        greet: function(name) {
+          return 'Hello ' + name + ', my name is ' + this.name
+        }
+      }, {
+        foo: function() {
+          return 'bar'
+        }
+      })
     })
 
     it('should extend the prototype and static properties', function() {
@@ -74,6 +78,30 @@ describe('Oopsy', function() {
       expect(Child.fizz()).to.equal('buzz')
     })
 
+    it('should only extend own prototype properties', function() {
+      function Prototype() {}
+      Prototype.prototype.fu = 'baz'
+      Prototype.prototype.buzz = function() {
+        return 321
+      }
+
+      var proto = new Prototype()
+      proto.foo = 'bar'
+      proto.fizz = function() {
+        return 123
+      }
+
+      var Child = Base.extend(proto)
+      var child = new Child('Foo')
+
+      expect(child.hasOwnProperty('name')).to.be.true
+      expect(child.name).to.equal('Foo')
+      expect(child.greet('Bar')).to.equal('Hello Bar, my name is Foo')
+      expect(child.foo).to.equal('bar')
+      expect(child.fizz()).to.equal(123)
+      expect(Child.foo()).to.equal('bar')
+    })
+
     it('should return constructor with correct inheritance', function() {
       var SubBase = Base.extend(function() {
         SubBase.super_.apply(this, arguments)
@@ -83,7 +111,7 @@ describe('Oopsy', function() {
       })
       var child = new Child('Foo')
 
-      expect(child).to.be.an.instanceof(Oopsy)
+      expect(child).to.be.an.instanceof(Nevis)
       expect(child).to.be.an.instanceof(Base)
       expect(child).to.be.an.instanceof(SubBase)
       expect(child).to.be.an.instanceof(Child)
@@ -99,7 +127,8 @@ describe('Oopsy', function() {
 
       expect(Child.super_).to.equal(SubBase)
       expect(SubBase.super_).to.equal(Base)
-      expect(Base.super_).to.equal(Oopsy)
+      expect(Base.super_).to.equal(Nevis)
+      expect(Nevis.super_).to.equal(Object)
     })
 
     it('should allow semi-inheritance of existing classes', function() {
@@ -111,7 +140,8 @@ describe('Oopsy', function() {
       var child = new Child('Foo')
 
       expect(Child.super_).to.equal(Base)
-      expect(child).to.be.an.instanceof(Oopsy)
+      expect(child).to.be.an.instanceof(Object)
+      expect(child).to.be.an.instanceof(Nevis)
       expect(child).to.be.an.instanceof(Base)
       expect(child).to.be.an.instanceof(Child)
       expect(child).not.to.be.an.instanceof(EventEmitter)
@@ -144,7 +174,8 @@ describe('Oopsy', function() {
         var Child = SubBase.extend()
         var child = new Child('Foo')
 
-        expect(child).to.be.an.instanceof(Oopsy)
+        expect(child).to.be.an.instanceof(Object)
+        expect(child).to.be.an.instanceof(Nevis)
         expect(child).to.be.an.instanceof(Base)
         expect(child).to.be.an.instanceof(SubBase)
         expect(child).to.be.an.instanceof(Child)
@@ -156,7 +187,8 @@ describe('Oopsy', function() {
 
         expect(Child.super_).to.equal(SubBase)
         expect(SubBase.super_).to.equal(Base)
-        expect(Base.super_).to.equal(Oopsy)
+        expect(Base.super_).to.equal(Nevis)
+        expect(Nevis.super_).to.equal(Object)
       })
     })
   })

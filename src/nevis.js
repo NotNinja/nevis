@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, Skelp
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,13 +20,15 @@
  * SOFTWARE.
  */
 
+'use strict'
+
 /**
  * A bare-bones constructor for surrogate prototype swapping.
  *
  * @private
  * @constructor
  */
-var Constructor = function() {}
+var Constructor = /* istanbul ignore next */ function() {}
 /**
  * A reference to <code>Object.prototype.hasOwnProperty</code>.
  *
@@ -43,23 +45,46 @@ var hasOwnProperty = Object.prototype.hasOwnProperty
 var slice = Array.prototype.slice
 
 /**
+ * Creates an object which inherits the given <code>prototype</code>.
+ *
+ * Optionally, the created object can be extended further with the specified <code>properties</code>.
+ *
+ * @param {Object} prototype - the prototype to be inherited by the created object
+ * @param {Object} [properties] - the optional properties to be extended by the created object
+ * @return {Object} The newly created object.
+ * @private
+ */
+function createObject(prototype, properties) {
+  var result
+  /* istanbul ignore else */
+  if (typeof Object.create === 'function') {
+    result = Object.create(prototype)
+  } else {
+    Constructor.prototype = prototype
+    result = new Constructor()
+    Constructor.prototype = null
+  }
+
+  if (properties) {
+    extendObject(true, result, properties)
+  }
+
+  return result
+}
+
+/**
  * Extends the specified <code>target</code> object with the properties in each of the <code>sources</code> provided.
  *
- * Nothing happens if <code>target</code> is <code>null</code> and if any source is <code>null</code> it will be
- * ignored.
+ * if any source is <code>null</code> it will be ignored.
  *
  * @param {boolean} own - <code>true</code> to only copy <b>own</b> properties from <code>sources</code> onto
  * <code>target</code>; otherwise <code>false</code>
- * @param {Object} [target] - the target object which should be extended
+ * @param {Object} target - the target object which should be extended
  * @param {...Object} [sources] - the source objects whose properties are to be copied onto <code>target</code>
  * @return {void}
  * @private
  */
-function extend(own, target, sources) {
-  if (target == null) {
-    return
-  }
-
+function extendObject(own, target, sources) {
   sources = slice.call(arguments, 2)
 
   var property
@@ -77,39 +102,13 @@ function extend(own, target, sources) {
 }
 
 /**
- * Creates an object which inherits the given <code>prototype</code>.
- *
- * Optionally, the created object can be extended further with the specified <code>properties</code>.
- *
- * @param {Object} prototype - the prototype to be inherited by the created object
- * @param {Object} [properties] - the optional properties to be extended by the created object
- * @return {Object} The newly created object.
- * @private
- */
-function create(prototype, properties) {
-  var result
-  if (typeof Object.create === 'function') {
-    result = Object.create(prototype)
-  } else {
-    Constructor.prototype = prototype
-    result = new Constructor()
-    Constructor.prototype = null
-  }
-
-  if (properties) {
-    extend(true, result, properties)
-  }
-
-  return result
-}
-
-/**
  * The base constructor from which all others should extend.
  *
  * @public
  * @constructor
  */
-export default function Oopsy() {}
+var Nevis = module.exports = function Nevis() {}
+Nevis.super_ = Object
 
 /**
  * Extends the constructor to which this method is associated with the <code>prototype</code> and/or
@@ -127,7 +126,7 @@ export default function Oopsy() {}
  * @public
  * @static
  */
-Oopsy.extend = function(constructor, prototype, statics) {
+Nevis.extend = function extend(constructor, prototype, statics) {
   var superConstructor = this
 
   if (typeof constructor !== 'function') {
@@ -138,9 +137,9 @@ Oopsy.extend = function(constructor, prototype, statics) {
     }
   }
 
-  extend(false, constructor, superConstructor, statics)
+  extendObject(false, constructor, superConstructor, statics)
 
-  constructor.prototype = create(superConstructor.prototype, prototype)
+  constructor.prototype = createObject(superConstructor.prototype, prototype)
   constructor.prototype.constructor = constructor
 
   constructor.super_ = superConstructor

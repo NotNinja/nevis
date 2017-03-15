@@ -4,7 +4,16 @@
     "node": true
   },
   "rules": {
+    "func-names": "off",
     "no-empty-function": "off",
-    "no-invalid-this": "off"
+    "no-inline-comments": "off",
+    "no-invalid-this": "off",
+    "no-use-before-define": [
+      "error",
+      {
+        "functions": false
+      }
+    ],
+    "sort-keys": "off"
   }
 }

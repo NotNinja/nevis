@@ -1,8 +1,8 @@
 {
-  "name": "skelp-oopsy",
-  "version": "0.2.0",
+  "name": "nevis",
+  "version": "1.0.0alpha",
   "description": "Simple OOP for JavaScript",
-  "homepage": "https://github.com/Skelp/oopsy",
+  "homepage": "https://github.com/Skelp/nevis",
   "authors": [
     {
       "name": "Alasdair Mercer",
@@ -19,15 +19,16 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Skelp/oopsy.git"
+    "url": "https://github.com/Skelp/nevis.git"
   },
-  "main": "dist/oopsy.js",
+  "main": "dist/nevis.js",
   "moduleType": [
     "amd",
     "globals",
     "node"
   ],
   "ignore": [
+    "coverage/",
     "src/",
     "test/",
     ".*",
