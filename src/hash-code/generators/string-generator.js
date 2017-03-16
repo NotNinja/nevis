@@ -22,34 +22,42 @@
 
 'use strict'
 
-var extend = require('./extend')
+var CachingHashCodeGenerator = require('./caching-generator')
 
 /**
- * The base class from which all others should extend.
+ * An implementation of {@link CachingHashCodeGenerator} that supports string values.
  *
- * @public
+ * @protected
  * @constructor
+ * @extends CachingHashCodeGenerator
  */
-function Nevis() {}
-Nevis.super_ = Object
+var StringHashCodeGenerator = CachingHashCodeGenerator.extend({
 
-/**
- * Extends the constructor to which this method is associated with the <code>prototype</code> and/or
- * <code>statics</code> provided.
- *
- * If <code>constructor</code> is provided, it will be used as the constructor for the child, otherwise a simple
- * constructor which only calls the super constructor will be used instead.
- *
- * The super constructor can be accessed via a special <code>super_</code> property on the child constructor.
- *
- * @param {Function} [constructor] - the constructor for the child
- * @param {Object} [prototype] - the prototype properties to be defined for the child
- * @param {Object} [statics] - the static properties to be defined for the child
- * @return {Function} The child <code>constructor</code> provided or the one created if none was given.
- * @public
- * @static
- * @memberof Nevis
- */
-Nevis.extend = extend
+  /**
+   * @inheritdoc
+   * @override
+   * @memberof StringHashCodeGenerator.prototype
+   */
+  generateInternal: function generateInternal(context) {
+    var hash = 0
+    var length = context.value.length
 
-module.exports = Nevis
+    for (var i = 0; i < length; i++) {
+      hash = ((31 * hash) + context.value.charCodeAt(i)) | 0
+    }
+
+    return hash
+  },
+
+  /**
+   * @inheritdoc
+   * @override
+   * @memberof StringHashCodeGenerator.prototype
+   */
+  supports: function supports(context) {
+    return context.type === 'string'
+  }
+
+})
+
+module.exports = StringHashCodeGenerator

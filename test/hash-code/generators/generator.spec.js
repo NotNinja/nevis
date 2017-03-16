@@ -22,34 +22,32 @@
 
 'use strict'
 
-var extend = require('./extend')
+var expect = require('chai').expect
 
-/**
- * The base class from which all others should extend.
- *
- * @public
- * @constructor
- */
-function Nevis() {}
-Nevis.super_ = Object
+var extend = require('../../../src/extend')
+var HashCodeGenerator = require('../../../src/hash-code/generators/generator')
 
-/**
- * Extends the constructor to which this method is associated with the <code>prototype</code> and/or
- * <code>statics</code> provided.
- *
- * If <code>constructor</code> is provided, it will be used as the constructor for the child, otherwise a simple
- * constructor which only calls the super constructor will be used instead.
- *
- * The super constructor can be accessed via a special <code>super_</code> property on the child constructor.
- *
- * @param {Function} [constructor] - the constructor for the child
- * @param {Object} [prototype] - the prototype properties to be defined for the child
- * @param {Object} [statics] - the static properties to be defined for the child
- * @return {Function} The child <code>constructor</code> provided or the one created if none was given.
- * @public
- * @static
- * @memberof Nevis
- */
-Nevis.extend = extend
+describe('hash-code/generators/generator:Generator', function() {
+  it('should be a constructor', function() {
+    expect(HashCodeGenerator).to.be.a('function')
+    expect(new HashCodeGenerator()).to.be.an('object')
+  })
 
-module.exports = Nevis
+  describe('.extend', function() {
+    it('should reference the internal extend function', function() {
+      expect(HashCodeGenerator.extend).to.equal(extend)
+    })
+  })
+
+  describe('#generate', function() {
+    it('should be an abstract method', function() {
+      expect(HashCodeGenerator.prototype.generate).to.be.a('function')
+    })
+  })
+
+  describe('#supports', function() {
+    it('should be an abstract method', function() {
+      expect(HashCodeGenerator.prototype.supports).to.be.a('function')
+    })
+  })
+})

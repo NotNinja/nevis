@@ -42,6 +42,8 @@ If you want to simply download the file to be used in the browser you can find t
 * [Development Version](https://github.com/Skelp/nevis/blob/master/dist/nevis.js)
 * [Production Version](https://github.com/Skelp/nevis/blob/master/dist/nevis.min.js)
 
+TODO: Document *lite* version
+
 ## API
 
 TODO: Update API documentation

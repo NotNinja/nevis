@@ -6,8 +6,11 @@
 * Add `Nevis#hashCode()` instance method to generate Java-like hash code for instance
 * Add `Nevis#toString()` instance method to generate string representation for instance
 * Add `Nevis.equals(value, other[, options])` static method to check whether two objects are equal
+* Add `Nevis.EqualsBuilder()` static constructor to check if complex classes are equal
 * Add `Nevis.hashCode(value[, options])` static method to generate Java-like hash code for an object
+* Add `Nevis.HashCodeBuilder([initial][, multiplier])` static constructor to generate Java-like hash codes for complex classes
 * Add `Nevis.toString(value[, options])` static method to generate string representation for instance
+* Release *lite* version where never only contains `Nevis.extends` static method
 * Track code coverage in build
 
 ## Version 0.2.0, 2016.11.24

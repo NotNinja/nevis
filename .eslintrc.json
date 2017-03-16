@@ -5,9 +5,16 @@
   },
   "rules": {
     "func-names": "off",
+    "no-bitwise": "off",
     "no-empty-function": "off",
     "no-inline-comments": "off",
     "no-invalid-this": "off",
+    "no-unused-vars": [
+      "warn",
+      {
+        "args": "none"
+      }
+    ],
     "no-use-before-define": [
       "error",
       {

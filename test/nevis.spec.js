@@ -22,174 +22,26 @@
 
 'use strict'
 
-var EventEmitter = require('events').EventEmitter
 var expect = require('chai').expect
 
+var extend = require('../src/extend')
 var Nevis = require('../src/nevis')
 
-describe('Nevis', function() {
+describe('nevis:Nevis', function() {
   it('should be a constructor', function() {
     expect(Nevis).to.be.a('function')
     expect(new Nevis()).to.be.an('object')
   })
 
-  describe('.extend', function() {
-    var Base
-
-    before(function() {
-      Base = Nevis.extend(function(name) {
-        this.name = name
-      }, {
-        greet: function(name) {
-          return 'Hello ' + name + ', my name is ' + this.name
-        }
-      }, {
-        foo: function() {
-          return 'bar'
-        }
-      })
-    })
-
-    it('should extend the prototype and static properties', function() {
-      function ChildConstructor() {
-        ChildConstructor.super_.apply(this, arguments)
-
-        this.id = 123
-      }
-
-      var Child = Base.extend(ChildConstructor, {
-        farewell: function(name) {
-          return 'Goodbye ' + name
-        }
-      }, {
-        fizz: function() {
-          return 'buzz'
-        }
-      })
-      var child = new Child('Foo')
-
-      expect(Child).to.equal(ChildConstructor)
-      expect(child.hasOwnProperty('name')).to.be.true
-      expect(child.name).to.equal('Foo')
-      expect(child.id).to.equal(123)
-      expect(child.greet('Bar')).to.equal('Hello Bar, my name is Foo')
-      expect(child.farewell('Bar')).to.equal('Goodbye Bar')
-      expect(Child.foo()).to.equal('bar')
-      expect(Child.fizz()).to.equal('buzz')
-    })
-
-    it('should only extend own prototype properties', function() {
-      function Prototype() {}
-      Prototype.prototype.fu = 'baz'
-      Prototype.prototype.buzz = function() {
-        return 321
-      }
-
-      var proto = new Prototype()
-      proto.foo = 'bar'
-      proto.fizz = function() {
-        return 123
-      }
-
-      var Child = Base.extend(proto)
-      var child = new Child('Foo')
-
-      expect(child.hasOwnProperty('name')).to.be.true
-      expect(child.name).to.equal('Foo')
-      expect(child.greet('Bar')).to.equal('Hello Bar, my name is Foo')
-      expect(child.foo).to.equal('bar')
-      expect(child.fizz()).to.equal(123)
-      expect(Child.foo()).to.equal('bar')
-    })
-
-    it('should return constructor with correct inheritance', function() {
-      var SubBase = Base.extend(function() {
-        SubBase.super_.apply(this, arguments)
-      })
-      var Child = SubBase.extend(function() {
-        Child.super_.apply(this, arguments)
-      })
-      var child = new Child('Foo')
-
-      expect(child).to.be.an.instanceof(Nevis)
-      expect(child).to.be.an.instanceof(Base)
-      expect(child).to.be.an.instanceof(SubBase)
-      expect(child).to.be.an.instanceof(Child)
-    })
-
-    it('should give constructor reference to super constructor', function() {
-      var SubBase = Base.extend(function() {
-        SubBase.super_.apply(this, arguments)
-      })
-      var Child = SubBase.extend(function() {
-        Child.super_.apply(this, arguments)
-      })
-
-      expect(Child.super_).to.equal(SubBase)
-      expect(SubBase.super_).to.equal(Base)
-      expect(Base.super_).to.equal(Nevis)
+  describe('.super_', function() {
+    it('should be Object', function() {
       expect(Nevis.super_).to.equal(Object)
     })
+  })
 
-    it('should allow semi-inheritance of existing classes', function() {
-      var Child = Base.extend(function() {
-        Child.super_.apply(this, arguments)
-
-        EventEmitter.call(this)
-      }, EventEmitter.prototype, EventEmitter)
-      var child = new Child('Foo')
-
-      expect(Child.super_).to.equal(Base)
-      expect(child).to.be.an.instanceof(Object)
-      expect(child).to.be.an.instanceof(Nevis)
-      expect(child).to.be.an.instanceof(Base)
-      expect(child).to.be.an.instanceof(Child)
-      expect(child).not.to.be.an.instanceof(EventEmitter)
-      expect(child.name).to.equal('Foo')
-      expect(child.listeners()).to.eql([])
-    })
-
-    context('when no constructor is passed', function() {
-      it('should extend the prototype and static properties', function() {
-        var Child = Base.extend({
-          farewell: function(name) {
-            return 'Goodbye ' + name
-          }
-        }, {
-          fizz: function() {
-            return 'buzz'
-          }
-        })
-        var child = new Child('Foo')
-
-        expect(child.name).to.equal('Foo')
-        expect(child.greet('Bar')).to.equal('Hello Bar, my name is Foo')
-        expect(child.farewell('Bar')).to.equal('Goodbye Bar')
-        expect(Child.foo()).to.equal('bar')
-        expect(Child.fizz()).to.equal('buzz')
-      })
-
-      it('should return a constructor with correct inheritance', function() {
-        var SubBase = Base.extend()
-        var Child = SubBase.extend()
-        var child = new Child('Foo')
-
-        expect(child).to.be.an.instanceof(Object)
-        expect(child).to.be.an.instanceof(Nevis)
-        expect(child).to.be.an.instanceof(Base)
-        expect(child).to.be.an.instanceof(SubBase)
-        expect(child).to.be.an.instanceof(Child)
-      })
-
-      it('should return a constructor with reference to super constructor', function() {
-        var SubBase = Base.extend()
-        var Child = SubBase.extend()
-
-        expect(Child.super_).to.equal(SubBase)
-        expect(SubBase.super_).to.equal(Base)
-        expect(Base.super_).to.equal(Nevis)
-        expect(Nevis.super_).to.equal(Object)
-      })
+  describe('.extend', function() {
+    it('should reference the internal extend function', function() {
+      expect(Nevis.extend).to.equal(extend)
     })
   })
 })

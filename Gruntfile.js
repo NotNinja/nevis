@@ -75,7 +75,7 @@ module.exports = function(grunt) {
     },
 
     rollup: {
-      umdDevelopment: {
+      fullUmdDevelopment: {
         options: {
           format: 'umd',
           moduleId: 'nevis',
@@ -90,10 +90,10 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          'dist/nevis.js': 'src/nevis.js'
+          'dist/nevis.js': 'src/index.js'
         }
       },
-      umdProduction: {
+      fullUmdProduction: {
         options: {
           format: 'umd',
           moduleId: 'nevis',
@@ -101,6 +101,50 @@ module.exports = function(grunt) {
           sourceMap: true,
           sourceMapRelativePaths: true,
           banner: '/*! Nevis v<%= pkg.version %> | (C) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>, Skelp | <%= pkg.license %> License */',
+          plugins: function() {
+            return [
+              nodeResolve(),
+              commonjs(),
+              uglify({
+                output: {
+                  comments: function(node, comment) {
+                    return comment.type === 'comment2' && /^\!/.test(comment.value)
+                  }
+                }
+              })
+            ]
+          }
+        },
+        files: {
+          'dist/nevis-lite.min.js': 'src/index.js'
+        }
+      },
+      liteUmdDevelopment: {
+        options: {
+          format: 'umd',
+          moduleId: 'nevis',
+          moduleName: 'Nevis',
+          sourceMap: true,
+          sourceMapRelativePaths: true,
+          plugins: function() {
+            return [
+              nodeResolve(),
+              commonjs()
+            ]
+          }
+        },
+        files: {
+          'dist/nevis-lite.js': 'src/nevis.js'
+        }
+      },
+      liteUmdProduction: {
+        options: {
+          format: 'umd',
+          moduleId: 'nevis',
+          moduleName: 'Nevis',
+          sourceMap: true,
+          sourceMapRelativePaths: true,
+          banner: '/*! Nevis Lite v<%= pkg.version %> | (C) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>, Skelp | <%= pkg.license %> License */',
           plugins: function() {
             return [
               nodeResolve(),

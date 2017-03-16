@@ -22,34 +22,46 @@
 
 'use strict'
 
-var extend = require('./extend')
+var expect = require('chai').expect
 
-/**
- * The base class from which all others should extend.
- *
- * @public
- * @constructor
- */
-function Nevis() {}
-Nevis.super_ = Object
+var hashCode = require('../src/hash-code/index')
+var HashCodeBuilder = require('../src/hash-code/builder')
+var index = require('../src/index')
+var Nevis = require('../src/nevis')
 
-/**
- * Extends the constructor to which this method is associated with the <code>prototype</code> and/or
- * <code>statics</code> provided.
- *
- * If <code>constructor</code> is provided, it will be used as the constructor for the child, otherwise a simple
- * constructor which only calls the super constructor will be used instead.
- *
- * The super constructor can be accessed via a special <code>super_</code> property on the child constructor.
- *
- * @param {Function} [constructor] - the constructor for the child
- * @param {Object} [prototype] - the prototype properties to be defined for the child
- * @param {Object} [statics] - the static properties to be defined for the child
- * @return {Function} The child <code>constructor</code> provided or the one created if none was given.
- * @public
- * @static
- * @memberof Nevis
- */
-Nevis.extend = extend
+describe('index:Nevis', function() {
+  it('should export Nevis', function() {
+    expect(index).to.equal(Nevis)
+  })
 
-module.exports = Nevis
+  describe('.hashCode', function() {
+    it('should reference the internal hashCode function', function() {
+      expect(index.hashCode).to.equal(hashCode)
+    })
+  })
+
+  describe('.HashCodeBuilder', function() {
+    it('should reference the internal HashCodeBuilder constructor', function() {
+      expect(index.HashCodeBuilder).to.equal(HashCodeBuilder)
+    })
+  })
+
+  describe('#hashCode', function() {
+    it('should generate a hash code for the instance', function() {
+      var Test = index.extend({
+        fu: 'baz',
+        buzz: function() {
+          321
+        }
+      })
+
+      var value = new Test()
+      value.foo = 'bar'
+      value.fizz = function() {
+        return 123
+      }
+
+      expect(value.hashCode()).to.equal(-1917239168)
+    })
+  })
+})

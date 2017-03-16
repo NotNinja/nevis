@@ -22,16 +22,22 @@
 
 'use strict'
 
-var extend = require('./extend')
+var extend = require('../../extend')
 
 /**
- * The base class from which all others should extend.
+ * Responsible for generating a hash code for a specific {@link HashCodeContext}.
  *
- * @public
+ * Individual <code>HashCodeGenerator</code> implementations should attempt to concentrate on specific value types to
+ * keep them small and targeted, allowing other implementations to possibly generate a more suitable hash code. The
+ * {@link HashCodeContext} should <b>never</b> be modified but can be copied via {@link HashCodeContext#copy}.
+ *
+ * Implementations <b>must</b> implement the {@link HashCodeGenerator#generate} and {@link HashCodeGenerator#supports}
+ * methods.
+ *
+ * @protected
  * @constructor
  */
-function Nevis() {}
-Nevis.super_ = Object
+function HashCodeGenerator() {}
 
 /**
  * Extends the constructor to which this method is associated with the <code>prototype</code> and/or
@@ -48,8 +54,37 @@ Nevis.super_ = Object
  * @return {Function} The child <code>constructor</code> provided or the one created if none was given.
  * @public
  * @static
- * @memberof Nevis
+ * @memberof HashCodeGenerator
  */
-Nevis.extend = extend
+HashCodeGenerator.extend = extend
 
-module.exports = Nevis
+/**
+ * Returns a hash code for the specified <code>context</code>.
+ *
+ * This method is only called when {@link HashCodeGenerator#supports} indicates that this {@link HashCodeGenerator}
+ * supports <code>context</code>.
+ *
+ * @param {HashCodeContext} context - the {@link HashCodeContext} for which the hash code is to be generated
+ * @return {number} The hash code generated for <code>context</code>.
+ * @public
+ * @abstract
+ * @memberof HashCodeGenerator.prototype
+ */
+HashCodeGenerator.prototype.generate = /* istanbul ignore next */ function generate(context) {}
+
+/**
+ * Returns whether this {@link HashCodeGenerator} supports the specified <code>context</code>.
+ *
+ * This method should only return <code>true</code> when {@link HashCodeGenerator#generate} can generate a hash code for
+ * <code>context</code>.
+ *
+ * @param {HashCodeContext} context - the {@link HashCodeContext} to be checked
+ * @return {boolean} <code>true</code> if this {@link HashCodeGenerator} can generate a hash code for
+ * <code>context</code>; otherwise <code>false</code>.
+ * @public
+ * @abstract
+ * @memberof HashCodeGenerator.prototype
+ */
+HashCodeGenerator.prototype.supports = /* istanbul ignore next */ function supports(context) {}
+
+module.exports = HashCodeGenerator

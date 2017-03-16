@@ -22,34 +22,35 @@
 
 'use strict'
 
-var extend = require('./extend')
+var CollectionHashCodeGenerator = require('./collection-generator')
 
 /**
- * The base class from which all others should extend.
+ * An implementation of {@link CollectionHashCodeGenerator} that supports array values.
  *
- * @public
+ * @protected
  * @constructor
+ * @extends CollectionHashCodeGenerator
  */
-function Nevis() {}
-Nevis.super_ = Object
+var ArrayHashCodeGenerator = CollectionHashCodeGenerator.extend({
 
-/**
- * Extends the constructor to which this method is associated with the <code>prototype</code> and/or
- * <code>statics</code> provided.
- *
- * If <code>constructor</code> is provided, it will be used as the constructor for the child, otherwise a simple
- * constructor which only calls the super constructor will be used instead.
- *
- * The super constructor can be accessed via a special <code>super_</code> property on the child constructor.
- *
- * @param {Function} [constructor] - the constructor for the child
- * @param {Object} [prototype] - the prototype properties to be defined for the child
- * @param {Object} [statics] - the static properties to be defined for the child
- * @return {Function} The child <code>constructor</code> provided or the one created if none was given.
- * @public
- * @static
- * @memberof Nevis
- */
-Nevis.extend = extend
+  /**
+   * @inheritdoc
+   * @override
+   * @memberof ArrayHashCodeGenerator.prototype
+   */
+  getElements: function getElements(context) {
+    return context.value
+  },
 
-module.exports = Nevis
+  /**
+   * @inheritdoc
+   * @override
+   * @memberof ArrayHashCodeGenerator.prototype
+   */
+  supports: function support(context) {
+    return context.string === '[object Array]'
+  }
+
+})
+
+module.exports = ArrayHashCodeGenerator
