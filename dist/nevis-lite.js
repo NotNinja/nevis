@@ -172,16 +172,16 @@
    * <code>statics</code> provided.
    *
    * If <code>name</code> is provided, it will be used as the class name and can be accessed via a special
-   * <code>class_</code> property on the child constructor, otherwise "Nevis" will be used instead. The class name may
-   * also be used string representation for instances of the child constructor (via <code>toString</code>), but this is
-   * not applicable to the <i>lite</i> version of Nevis.
+   * <code>class_</code> property on the child constructor, otherwise the class name of the super constructor will be used
+   * instead. The class name may also be used string representation for instances of the child constructor (via
+   * <code>toString</code>), but this is not applicable to the <i>lite</i> version of Nevis.
    *
    * If <code>constructor</code> is provided, it will be used as the constructor for the child, otherwise a simple
    * constructor which only calls the super constructor will be used instead.
    *
    * The super constructor can be accessed via a special <code>super_</code> property on the child constructor.
    *
-   * @param {string} [name="Nevis"] - the class name to be used for the child constructor
+   * @param {string} [name=this.class_] - the class name to be used for the child constructor
    * @param {Function} [constructor] - the constructor for the child
    * @param {Object} [prototype] - the prototype properties to be defined for the child
    * @param {Object} [statics] - the static properties to be defined for the child
@@ -194,7 +194,9 @@
 
   var nevis = Nevis;
 
-  return nevis;
+  var lite = nevis;
+
+  return lite;
 
 })));
 

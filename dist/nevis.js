@@ -182,16 +182,16 @@
    * <code>statics</code> provided.
    *
    * If <code>name</code> is provided, it will be used as the class name and can be accessed via a special
-   * <code>class_</code> property on the child constructor, otherwise "Nevis" will be used instead. The class name may
-   * also be used string representation for instances of the child constructor (via <code>toString</code>), but this is
-   * not applicable to the <i>lite</i> version of Nevis.
+   * <code>class_</code> property on the child constructor, otherwise the class name of the super constructor will be used
+   * instead. The class name may also be used string representation for instances of the child constructor (via
+   * <code>toString</code>), but this is not applicable to the <i>lite</i> version of Nevis.
    *
    * If <code>constructor</code> is provided, it will be used as the constructor for the child, otherwise a simple
    * constructor which only calls the super constructor will be used instead.
    *
    * The super constructor can be accessed via a special <code>super_</code> property on the child constructor.
    *
-   * @param {string} [name="Nevis"] - the class name to be used for the child constructor
+   * @param {string} [name=this.class_] - the class name to be used for the child constructor
    * @param {Function} [constructor] - the constructor for the child
    * @param {Object} [prototype] - the prototype properties to be defined for the child
    * @param {Object} [statics] - the static properties to be defined for the child
@@ -585,7 +585,7 @@
    * @public
    * @type {Object.<string, Function>}
    */
-  var index$4 = {
+  var index$6 = {
     ArrayEqualsComparator: arrayComparator,
     CollectionEqualsComparator: collectionComparator,
     DateEqualsComparator: dateComparator,
@@ -757,12 +757,12 @@
    * @type {EqualsComparator[]}
    */
   var activeComparators = [
-    new index$4.NumberEqualsComparator(),
-    new index$4.StringEqualsComparator(),
-    new index$4.DateEqualsComparator(),
-    new index$4.ToStringEqualsComparator(),
-    new index$4.ArrayEqualsComparator(),
-    new index$4.ObjectEqualsComparator()
+    new index$6.NumberEqualsComparator(),
+    new index$6.StringEqualsComparator(),
+    new index$6.DateEqualsComparator(),
+    new index$6.ToStringEqualsComparator(),
+    new index$6.ArrayEqualsComparator(),
+    new index$6.ObjectEqualsComparator()
   ];
 
   /**
@@ -839,7 +839,7 @@
     return false
   }
 
-  var index$2 = equals;
+  var index$4 = equals;
 
   /**
    * Called with the name and value of a property belonging to an object whose equality is being tested to determine
@@ -904,7 +904,7 @@
    */
   EqualsBuilder.prototype.append = function append(value, other, options) {
     if (this._equals) {
-      this._equals = index$2(value, other, options);
+      this._equals = index$4(value, other, options);
     }
 
     return this
@@ -961,16 +961,16 @@
    * <code>statics</code> provided.
    *
    * If <code>name</code> is provided, it will be used as the class name and can be accessed via a special
-   * <code>class_</code> property on the child constructor, otherwise "Nevis" will be used instead. The class name may
-   * also be used string representation for instances of the child constructor (via <code>toString</code>), but this is
-   * not applicable to the <i>lite</i> version of Nevis.
+   * <code>class_</code> property on the child constructor, otherwise the class name of the super constructor will be used
+   * instead. The class name may also be used string representation for instances of the child constructor (via
+   * <code>toString</code>), but this is not applicable to the <i>lite</i> version of Nevis.
    *
    * If <code>constructor</code> is provided, it will be used as the constructor for the child, otherwise a simple
    * constructor which only calls the super constructor will be used instead.
    *
    * The super constructor can be accessed via a special <code>super_</code> property on the child constructor.
    *
-   * @param {string} [name="Nevis"] - the class name to be used for the child constructor
+   * @param {string} [name=this.class_] - the class name to be used for the child constructor
    * @param {Function} [constructor] - the constructor for the child
    * @param {Object} [prototype] - the prototype properties to be defined for the child
    * @param {Object} [statics] - the static properties to be defined for the child
@@ -1395,7 +1395,7 @@
    * @public
    * @type {Object.<string, Function>}
    */
-  var index$8 = {
+  var index$10 = {
     ArrayHashCodeGenerator: arrayGenerator,
     BooleanHashCodeGenerator: booleanGenerator,
     CachingHashCodeGenerator: cachingGenerator,
@@ -1538,11 +1538,11 @@
    * @type {HashCodeGenerator[]}
    */
   var activeGenerators = [
-    new index$8.BooleanHashCodeGenerator(),
-    new index$8.StringHashCodeGenerator(),
-    new index$8.DateHashCodeGenerator(),
-    new index$8.ToStringHashCodeGenerator(),
-    new index$8.ArrayHashCodeGenerator()
+    new index$10.BooleanHashCodeGenerator(),
+    new index$10.StringHashCodeGenerator(),
+    new index$10.DateHashCodeGenerator(),
+    new index$10.ToStringHashCodeGenerator(),
+    new index$10.ArrayHashCodeGenerator()
   ];
 
   /**
@@ -1551,7 +1551,7 @@
    * @private
    * @type {HashCodeGenerator}
    */
-  var defaultGenerator = new index$8.ObjectHashCodeGenerator();
+  var defaultGenerator = new index$10.ObjectHashCodeGenerator();
 
   /**
    * Returns a hash code for the specified <code>value</code> using the <code>options</code> provided. This method is
@@ -1631,7 +1631,7 @@
     });
   };
 
-  var index$6 = hashCode;
+  var index$8 = hashCode;
 
   /**
    * Called with the name and value of a property belonging to an object for which a hash code is being generated to
@@ -1739,7 +1739,7 @@
    * @memberof HashCodeBuilder#
    */
   HashCodeBuilder.prototype.append = function append(value, options) {
-    this._hash = (this._hash * this._multiplier) + index$6(value, options);
+    this._hash = (this._hash * this._multiplier) + index$8(value, options);
 
     return this
   };
@@ -1799,16 +1799,16 @@
    * <code>statics</code> provided.
    *
    * If <code>name</code> is provided, it will be used as the class name and can be accessed via a special
-   * <code>class_</code> property on the child constructor, otherwise "Nevis" will be used instead. The class name may
-   * also be used string representation for instances of the child constructor (via <code>toString</code>), but this is
-   * not applicable to the <i>lite</i> version of Nevis.
+   * <code>class_</code> property on the child constructor, otherwise the class name of the super constructor will be used
+   * instead. The class name may also be used string representation for instances of the child constructor (via
+   * <code>toString</code>), but this is not applicable to the <i>lite</i> version of Nevis.
    *
    * If <code>constructor</code> is provided, it will be used as the constructor for the child, otherwise a simple
    * constructor which only calls the super constructor will be used instead.
    *
    * The super constructor can be accessed via a special <code>super_</code> property on the child constructor.
    *
-   * @param {string} [name="Nevis"] - the class name to be used for the child constructor
+   * @param {string} [name=this.class_] - the class name to be used for the child constructor
    * @param {Function} [constructor] - the constructor for the child
    * @param {Object} [prototype] - the prototype properties to be defined for the child
    * @param {Object} [statics] - the static properties to be defined for the child
@@ -1865,7 +1865,7 @@
     return value.toString()
   }
 
-  var index$10 = toString;
+  var index$12 = toString;
 
   /**
    * Returns whether the specified <code>value</code> is "equal to" the <code>other</code> provided using the given
@@ -1911,7 +1911,7 @@
    * @static
    * @memberof Nevis
    */
-  nevis.equals = index$2;
+  nevis.equals = index$4;
 
   /**
    * Assists in building good equals for complex classes.
@@ -1957,7 +1957,7 @@
    * @static
    * @memberof Nevis
    */
-  nevis.hashCode = index$6;
+  nevis.hashCode = index$8;
 
   /**
    * Assists in building hash codes for complex classes.
@@ -1990,7 +1990,7 @@
    * @static
    * @memberof Nevis
    */
-  nevis.toString = index$10;
+  nevis.toString = index$12;
 
   /**
    * Returns whether this instance is "equal to" the specified <code>obj</code>.
@@ -2060,7 +2060,7 @@
    * @memberof Nevis#
    */
   nevis.prototype.hashCode = function hashCode() {
-    return index$6(this, { ignoreHashCode: true })
+    return index$8(this, { ignoreHashCode: true })
   };
 
   /**
@@ -2080,7 +2080,9 @@
     return this.constructor.class_ + '@' + this.hashCode().toString(16)
   };
 
-  var index = nevis;
+  var index$2 = nevis;
+
+  var index = index$2;
 
   return index;
 

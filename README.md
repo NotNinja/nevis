@@ -48,32 +48,42 @@ TODO: Update API documentation
 
 ### Inheritance
 
-TODO: Document inheritance 
+Nevis' primary function is to provide clean implementation of single inheritance.
 
-The API is extremely simple and is designed to make it as easy as possible to implement traditional inheritance.
+> Available in *lite* version
 
 ``` javascript
 Nevis.extend([name][, constructor][, prototype][, statics])
 ```
 
+Extends the constructor to which this method is associated with the `prototype` and/or `statics` provided.
+
+If `name` is provided, it will be used as the class name and can be accessed via a special `class_` property on the
+child constructor, otherwise the class name of the super constructor will be used instead. The class name may also be
+used string representation for instances of the child constructor (via `toString`), but this is not applicable to the
+*lite* version of Nevis.
+
+If `constructor` is provided, it will be used as the constructor for the child, otherwise a simple constructor which
+only calls the super constructor will be used instead.
+
+The super constructor can be accessed via a special `super_` property on the child constructor.
+
 It is very flexible and can be used to extend *classes*:
 
 ``` javascript
-var BaseObject = Nevis.extend(function(options) {
-  this.options = options || {}
-})
-
-var ChildObject = BaseObject.extend({
-  getOption: function(name) {
-    return this.options[name]
+var Base = Nevis.extend('Base', function(attributes) {
+  this.attributes = attributes || {}
+}, {
+  getAttribute: function(name) {
+    return this.attributes[name]
   },
-  setOption: function(name, value) {
-    this.options[name] = value
+  setAttribute: function(name, value) {
+    this.attributes[name] = value
   }
 })
 
-var Person = ChildObject.extend(function(name, options) {
-  Person.super_.call(this, options)
+var Person = Base.extend('Person', function(name, attributes) {
+  Person.super_.call(this, attributes)
 
   this.name = name
 
@@ -85,18 +95,26 @@ var Person = ChildObject.extend(function(name, options) {
 }, {
   people: []
 })
+
+var bob = new Person('Bob', { age: 58 })
+
+bob.name
+//=> "Bob"
+bob.greet('Suzie')
+//=> "Hello Suzie, my name is Bob"
+bob.getAttribute('age')
+//=> 58
+Person.people
+//=> [ "Bob" ]
 ```
 
-All constructors extended by Nevis are given static properties `class_` and `super_` which are the name and reference
-to the super constructor respectively. 
-
-Also, this can be used to extend existing *classes* such as `EventEmitter`:
+Also, this can be used to extend external classes such as `EventEmitter`:
 
 ``` javascript
 var EventEmitter = require('events').EventEmitter
 var Nevis = require('nevis')
 
-var BaseObject = Nevis.extend(function() {
+var Events = Nevis.extend('Events', function() {
   EventEmitter.call(this)
 }, EventEmitter.prototype, EventEmitter)
 ```

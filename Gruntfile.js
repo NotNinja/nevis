@@ -45,7 +45,12 @@ module.exports = function(grunt) {
     },
 
     eslint: {
-      target: [ 'src/**/*.js', 'test/**/*.js' ]
+      target: [
+        'src/**/*.js',
+        'test/**/*.js',
+        'index.js',
+        'lite.js'
+      ]
     },
 
     mocha_istanbul: {
@@ -90,7 +95,7 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          'dist/nevis.js': 'src/index.js'
+          'dist/nevis.js': 'index.js'
         }
       },
       fullUmdProduction: {
@@ -116,7 +121,7 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          'dist/nevis-lite.min.js': 'src/index.js'
+          'dist/nevis.min.js': 'index.js'
         }
       },
       liteUmdDevelopment: {
@@ -134,7 +139,7 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          'dist/nevis-lite.js': 'src/nevis.js'
+          'dist/nevis-lite.js': 'lite.js'
         }
       },
       liteUmdProduction: {
@@ -160,7 +165,7 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          'dist/nevis.min.js': 'src/nevis.js'
+          'dist/nevis-lite.min.js': 'lite.js'
         }
       }
     },
