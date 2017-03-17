@@ -97,7 +97,7 @@ HashCodeBuilder.DEFAULT_MULTIPLIER_VALUE = 37
  * @param {Nevis~HashCodeOptions} [options] - the options to be used (may be <code>null</code>)
  * @return {HashCodeBuilder} A reference to this {@link HashCodeBuilder} for chaining purposes.
  * @public
- * @memberof HashCodeBuilder.prototype
+ * @memberof HashCodeBuilder#
  */
 HashCodeBuilder.prototype.append = function append(value, options) {
   this._hash = (this._hash * this._multiplier) + hash(value, options)
@@ -111,7 +111,7 @@ HashCodeBuilder.prototype.append = function append(value, options) {
  * @param {number} superHashCode - the result of computing the hash code for a super class
  * @return {HashCodeBuilder} A reference to this {@link HashCodeBuilder} for chaining purposes.
  * @public
- * @memberof HashCodeBuilder.prototype
+ * @memberof HashCodeBuilder#
  */
 HashCodeBuilder.prototype.appendSuper = function appendSuper(superHashCode) {
   this._hash = (this._hash * this._multiplier) + superHashCode
@@ -124,7 +124,7 @@ HashCodeBuilder.prototype.appendSuper = function appendSuper(superHashCode) {
  *
  * @return {number} The hash code based on the appended values.
  * @public
- * @memberof HashCodeBuilder.prototype
+ * @memberof HashCodeBuilder#
  */
 HashCodeBuilder.prototype.build = function build() {
   return this._hash
@@ -137,7 +137,7 @@ HashCodeBuilder.prototype.build = function build() {
  *
  * @return {number} The hash code.
  * @public
- * @memberof HashCodeBuilder.prototype
+ * @memberof HashCodeBuilder#
  */
 HashCodeBuilder.prototype.hashCode = function hashCode() {
   return this._hash

@@ -25,55 +25,55 @@
 var expect = require('chai').expect
 var sinon = require('sinon')
 
-var hashCode = require('../../src/hash-code/index')
-var HashCodeContext = require('../../src/hash-code/context')
+var equals = require('../../src/equals/index')
+var EqualsContext = require('../../src/equals/context')
 
-describe('hash-code/context:HashCodeContext', function() {
-  var hashCodeSpy
+describe('equals/context:EqualsContext', function() {
+  var equalsSpy
 
   beforeEach(function() {
-    hashCodeSpy = sinon.spy(hashCode)
+    equalsSpy = sinon.spy(equals)
   })
 
   it('should be a constructor', function() {
-    expect(HashCodeContext).to.be.a('function')
-    expect(new HashCodeContext()).to.be.an('object')
+    expect(EqualsContext).to.be.a('function')
+    expect(new EqualsContext()).to.be.an('object')
   })
 
   describe('#copy', function() {
-    it('should create a copy of itself but based on the passed value', function() {
+    it('should create a copy of itself but based on the passed values', function() {
       var expectedOptions = {
-        allowCache: false,
         filterProperty: function() {
           return false
         },
         skipInherited: true,
         skipMethods: true,
-        useHashCodeMethod: false
+        useEqualsMethod: false
       }
 
-      var ctx = new HashCodeContext(123, hashCodeSpy, expectedOptions)
-      var copy = ctx.copy(321)
+      var ctx = new EqualsContext(123, 321, equalsSpy, expectedOptions)
+      var copy = ctx.copy(321, 123)
 
-      expect(copy).to.be.an.instanceof(HashCodeContext)
+      expect(copy).to.be.an.instanceof(EqualsContext)
       expect(copy.options).not.to.equal(expectedOptions)
       expect(copy.options).to.deep.equal(expectedOptions)
+      expect(copy.other).to.equal(123)
       expect(copy.string).to.equal('[object Number]')
       expect(copy.type).to.equal('number')
       expect(copy.value).to.equal(321)
-      expect(copy.hashCode('321')).to.equal(50610)
+      expect(copy.equals('321', '123')).to.be.false
 
-      expect(hashCodeSpy.calledWith('321', copy.options)).to.be.true
+      expect(equalsSpy.calledWith('321', '123', copy.options)).to.be.true
     })
   })
 
-  describe('#hashCode', function() {
-    it('should delegate to the hashCode function passed to the constructor', function() {
-      var ctx = new HashCodeContext(123, hashCodeSpy)
+  describe('#equals', function() {
+    it('should delegate to the equals function passed to the constructor', function() {
+      var ctx = new EqualsContext(123, 321, equalsSpy)
 
-      expect(ctx.hashCode('123')).to.equal(48690)
+      expect(ctx.equals('123', '321')).to.be.false
 
-      expect(hashCodeSpy.calledWith('123', ctx.options)).to.be.true
+      expect(equalsSpy.calledWith('123', '321', ctx.options)).to.be.true
     })
   })
 
@@ -81,16 +81,15 @@ describe('hash-code/context:HashCodeContext', function() {
     context('when options are passed to constructor', function() {
       it('should be based on options passed to constructor', function() {
         var expected = {
-          allowCache: false,
           filterProperty: function() {
             return false
           },
           skipInherited: true,
           skipMethods: true,
-          useHashCodeMethod: false
+          useEqualsMethod: false
         }
 
-        var ctx = new HashCodeContext(123, hashCodeSpy, expected)
+        var ctx = new EqualsContext(123, 321, equalsSpy, expected)
 
         expect(ctx.options).not.to.equal(expected)
         expect(ctx.options).to.deep.equal(expected)
@@ -99,30 +98,38 @@ describe('hash-code/context:HashCodeContext', function() {
 
     context('when no options are passed to constructor', function() {
       it('should be based on default options', function() {
-        var ctx = new HashCodeContext(123, hashCodeSpy)
+        var ctx = new EqualsContext(123, 312, equalsSpy)
 
         expect(ctx.options).to.be.an('object')
-        expect(ctx.options.allowCache).to.be.true
         expect(ctx.options.filterProperty).to.be.a('function')
         expect(ctx.options.filterProperty()).to.be.true
         expect(ctx.options.skipInherited).to.be.false
         expect(ctx.options.skipMethods).to.be.false
-        expect(ctx.options.useHashCodeMethod).to.be.true
+        expect(ctx.options.useEqualsMethod).to.be.true
       })
+    })
+  })
+
+  describe('#other', function() {
+    it('should be other value passed to constructor', function() {
+      var other = {}
+      var ctx = new EqualsContext('foo', other, equalsSpy)
+
+      expect(ctx.other).to.equal(other)
     })
   })
 
   describe('#string', function() {
     it('should be based on value passed to constructor', function() {
-      var ctx = new HashCodeContext({}, hashCodeSpy)
+      var ctx = new EqualsContext({}, 'foo', equalsSpy)
 
       expect(ctx.string).to.equal('[object Object]')
 
-      ctx = new HashCodeContext([], hashCodeSpy)
+      ctx = new EqualsContext([], 'foo', equalsSpy)
 
       expect(ctx.string).to.equal('[object Array]')
 
-      ctx = new HashCodeContext(123, hashCodeSpy)
+      ctx = new EqualsContext(123, 'foo', equalsSpy)
 
       expect(ctx.string).to.equal('[object Number]')
     })
@@ -130,24 +137,48 @@ describe('hash-code/context:HashCodeContext', function() {
 
   describe('#type', function() {
     it('should be based on value passed to constructor', function() {
-      var ctx = new HashCodeContext({}, hashCodeSpy)
+      var ctx = new EqualsContext({}, 'foo', equalsSpy)
 
       expect(ctx.type).to.equal('object')
 
-      ctx = new HashCodeContext([], hashCodeSpy)
+      ctx = new EqualsContext([], 'foo', equalsSpy)
 
       expect(ctx.type).to.equal('object')
 
-      ctx = new HashCodeContext(123, hashCodeSpy)
+      ctx = new EqualsContext(123, 'foo', equalsSpy)
 
       expect(ctx.type).to.equal('number')
+    })
+  })
+
+  describe('#validate', function() {
+    it('should return whether type of other matches that of value', function() {
+      var ctx = new EqualsContext('foo', 'bar', equalsSpy)
+
+      expect(ctx.validate()).to.be.true
+
+      ctx = new EqualsContext({ foo: 'bar' }, { fu: 'baz' }, equalsSpy)
+
+      expect(ctx.validate()).to.be.true
+
+      ctx = new EqualsContext([ 'foo' ], [ 'bar' ], equalsSpy)
+
+      expect(ctx.validate()).to.be.true
+
+      ctx = new EqualsContext([ 'foo' ], { fu: 'baz' }, equalsSpy)
+
+      expect(ctx.validate()).to.be.false
+
+      ctx = new EqualsContext(123, '123', equalsSpy)
+
+      expect(ctx.validate()).to.be.false
     })
   })
 
   describe('#value', function() {
     it('should be value passed to constructor', function() {
       var value = {}
-      var ctx = new HashCodeContext(value, hashCodeSpy)
+      var ctx = new EqualsContext(value, 'foo', equalsSpy)
 
       expect(ctx.value).to.equal(value)
     })

@@ -42,7 +42,7 @@ var NumberHashCodeGenerator = HashCodeGenerator.extend({
   /**
    * @inheritdoc
    * @override
-   * @memberof NumberHashCodeGenerator.prototype
+   * @memberof NumberHashCodeGenerator#
    */
   generate: function generate(context) {
     return context.value !== context.value ? 0 : context.value
@@ -51,7 +51,7 @@ var NumberHashCodeGenerator = HashCodeGenerator.extend({
   /**
    * @inheritdoc
    * @override
-   * @memberof NumberHashCodeGenerator.prototype
+   * @memberof NumberHashCodeGenerator#
    */
   supports: function supports(context) {
     return context.type === 'number'

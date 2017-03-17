@@ -22,33 +22,33 @@
 
 'use strict'
 
-var HashCodeGenerator = require('./generator')
+var EqualsComparator = require('./comparator')
 
 /**
- * An implementation of {@link HashCodeGenerator} that supports miscellaneous values by generating hash codes based on
- * their primitive value (determined by calling <code>valueOf</code> on the value).
+ * An implementation of {@link EqualsComparator} that supports miscellaneous values by comparing their primitive value
+ * (determined by calling <code>valueOf</code> on each value).
  *
- * This {@link HashCodeGenerator} currently only supports dates.
+ * This {@link EqualsComparator} currently only supports dates.
  *
  * @protected
  * @constructor
- * @extends HashCodeGenerator
+ * @extends EqualsComparator
  */
-var ValueOfHashCodeGenerator = HashCodeGenerator.extend({
+var ValueOfEqualsComparator = EqualsComparator.extend({
 
   /**
    * @inheritdoc
    * @override
-   * @memberof ValueOfHashCodeGenerator#
+   * @memberof ValueOfEqualsComparator#
    */
-  generate: function generate(context) {
-    return context.hashCode(context.value.valueOf())
+  compare: function compare(context) {
+    return context.equals(context.value.valueOf(), context.other.valueOf())
   },
 
   /**
    * @inheritdoc
    * @override
-   * @memberof ValueOfHashCodeGenerator#
+   * @memberof ValueOfEqualsComparator#
    */
   supports: function supports(context) {
     return context.string === '[object Date]'
@@ -56,4 +56,4 @@ var ValueOfHashCodeGenerator = HashCodeGenerator.extend({
 
 })
 
-module.exports = ValueOfHashCodeGenerator
+module.exports = ValueOfEqualsComparator

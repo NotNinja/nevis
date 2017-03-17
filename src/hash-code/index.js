@@ -70,9 +70,7 @@ var defaultGenerator = new generators.ObjectHashCodeGenerator()
  * If <code>value</code> is <code>null</code>, this method will always return zero. Otherwise, it will check whether
  * <code>value</code> has a method named "hashCode" and, if so, return the result of calling that method. If no
  * "hashCode" method exists on <code>value</code> or if the <code>useHashCodeMethod</code> option is disabled, it will
- * attempt to find a {@link HashCodeGenerator} that supports <code>value</code>. Finally, if no generator could be found
- * that supports <code>value</code>, it will fall back to the default generator (i.e. {@link ObjectHashCodeGenerator})
- * which should support most other objects.
+ * attempt to generate the hash code internally based on its type.
  *
  * Plain objects are hashed recursively for their properties and collections (e.g. arrays) are also hashed recursively
  * for their elements.
@@ -155,7 +153,7 @@ module.exports = hashCode
  * This is not called for method properties when <code>skipMethods</code> is enabled.
  * @property {boolean} [skipInherited] - <code>true</code> to skip inherited properties when generating hash codes for
  * objects; otherwise <code>false</code>.
- * @property {boolean} [skipMethods=true] - <code>true</code> to skip method properties when generating hash codes for
+ * @property {boolean} [skipMethods] - <code>true</code> to skip method properties when generating hash codes for
  * objects; otherwise <code>false</code>.
  * @property {boolean} [useHashCodeMethod=true] - <code>true</code> to call "hashCode" method on value, when present;
  * otherwise <code>false</code>.

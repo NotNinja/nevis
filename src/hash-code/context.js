@@ -58,7 +58,7 @@ function HashCodeContext(value, hashCode, options) {
       return true
     },
     skipInherited: Boolean(options.skipInherited),
-    skipMethods: options.skipMethods !== false,
+    skipMethods: Boolean(options.skipMethods),
     useHashCodeMethod: options.useHashCodeMethod !== false
   }
 
@@ -101,7 +101,7 @@ function HashCodeContext(value, hashCode, options) {
  * @param {*} value - the value whose hash code is to be generated
  * @return {HashCodeContext} A copy of this {@link HashCodeContext} for <code>value</code>.
  * @public
- * @memberof HashCodeContext.prototype
+ * @memberof HashCodeContext#
  */
 HashCodeContext.prototype.copy = function copy(value) {
   return new HashCodeContext(value, this._hashCode, this.options)
@@ -114,7 +114,7 @@ HashCodeContext.prototype.copy = function copy(value) {
  * @param {Function} [value.hashCode] - the method used to produce the hash code for <code>value</code>, when present
  * @return {number} A hash code for <code>value</code>.
  * @public
- * @memberof HashCodeContext.prototype
+ * @memberof HashCodeContext#
  */
 HashCodeContext.prototype.hashCode = function hashCode(value) {
   return this._hashCode(value, this.options)

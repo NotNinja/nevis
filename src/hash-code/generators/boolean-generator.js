@@ -36,7 +36,7 @@ var BooleanHashCodeGenerator = HashCodeGenerator.extend({
   /**
    * @inheritdoc
    * @override
-   * @memberof BooleanHashCodeGenerator.prototype
+   * @memberof BooleanHashCodeGenerator#
    */
   generate: function generate(context) {
     return context.value ? 1231 : 1237
@@ -45,7 +45,7 @@ var BooleanHashCodeGenerator = HashCodeGenerator.extend({
   /**
    * @inheritdoc
    * @override
-   * @memberof BooleanHashCodeGenerator.prototype
+   * @memberof BooleanHashCodeGenerator#
    */
   supports: function supports(context) {
     return context.type === 'boolean'

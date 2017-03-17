@@ -25,19 +25,22 @@
 var extend = require('../../extend')
 
 /**
- * Responsible for generating a hash code for a specific {@link HashCodeContext}.
+ * Responsible for comparing the values within a specific {@link EqualsContext} to check whether they are equal.
  *
- * Individual <code>HashCodeGenerator</code> implementations should attempt to concentrate on specific value types to
- * keep them small and targeted, allowing other implementations to possibly generate a more suitable hash code. The
- * {@link HashCodeContext} should <b>never</b> be modified but can be copied via {@link HashCodeContext#copy}.
+ * Individual <code>EqualsComparator</code> implementations should attempt to concentrate on specific value types to
+ * keep them small and targeted, allowing other implementations to possibly provide a more suitable comparison. The
+ * {@link EqualsContext} should <b>never</b> be modified but can be copied via {@link EqualsContext#copy}.
  *
- * Implementations <b>must</b> implement the {@link HashCodeGenerator#generate} and {@link HashCodeGenerator#supports}
+ * A <code>EqualsComparator</code> is <b>only</b> called once it has been determined that the values within the
+ * {@link EqualsContext} are not exactly equal, neither are <code>null</code>, and both share the same type.
+ *
+ * Implementations <b>must</b> implement the {@link EqualsComparator#compare} and {@link EqualsComparator#supports}
  * methods.
  *
  * @protected
  * @constructor
  */
-function HashCodeGenerator() {}
+function EqualsComparator() {}
 
 /**
  * Extends the constructor to which this method is associated with the <code>prototype</code> and/or
@@ -54,37 +57,38 @@ function HashCodeGenerator() {}
  * @return {Function} The child <code>constructor</code> provided or the one created if none was given.
  * @public
  * @static
- * @memberof HashCodeGenerator
+ * @memberof EqualsComparator
  */
-HashCodeGenerator.extend = extend
+EqualsComparator.extend = extend
 
 /**
- * Returns a hash code for the specified <code>context</code>.
+ * Compares the values within the specified <code>context</code>.
  *
- * This method is only called when {@link HashCodeGenerator#supports} indicates that this {@link HashCodeGenerator}
+ * This method is only called when {@link EqualsComparator#supports} indicates that this {@link EqualsComparator}
  * supports <code>context</code>.
  *
- * @param {HashCodeContext} context - the {@link HashCodeContext} for which the hash code is to be generated
- * @return {number} The hash code generated for <code>context</code>.
+ * @param {EqualsContext} context - the {@link EqualsContext} whose values are to be compared
+ * @return {boolean} <code>true</code> if the values within <code>context</code> are equal; otherwise
+ * <code>false</code>.
  * @public
  * @abstract
- * @memberof HashCodeGenerator#
+ * @memberof EqualsComparator#
  */
-HashCodeGenerator.prototype.generate = /* istanbul ignore next */ function generate(context) {}
+EqualsComparator.prototype.compare = /* istanbul ignore next */ function compare(context) {}
 
 /**
- * Returns whether this {@link HashCodeGenerator} supports the specified <code>context</code>.
+ * Returns whether this {@link EqualsComparator} supports the specified <code>context</code>.
  *
- * This method should only return <code>true</code> when {@link HashCodeGenerator#generate} can generate a hash code for
+ * This method should only return <code>true</code> when {@link EqualsComparator#compare} can compare the values within
  * <code>context</code>.
  *
- * @param {HashCodeContext} context - the {@link HashCodeContext} to be checked
- * @return {boolean} <code>true</code> if this {@link HashCodeGenerator} can generate a hash code for
+ * @param {EqualsContext} context - the {@link EqualsContext} to be checked
+ * @return {boolean} <code>true</code> if this {@link EqualsComparator} can compare the values within
  * <code>context</code>; otherwise <code>false</code>.
  * @public
  * @abstract
- * @memberof HashCodeGenerator#
+ * @memberof EqualsComparator#
  */
-HashCodeGenerator.prototype.supports = /* istanbul ignore next */ function supports(context) {}
+EqualsComparator.prototype.supports = /* istanbul ignore next */ function supports(context) {}
 
-module.exports = HashCodeGenerator
+module.exports = EqualsComparator

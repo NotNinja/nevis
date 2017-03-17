@@ -5,6 +5,10 @@
   },
   "rules": {
     "func-names": "off",
+    "max-params": [
+      "error",
+      4
+    ],
     "no-bitwise": "off",
     "no-empty-function": "off",
     "no-inline-comments": "off",

@@ -45,7 +45,7 @@ var CachingHashCodeGenerator = HashCodeGenerator.extend(function() {
    *
    * @private
    * @type {Object.<*, number>}
-   * @memberof CachingHashCodeGenerator.prototype
+   * @memberof CachingHashCodeGenerator#
    */
   this._cache = {}
 }, {
@@ -56,7 +56,7 @@ var CachingHashCodeGenerator = HashCodeGenerator.extend(function() {
    *
    * @return {void}
    * @public
-   * @memberof CachingHashCodeGenerator.prototype
+   * @memberof CachingHashCodeGenerator#
    */
   clearCache: function clearCache() {
     this._cache = {}
@@ -65,7 +65,7 @@ var CachingHashCodeGenerator = HashCodeGenerator.extend(function() {
   /**
    * @inheritdoc
    * @override
-   * @memberof CachingHashCodeGenerator.prototype
+   * @memberof CachingHashCodeGenerator#
    */
   generate: function generate(context) {
     var hash = this._cache[context.value]
@@ -91,7 +91,7 @@ var CachingHashCodeGenerator = HashCodeGenerator.extend(function() {
    * @return {number} The hash code generated for <code>context</code>.
    * @protected
    * @abstract
-   * @memberof CachingHashCodeGenerator.prototype
+   * @memberof CachingHashCodeGenerator#
    */
   generateInternal: /* istanbul ignore next */ function generateInternal(context) {}
 

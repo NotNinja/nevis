@@ -35,7 +35,7 @@ var ToStringHashCodeGenerator = require('./to-string-generator')
 var ValueOfHashCodeGenerator = require('./value-of-generator')
 
 /**
- * A hash containing constructors for all built-in hash code generators.
+ * A hash containing constructors for all hash code generators.
  *
  * @public
  * @type {Object.<string, Function>}

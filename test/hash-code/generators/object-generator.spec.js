@@ -56,7 +56,7 @@ describe('hash-code/generators/object-generator:ObjectHashCodeGenerator', functi
   describe('#generate', function() {
     it('should generate hash code for object values', function() {
       expect(generator.generate(new HashCodeContext({}, hashCode))).to.equal(0)
-      expect(generator.generate(new HashCodeContext(value, hashCode))).to.equal(156073)
+      expect(generator.generate(new HashCodeContext(value, hashCode))).to.equal(-75170231)
     })
 
     context('when "filterProperty" option is used', function() {
@@ -71,22 +71,22 @@ describe('hash-code/generators/object-generator:ObjectHashCodeGenerator', functi
 
     context('when "skipInherited" option is enabled', function() {
       it('should ignore inherited properties when generating hash code for object values', function() {
-        expect(generator.generate(new HashCodeContext(value, hashCode, { skipInherited: true }))).to.equal(61653)
+        expect(generator.generate(new HashCodeContext(value, hashCode, { skipInherited: true }))).to.equal(-1637798867)
       })
 
-      context('and "skipMethods" option is disabled', function() {
-        it('should consider method properties when generating hash code for object values', function() {
+      context('and "skipMethods" option is enabled', function() {
+        it('should ignore method properties when generating hash code for object values', function() {
           expect(generator.generate(new HashCodeContext(value, hashCode, {
             skipInherited: true,
-            skipMethods: false
-          }))).to.equal(-1637798867)
+            skipMethods: true
+          }))).to.equal(61653)
         })
       })
     })
 
-    context('when "skipMethods" option is disabled', function() {
-      it('should consider method properties when generating hash code for object values', function() {
-        expect(generator.generate(new HashCodeContext(value, hashCode, { skipMethods: false }))).to.equal(-75170231)
+    context('when "skipMethods" option is enabled', function() {
+      it('should ignore method properties when generating hash code for object values', function() {
+        expect(generator.generate(new HashCodeContext(value, hashCode, { skipMethods: true }))).to.equal(156073)
       })
     })
   })

@@ -24,6 +24,8 @@
 
 var expect = require('chai').expect
 
+var equals = require('../src/equals/index')
+var EqualsBuilder = require('../src/equals/builder')
 var hashCode = require('../src/hash-code/index')
 var HashCodeBuilder = require('../src/hash-code/builder')
 var index = require('../src/index')
@@ -32,6 +34,18 @@ var Nevis = require('../src/nevis')
 describe('index:Nevis', function() {
   it('should export Nevis', function() {
     expect(index).to.equal(Nevis)
+  })
+
+  describe('.equals', function() {
+    it('should reference the internal equals function', function() {
+      expect(index.equals).to.equal(equals)
+    })
+  })
+
+  describe('.EqualsBuilder', function() {
+    it('should reference the internal EqualsBuilder constructor', function() {
+      expect(index.EqualsBuilder).to.equal(EqualsBuilder)
+    })
   })
 
   describe('.hashCode', function() {
@@ -46,12 +60,25 @@ describe('index:Nevis', function() {
     })
   })
 
+  describe('#equals', function() {
+    it('should perform a strict equality comparison to the other object', function() {
+      var Test = index.extend()
+
+      var value = new Test()
+
+      expect(value.equals()).to.be.false
+      expect(value.equals(null)).to.be.false
+      expect(value.equals(new Test())).to.be.false
+      expect(value.equals(value)).to.be.true
+    })
+  })
+
   describe('#hashCode', function() {
     it('should generate a hash code for the instance', function() {
       var Test = index.extend({
         fu: 'baz',
         buzz: function() {
-          321
+          return 321
         }
       })
 
@@ -61,7 +88,7 @@ describe('index:Nevis', function() {
         return 123
       }
 
-      expect(value.hashCode()).to.equal(-1917239168)
+      expect(value.hashCode()).to.equal(1669087569)
     })
   })
 })

@@ -36,7 +36,7 @@ var StringHashCodeGenerator = CachingHashCodeGenerator.extend({
   /**
    * @inheritdoc
    * @override
-   * @memberof StringHashCodeGenerator.prototype
+   * @memberof StringHashCodeGenerator#
    */
   generateInternal: function generateInternal(context) {
     var hash = 0
@@ -52,7 +52,7 @@ var StringHashCodeGenerator = CachingHashCodeGenerator.extend({
   /**
    * @inheritdoc
    * @override
-   * @memberof StringHashCodeGenerator.prototype
+   * @memberof StringHashCodeGenerator#
    */
   supports: function supports(context) {
     return context.type === 'string'

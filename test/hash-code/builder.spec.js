@@ -70,7 +70,7 @@ describe('hash-code/builder:HashCodeBuilder', function() {
           fu: function() {
             return 321
           }
-        }, { skipMethods: false })).to.equal(builder)
+        })).to.equal(builder)
 
         expect(builder.build()).to.equal(624515545)
       })
@@ -85,7 +85,7 @@ describe('hash-code/builder:HashCodeBuilder', function() {
           fu: function() {
             return 321
           }
-        }, { skipMethods: false })).to.equal(builder)
+        })).to.equal(builder)
 
         expect(builder.build()).to.equal(624489437)
       })

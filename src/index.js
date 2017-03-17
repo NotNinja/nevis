@@ -22,9 +22,67 @@
 
 'use strict'
 
+var eq = require('./equals')
+var EqualsBuilder = require('./equals/builder')
 var hash = require('./hash-code')
 var HashCodeBuilder = require('./hash-code/builder')
 var Nevis = require('./nevis')
+
+/**
+ * Returns whether the specified <code>value</code> is "equal to" the <code>other</code> provided using the given
+ * <code>options</code>.
+ *
+ * Consequently, if both arguments are <code>null</code>, <code>true</code> is returned and if exactly one argument is
+ * <code>null</code>, <code>false</code> is returned. Otherwise, this method implements an equivalence relation on
+ * non-null object references:
+ *
+ * <ul>
+ *   <li>It is <i>reflexive</i>: for any non-null reference value <code>x</code>, <code>equals(x, x)</code> should
+ *   return <code>true</code>.</li>
+ *   <li>It is <i>symmetric</i>: for any non-null reference values <code>x</code> and <code>y</code>,
+ *   <code>equals(x, y)</code> should return <code>true</code> if and only if <code>equals(y, x)</code> returns
+ *   <code>true</code>.</li>
+ *   <li>It is <i>transitive</i>: for any non-null reference values <code>x</code>, <code>y</code>, and <code>z</code>,
+ *   if <code>equals(x, y)</code> returns <code>true</code> and <code>equals(y, z)</code> returns <code>true</code>,
+ *   then <code>equals(x, z)</code> should return <code>true</code>.</li>
+ *   <li>It is <i>consistent</i>: for any non-null reference values <code>x</code> and <code>y</code>, multiple
+ *   invocations of <code>equals(x, y)</code> consistently return <code>true</code> or consistently return
+ *   <code>false</code>, provided no information used in <code>equals</code> comparisons on the objects is
+ *   modified.</li>
+ *   <li>For any non-null reference value <code>x</code>, <code>equals(x, null)</code> should return
+ *   <code>false</code>.</li>
+ * </ul>
+ *
+ * If neither value is <code>null</code> and both are not exactly (strictly) equal, this method will first check whether
+ * <code>value</code> has a method named "equals" and, if so, return the result of calling that method with
+ * <code>other</code> passed to it. If no "equals" method exists on <code>value</code> or if the
+ * <code>useEqualsMethod</code> option is disabled, it will attempt to test the equality internally based on their type.
+ *
+ * Plain objects are tested recursively for their properties and collections (e.g. arrays) are also tested recursively
+ * for their elements.
+ *
+ * @param {*} value - the value to be checked against <code>other</code> (may be <code>null</code>)
+ * @param {Function} [value.equals] - the method to be used to test equality for <code>value</code> and
+ * <code>other</code>, when present
+ * @param {*} other - the other value to be checked against <code>value</code> (may be <code>null</code>)
+ * @param {Nevis~EqualsOptions} [options] - the options to be used (may be <code>null</code>)
+ * @return {boolean} <code>true</code> if <code>value</code> is equal to <code>other</code>; otherwise
+ * <code>false</code>.
+ * @public
+ * @static
+ * @memberof Nevis
+ */
+Nevis.equals = eq
+
+/**
+ * Assists in building good equals for complex classes.
+ *
+ * @public
+ * @static
+ * @constructor
+ * @memberof Nevis
+ */
+Nevis.EqualsBuilder = EqualsBuilder
 
 /**
  * Returns a hash code for the specified <code>value</code> using the <code>options</code> provided. This method is
@@ -47,9 +105,7 @@ var Nevis = require('./nevis')
  * If <code>value</code> is <code>null</code>, this method will always return zero. Otherwise, it will check whether
  * <code>value</code> has a method named "hashCode" and, if so, return the result of calling that method. If no
  * "hashCode" method exists on <code>value</code> or if the <code>useHashCodeMethod</code> option is disabled, it will
- * attempt to find a {@link HashCodeGenerator} that supports <code>value</code>. Finally, if no generator could be found
- * that supports <code>value</code>, it will fall back to the default generator (i.e. {@link ObjectHashCodeGenerator})
- * which should support most other objects.
+ * attempt to generate the hash code internally based on its type.
  *
  * Plain objects are hashed recursively for their properties and collections (e.g. arrays) are also hashed recursively
  * for their elements.
@@ -83,6 +139,46 @@ Nevis.hashCode = hash
 Nevis.HashCodeBuilder = HashCodeBuilder
 
 /**
+ * Returns whether this instance is "equal to" the specified <code>obj</code>.
+ *
+ * This method implements an equivalence relation on non-null object references:
+ *
+ * <ul>
+ *   <li>It is <i>reflexive</i>: for any non-null reference value <code>x</code>, <code>equals(x, x)</code> should
+ *   return <code>true</code>.</li>
+ *   <li>It is <i>symmetric</i>: for any non-null reference values <code>x</code> and <code>y</code>,
+ *   <code>equals(x, y)</code> should return <code>true</code> if and only if <code>equals(y, x)</code> returns
+ *   <code>true</code>.</li>
+ *   <li>It is <i>transitive</i>: for any non-null reference values <code>x</code>, <code>y</code>, and <code>z</code>,
+ *   if <code>equals(x, y)</code> returns <code>true</code> and <code>equals(y, z)</code> returns <code>true</code>,
+ *   then <code>equals(x, z)</code> should return <code>true</code>.</li>
+ *   <li>It is <i>consistent</i>: for any non-null reference values <code>x</code> and <code>y</code>, multiple
+ *   invocations of <code>equals(x, y)</code> consistently return <code>true</code> or consistently return
+ *   <code>false</code>, provided no information used in <code>equals</code> comparisons on the objects is
+ *   modified.</li>
+ *   <li>For any non-null reference value <code>x</code>, <code>equals(x, null)</code> should return
+ *   <code>false</code>.</li>
+ * </ul>
+ *
+ * The default implementation of this method is the most discriminating possible equivalence relation on objects; that
+ * is, for any non-null reference values <code>x</code> and <code>y</code>, this method returns <code>true</code> if,
+ * and only if, <code>x</code> and <code>y</code> are exactly equal (<code>x === y</code> has the value
+ * <code>true</code>).
+ *
+ * Please note that it is generally necessary to override the {@link Nevis#hashCode} method whenever this method is
+ * overridden, so as to maintain the general contract for the {@link Nevis#hashCode} method, which states that equal
+ * objects must have equal hash codes.
+ *
+ * @param {*} obj - the reference to which this instance is to be compared (may be <code>null</code>)
+ * @return {boolean} <code>true</code> if this instance is equal to <code>obj</code>; otherwise <code>false</code>.
+ * @public
+ * @memberof Nevis#
+ */
+Nevis.prototype.equals = function equals(obj) {
+  return this === obj
+}
+
+/**
  * Returns the hash code for this instance. This method is supported for the benefit of hash tables.
  *
  * The general contract of <code>hashCode</code> is:
@@ -99,19 +195,18 @@ Nevis.HashCodeBuilder = HashCodeBuilder
  *   producing distinct number results for unequal instances may improve the performance of hash tables.</li>
  * </ul>
  *
- * This method will attempt to find a {@link HashCodeGenerator} that supports this instance. However, if no generator
- * could be found that supports this instance, it will fall back to the default generator (i.e.
- * {@link ObjectHashCodeGenerator}) which should support most other objects.
+ * The default implementation of this method will attempt to generate the hash code based on all of the fields on this
+ * class.
+ *
+ * Please note that it is generally necessary to override the {@link Nevis#equals} method whenever this method is
+ * overridden, so as to maintain the above contract where equal objects must have equal hash codes.
  *
  * @return {number} The hash code.
  * @public
- * @memberof Nevis.prototype
+ * @memberof Nevis#
  */
 Nevis.prototype.hashCode = function hashCode() {
-  return hash(this, {
-    skipMethods: false,
-    useHashCodeMethod: false
-  })
+  return hash(this, { useHashCodeMethod: false })
 }
 
 module.exports = Nevis

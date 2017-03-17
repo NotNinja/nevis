@@ -39,7 +39,7 @@ var ToStringHashCodeGenerator = StringHashCodeGenerator.extend({
   /**
    * @inheritdoc
    * @override
-   * @memberof ToStringHashCodeGenerator.prototype
+   * @memberof ToStringHashCodeGenerator#
    */
   generate: function generate(context) {
     return ToStringHashCodeGenerator.super_.prototype.generate.call(this, context.copy(context.value.toString()))
@@ -48,7 +48,7 @@ var ToStringHashCodeGenerator = StringHashCodeGenerator.extend({
   /**
    * @inheritdoc
    * @override
-   * @memberof ToStringHashCodeGenerator.prototype
+   * @memberof ToStringHashCodeGenerator#
    */
   supports: function supports(context) {
     return context.type === 'function' || context.string === '[object RegExp]'

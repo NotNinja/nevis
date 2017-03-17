@@ -65,7 +65,7 @@ describe('hash-code/generators/number-generator:NumberHashCodeGenerator', functi
       expect(generator.supports(new HashCodeContext(NaN, hashCode))).to.be.true
     })
 
-    it('should return false for number values', function() {
+    it('should return false for other values', function() {
       expect(generator.supports(new HashCodeContext(true, hashCode))).to.be.false
       expect(generator.supports(new HashCodeContext('foo', hashCode))).to.be.false
       expect(generator.supports(new HashCodeContext(function foo() {}, hashCode))).to.be.false

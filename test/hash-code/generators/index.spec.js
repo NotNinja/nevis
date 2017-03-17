@@ -37,7 +37,7 @@ var StringHashCodeGenerator = require('../../../src/hash-code/generators/string-
 var ToStringHashCodeGenerator = require('../../../src/hash-code/generators/to-string-generator')
 var ValueOfHashCodeGenerator = require('../../../src/hash-code/generators/value-of-generator')
 
-describe('hash-code/generators', function() {
+describe('hash-code/generators/index', function() {
   it('should contain all hash code generator constructors', function() {
     expect(generators).to.deep.equal({
       ArrayHashCodeGenerator: ArrayHashCodeGenerator,

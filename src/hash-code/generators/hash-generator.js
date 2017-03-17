@@ -42,7 +42,7 @@ var HashHashCodeGenerator = HashCodeGenerator.extend({
   /**
    * @inheritdoc
    * @override
-   * @memberof HashHashCodeGenerator.prototype
+   * @memberof HashHashCodeGenerator#
    */
   generate: function generate(context) {
     var entries = this.getEntries(context)
@@ -63,7 +63,7 @@ var HashHashCodeGenerator = HashCodeGenerator.extend({
    * @return {Array.<Array>} The entries contained within the value of <code>context</code>.
    * @protected
    * @abstract
-   * @memberof HashHashCodeGenerator.prototype
+   * @memberof HashHashCodeGenerator#
    */
   getEntries: /* istanbul ignore next */ function getEntries(context) {}
 

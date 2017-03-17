@@ -22,38 +22,58 @@
 
 'use strict'
 
-var HashCodeGenerator = require('./generator')
+var HashEqualsComparator = require('./hash-comparator')
 
 /**
- * An implementation of {@link HashCodeGenerator} that supports miscellaneous values by generating hash codes based on
- * their primitive value (determined by calling <code>valueOf</code> on the value).
- *
- * This {@link HashCodeGenerator} currently only supports dates.
+ * An implementation of {@link HashEqualsComparator} that supports plain old object values.
  *
  * @protected
  * @constructor
- * @extends HashCodeGenerator
+ * @extends HashEqualsComparator
  */
-var ValueOfHashCodeGenerator = HashCodeGenerator.extend({
+var ObjectEqualsComparator = HashEqualsComparator.extend({
 
   /**
    * @inheritdoc
    * @override
-   * @memberof ValueOfHashCodeGenerator#
+   * @memberof ObjectEqualsComparator#
    */
-  generate: function generate(context) {
-    return context.hashCode(context.value.valueOf())
+  getKeys: function getKeys(hash, context) {
+    var keys = []
+    var options = context.options
+    var value
+
+    for (var key in hash) {
+      if (!options.skipInherited || Object.prototype.hasOwnProperty.call(hash, key)) {
+        value = this.getValue(hash, key, context)
+
+        if ((typeof value !== 'function' || !options.skipMethods) && options.filterProperty(key, value, hash)) {
+          keys.push(key)
+        }
+      }
+    }
+
+    return keys
   },
 
   /**
    * @inheritdoc
    * @override
-   * @memberof ValueOfHashCodeGenerator#
+   * @memberof ObjectEqualsComparator#
+   */
+  getValue: function getValue(hash, key) {
+    return hash[key]
+  },
+
+  /**
+   * @inheritdoc
+   * @override
+   * @memberof ObjectEqualsComparator#
    */
   supports: function supports(context) {
-    return context.string === '[object Date]'
+    return context.type === 'object'
   }
 
 })
 
-module.exports = ValueOfHashCodeGenerator
+module.exports = ObjectEqualsComparator

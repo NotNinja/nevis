@@ -22,38 +22,35 @@
 
 'use strict'
 
-var HashCodeGenerator = require('./generator')
+var CollectionEqualsComparator = require('./collection-comparator')
 
 /**
- * An implementation of {@link HashCodeGenerator} that supports miscellaneous values by generating hash codes based on
- * their primitive value (determined by calling <code>valueOf</code> on the value).
- *
- * This {@link HashCodeGenerator} currently only supports dates.
+ * An implementation of {@link CollectionEqualsComparator} that supports array values.
  *
  * @protected
  * @constructor
- * @extends HashCodeGenerator
+ * @extends CollectionEqualsComparator
  */
-var ValueOfHashCodeGenerator = HashCodeGenerator.extend({
+var ArrayEqualsComparator = CollectionEqualsComparator.extend({
 
   /**
    * @inheritdoc
    * @override
-   * @memberof ValueOfHashCodeGenerator#
+   * @memberof ArrayEqualsComparator#
    */
-  generate: function generate(context) {
-    return context.hashCode(context.value.valueOf())
+  getElements: function getElements(collection) {
+    return collection
   },
 
   /**
    * @inheritdoc
    * @override
-   * @memberof ValueOfHashCodeGenerator#
+   * @memberof ArrayEqualsComparator#
    */
   supports: function supports(context) {
-    return context.string === '[object Date]'
+    return context.string === '[object Array]'
   }
 
 })
 
-module.exports = ValueOfHashCodeGenerator
+module.exports = ArrayEqualsComparator

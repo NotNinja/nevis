@@ -22,38 +22,32 @@
 
 'use strict'
 
-var HashCodeGenerator = require('./generator')
+var expect = require('chai').expect
 
-/**
- * An implementation of {@link HashCodeGenerator} that supports miscellaneous values by generating hash codes based on
- * their primitive value (determined by calling <code>valueOf</code> on the value).
- *
- * This {@link HashCodeGenerator} currently only supports dates.
- *
- * @protected
- * @constructor
- * @extends HashCodeGenerator
- */
-var ValueOfHashCodeGenerator = HashCodeGenerator.extend({
+var EqualsComparator = require('../../../src/equals/comparators/comparator')
+var extend = require('../../../src/extend')
 
-  /**
-   * @inheritdoc
-   * @override
-   * @memberof ValueOfHashCodeGenerator#
-   */
-  generate: function generate(context) {
-    return context.hashCode(context.value.valueOf())
-  },
+describe('equals/comparators/comparator:EqualsComparator', function() {
+  it('should be a constructor', function() {
+    expect(EqualsComparator).to.be.a('function')
+    expect(new EqualsComparator()).to.be.an('object')
+  })
 
-  /**
-   * @inheritdoc
-   * @override
-   * @memberof ValueOfHashCodeGenerator#
-   */
-  supports: function supports(context) {
-    return context.string === '[object Date]'
-  }
+  describe('.extend', function() {
+    it('should reference the internal extend function', function() {
+      expect(EqualsComparator.extend).to.equal(extend)
+    })
+  })
 
+  describe('#compare', function() {
+    it('should be an abstract method', function() {
+      expect(EqualsComparator.prototype.compare).to.be.a('function')
+    })
+  })
+
+  describe('#supports', function() {
+    it('should be an abstract method', function() {
+      expect(EqualsComparator.prototype.supports).to.be.a('function')
+    })
+  })
 })
-
-module.exports = ValueOfHashCodeGenerator

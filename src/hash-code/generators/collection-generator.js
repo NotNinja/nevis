@@ -42,7 +42,7 @@ var CollectionHashCodeGenerator = HashCodeGenerator.extend({
   /**
    * @inheritdoc
    * @override
-   * @memberof CollectionHashCodeGenerator.prototype
+   * @memberof CollectionHashCodeGenerator#
    */
   generate: function generate(context) {
     var elements = this.getElements(context)
@@ -60,7 +60,7 @@ var CollectionHashCodeGenerator = HashCodeGenerator.extend({
    * @return {Array} The elements contained within the value of <code>context</code>.
    * @protected
    * @abstract
-   * @memberof CollectionHashCodeGenerator.prototype
+   * @memberof CollectionHashCodeGenerator#
    */
   getElements: /* istanbul ignore next */ function getElements(context) {}
 

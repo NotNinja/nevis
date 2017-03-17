@@ -36,19 +36,20 @@ var ObjectHashCodeGenerator = HashHashCodeGenerator.extend({
   /**
    * @inheritdoc
    * @override
-   * @memberof ObjectHashCodeGenerator.prototype
+   * @memberof ObjectHashCodeGenerator#
    */
   getEntries: function getEntries(context) {
     var entries = []
-    var propertyValue
+    var hash = context.value
+    var options = context.options
+    var value
 
-    for (var name in context.value) {
-      if (!context.options.skipInherited || Object.prototype.hasOwnProperty.call(context.value, name)) {
-        propertyValue = context.value[name]
+    for (var name in hash) {
+      if (!options.skipInherited || Object.prototype.hasOwnProperty.call(hash, name)) {
+        value = hash[name]
 
-        if ((typeof propertyValue !== 'function' || !context.options.skipMethods) &&
-          context.options.filterProperty(name, propertyValue, context.value)) {
-          entries.push([ name, propertyValue ])
+        if ((typeof value !== 'function' || !options.skipMethods) && options.filterProperty(name, value, hash)) {
+          entries.push([ name, value ])
         }
       }
     }
@@ -59,7 +60,7 @@ var ObjectHashCodeGenerator = HashHashCodeGenerator.extend({
   /**
    * @inheritdoc
    * @override
-   * @memberof ObjectHashCodeGenerator.prototype
+   * @memberof ObjectHashCodeGenerator#
    */
   supports: function supports(context) {
     return context.type === 'object'

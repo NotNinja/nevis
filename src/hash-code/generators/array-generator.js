@@ -36,7 +36,7 @@ var ArrayHashCodeGenerator = CollectionHashCodeGenerator.extend({
   /**
    * @inheritdoc
    * @override
-   * @memberof ArrayHashCodeGenerator.prototype
+   * @memberof ArrayHashCodeGenerator#
    */
   getElements: function getElements(context) {
     return context.value
@@ -45,7 +45,7 @@ var ArrayHashCodeGenerator = CollectionHashCodeGenerator.extend({
   /**
    * @inheritdoc
    * @override
-   * @memberof ArrayHashCodeGenerator.prototype
+   * @memberof ArrayHashCodeGenerator#
    */
   supports: function support(context) {
     return context.string === '[object Array]'
