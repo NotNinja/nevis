@@ -28,25 +28,25 @@ var ArrayEqualsComparator = require('../../../src/equals/comparators/array-compa
 var CollectionEqualsComparator = require('../../../src/equals/comparators/collection-comparator')
 var EqualsComparator = require('../../../src/equals/comparators/comparator')
 var comparators = require('../../../src/equals/comparators')
+var DateEqualsComparator = require('../../../src/equals/comparators/date-comparator')
 var HashEqualsComparator = require('../../../src/equals/comparators/hash-comparator')
 var NumberEqualsComparator = require('../../../src/equals/comparators/number-comparator')
 var ObjectEqualsComparator = require('../../../src/equals/comparators/object-comparator')
 var StringEqualsComparator = require('../../../src/equals/comparators/string-comparator')
 var ToStringEqualsComparator = require('../../../src/equals/comparators/to-string-comparator')
-var ValueOfEqualsComparator = require('../../../src/equals/comparators/value-of-comparator')
 
 describe('equals/comparators/index', function() {
   it('should contain all equals comparator constructors', function() {
     expect(comparators).to.deep.equal({
       ArrayEqualsComparator: ArrayEqualsComparator,
       CollectionEqualsComparator: CollectionEqualsComparator,
+      DateEqualsComparator: DateEqualsComparator,
       EqualsComparator: EqualsComparator,
       HashEqualsComparator: HashEqualsComparator,
       NumberEqualsComparator: NumberEqualsComparator,
       ObjectEqualsComparator: ObjectEqualsComparator,
       StringEqualsComparator: StringEqualsComparator,
-      ToStringEqualsComparator: ToStringEqualsComparator,
-      ValueOfEqualsComparator: ValueOfEqualsComparator
+      ToStringEqualsComparator: ToStringEqualsComparator
     })
   })
 })

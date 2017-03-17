@@ -28,13 +28,13 @@ var ArrayHashCodeGenerator = require('../../../src/hash-code/generators/array-ge
 var BooleanHashCodeGenerator = require('../../../src/hash-code/generators/boolean-generator')
 var CachingHashCodeGenerator = require('../../../src/hash-code/generators/caching-generator')
 var CollectionHashCodeGenerator = require('../../../src/hash-code/generators/collection-generator')
+var DateHashCodeGenerator = require('../../../src/hash-code/generators/date-generator')
 var HashCodeGenerator = require('../../../src/hash-code/generators/generator')
 var generators = require('../../../src/hash-code/generators')
 var HashHashCodeGenerator = require('../../../src/hash-code/generators/hash-generator')
 var ObjectHashCodeGenerator = require('../../../src/hash-code/generators/object-generator')
 var StringHashCodeGenerator = require('../../../src/hash-code/generators/string-generator')
 var ToStringHashCodeGenerator = require('../../../src/hash-code/generators/to-string-generator')
-var ValueOfHashCodeGenerator = require('../../../src/hash-code/generators/value-of-generator')
 
 describe('hash-code/generators/index', function() {
   it('should contain all hash code generator constructors', function() {
@@ -43,12 +43,12 @@ describe('hash-code/generators/index', function() {
       BooleanHashCodeGenerator: BooleanHashCodeGenerator,
       CachingHashCodeGenerator: CachingHashCodeGenerator,
       CollectionHashCodeGenerator: CollectionHashCodeGenerator,
+      DateHashCodeGenerator: DateHashCodeGenerator,
       HashCodeGenerator: HashCodeGenerator,
       HashHashCodeGenerator: HashHashCodeGenerator,
       ObjectHashCodeGenerator: ObjectHashCodeGenerator,
       StringHashCodeGenerator: StringHashCodeGenerator,
-      ToStringHashCodeGenerator: ToStringHashCodeGenerator,
-      ValueOfHashCodeGenerator: ValueOfHashCodeGenerator
+      ToStringHashCodeGenerator: ToStringHashCodeGenerator
     })
   })
 })

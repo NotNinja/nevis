@@ -319,6 +319,37 @@
   var arrayComparator = ArrayEqualsComparator;
 
   /**
+   * An implementation of {@link EqualsComparator} that supports date values.
+   *
+   * @protected
+   * @constructor
+   * @extends EqualsComparator
+   */
+  var DateEqualsComparator = comparator.extend({
+
+    /**
+     * @inheritdoc
+     * @override
+     * @memberof DateEqualsComparator#
+     */
+    compare: function compare(context) {
+      return context.value.getTime() === context.other.getTime()
+    },
+
+    /**
+     * @inheritdoc
+     * @override
+     * @memberof DateEqualsComparator#
+     */
+    supports: function supports(context) {
+      return context.string === '[object Date]'
+    }
+
+  });
+
+  var dateComparator = DateEqualsComparator;
+
+  /**
    * An abstract implementation of {@link EqualsComparator} that is intended for implementations that wish to support
    * value types that represent a hash of key/value pairs. This is achieved by requesting the keys contained within each
    * value as an array from the implementation and then compares each key/value pair to determine whether the values are
@@ -549,40 +580,6 @@
   var toStringComparator = ToStringEqualsComparator;
 
   /**
-   * An implementation of {@link EqualsComparator} that supports miscellaneous values by comparing their primitive value
-   * (determined by calling <code>valueOf</code> on each value).
-   *
-   * This {@link EqualsComparator} currently only supports dates.
-   *
-   * @protected
-   * @constructor
-   * @extends EqualsComparator
-   */
-  var ValueOfEqualsComparator = comparator.extend({
-
-    /**
-     * @inheritdoc
-     * @override
-     * @memberof ValueOfEqualsComparator#
-     */
-    compare: function compare(context) {
-      return context.equals(context.value.valueOf(), context.other.valueOf())
-    },
-
-    /**
-     * @inheritdoc
-     * @override
-     * @memberof ValueOfEqualsComparator#
-     */
-    supports: function supports(context) {
-      return context.string === '[object Date]'
-    }
-
-  });
-
-  var valueOfComparator = ValueOfEqualsComparator;
-
-  /**
    * A hash containing constructors for all equals comparators.
    *
    * @public
@@ -591,13 +588,13 @@
   var index$4 = {
     ArrayEqualsComparator: arrayComparator,
     CollectionEqualsComparator: collectionComparator,
+    DateEqualsComparator: dateComparator,
     EqualsComparator: comparator,
     HashEqualsComparator: hashComparator,
     NumberEqualsComparator: numberComparator,
     ObjectEqualsComparator: objectComparator,
     StringEqualsComparator: stringComparator,
-    ToStringEqualsComparator: toStringComparator,
-    ValueOfEqualsComparator: valueOfComparator
+    ToStringEqualsComparator: toStringComparator
   };
 
   /*
@@ -762,8 +759,8 @@
   var activeComparators = [
     new index$4.NumberEqualsComparator(),
     new index$4.StringEqualsComparator(),
+    new index$4.DateEqualsComparator(),
     new index$4.ToStringEqualsComparator(),
-    new index$4.ValueOfEqualsComparator(),
     new index$4.ArrayEqualsComparator(),
     new index$4.ObjectEqualsComparator()
   ];
@@ -1197,6 +1194,37 @@
   var cachingGenerator = CachingHashCodeGenerator;
 
   /**
+   * An implementation of {@link HashCodeGenerator} that supports date values.
+   *
+   * @protected
+   * @constructor
+   * @extends HashCodeGenerator
+   */
+  var DateHashCodeGenerator = generator.extend({
+
+    /**
+     * @inheritdoc
+     * @override
+     * @memberof DateHashCodeGenerator#
+     */
+    generate: function generate(context) {
+      return context.value.getTime()
+    },
+
+    /**
+     * @inheritdoc
+     * @override
+     * @memberof DateHashCodeGenerator#
+     */
+    supports: function supports(context) {
+      return context.string === '[object Date]'
+    }
+
+  });
+
+  var dateGenerator = DateHashCodeGenerator;
+
+  /**
    * An abstract implementation of {@link HashCodeGenerator} that is intended for implementations that wish to support
    * value types that represent a hash of key/value pairs. This is achieved by requesting the entries of key/value pairs
    * contained within the value as an multi-dimensional array from the implementation and then generates hash codes for
@@ -1362,40 +1390,6 @@
   var toStringGenerator = ToStringHashCodeGenerator;
 
   /**
-   * An implementation of {@link HashCodeGenerator} that supports miscellaneous values by generating hash codes based on
-   * their primitive value (determined by calling <code>valueOf</code> on the value).
-   *
-   * This {@link HashCodeGenerator} currently only supports dates.
-   *
-   * @protected
-   * @constructor
-   * @extends HashCodeGenerator
-   */
-  var ValueOfHashCodeGenerator = generator.extend({
-
-    /**
-     * @inheritdoc
-     * @override
-     * @memberof ValueOfHashCodeGenerator#
-     */
-    generate: function generate(context) {
-      return context.hashCode(context.value.valueOf())
-    },
-
-    /**
-     * @inheritdoc
-     * @override
-     * @memberof ValueOfHashCodeGenerator#
-     */
-    supports: function supports(context) {
-      return context.string === '[object Date]'
-    }
-
-  });
-
-  var valueOfGenerator = ValueOfHashCodeGenerator;
-
-  /**
    * A hash containing constructors for all hash code generators.
    *
    * @public
@@ -1406,12 +1400,12 @@
     BooleanHashCodeGenerator: booleanGenerator,
     CachingHashCodeGenerator: cachingGenerator,
     CollectionHashCodeGenerator: collectionGenerator,
+    DateHashCodeGenerator: dateGenerator,
     HashCodeGenerator: generator,
     HashHashCodeGenerator: hashGenerator,
     ObjectHashCodeGenerator: objectGenerator,
     StringHashCodeGenerator: stringGenerator,
-    ToStringHashCodeGenerator: toStringGenerator,
-    ValueOfHashCodeGenerator: valueOfGenerator
+    ToStringHashCodeGenerator: toStringGenerator
   };
 
   /*
@@ -1546,8 +1540,8 @@
   var activeGenerators = [
     new index$8.BooleanHashCodeGenerator(),
     new index$8.StringHashCodeGenerator(),
+    new index$8.DateHashCodeGenerator(),
     new index$8.ToStringHashCodeGenerator(),
-    new index$8.ValueOfHashCodeGenerator(),
     new index$8.ArrayHashCodeGenerator()
   ];
 

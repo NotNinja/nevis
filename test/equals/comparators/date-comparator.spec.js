@@ -24,16 +24,16 @@
 
 var expect = require('chai').expect
 
+var DateEqualsComparator = require('../../../src/equals/comparators/date-comparator')
 var equals = require('../../../src/equals/index')
 var EqualsContext = require('../../../src/equals/context')
 var EqualsComparator = require('../../../src/equals/comparators/comparator')
-var ValueOfEqualsComparator = require('../../../src/equals/comparators/value-of-comparator')
 
-describe('equals/comparators/value-of-comparator:ValueOfEqualsComparator', function() {
+describe('equals/comparators/date-comparator:DateEqualsComparator', function() {
   var comparator
 
   before(function() {
-    comparator = new ValueOfEqualsComparator()
+    comparator = new DateEqualsComparator()
   })
 
   it('should be a EqualsComparator', function() {

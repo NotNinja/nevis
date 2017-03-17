@@ -34,8 +34,8 @@ var EqualsContext = require('./context')
 var activeComparators = [
   new comparators.NumberEqualsComparator(),
   new comparators.StringEqualsComparator(),
+  new comparators.DateEqualsComparator(),
   new comparators.ToStringEqualsComparator(),
-  new comparators.ValueOfEqualsComparator(),
   new comparators.ArrayEqualsComparator(),
   new comparators.ObjectEqualsComparator()
 ]

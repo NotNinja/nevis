@@ -26,12 +26,12 @@ var ArrayHashCodeGenerator = require('./array-generator')
 var BooleanHashCodeGenerator = require('./boolean-generator')
 var CachingHashCodeGenerator = require('./caching-generator')
 var CollectionHashCodeGenerator = require('./collection-generator')
+var DateHashCodeGenerator = require('./date-generator')
 var HashCodeGenerator = require('./generator')
 var HashHashCodeGenerator = require('./hash-generator')
 var ObjectHashCodeGenerator = require('./object-generator')
 var StringHashCodeGenerator = require('./string-generator')
 var ToStringHashCodeGenerator = require('./to-string-generator')
-var ValueOfHashCodeGenerator = require('./value-of-generator')
 
 /**
  * A hash containing constructors for all hash code generators.
@@ -44,10 +44,10 @@ module.exports = {
   BooleanHashCodeGenerator: BooleanHashCodeGenerator,
   CachingHashCodeGenerator: CachingHashCodeGenerator,
   CollectionHashCodeGenerator: CollectionHashCodeGenerator,
+  DateHashCodeGenerator: DateHashCodeGenerator,
   HashCodeGenerator: HashCodeGenerator,
   HashHashCodeGenerator: HashHashCodeGenerator,
   ObjectHashCodeGenerator: ObjectHashCodeGenerator,
   StringHashCodeGenerator: StringHashCodeGenerator,
-  ToStringHashCodeGenerator: ToStringHashCodeGenerator,
-  ValueOfHashCodeGenerator: ValueOfHashCodeGenerator
+  ToStringHashCodeGenerator: ToStringHashCodeGenerator
 }

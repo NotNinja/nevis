@@ -24,16 +24,16 @@
 
 var expect = require('chai').expect
 
+var DateHashCodeGenerator = require('../../../src/hash-code/generators/date-generator')
 var hashCode = require('../../../src/hash-code/index')
 var HashCodeContext = require('../../../src/hash-code/context')
 var HashCodeGenerator = require('../../../src/hash-code/generators/generator')
-var ValueOfHashCodeGenerator = require('../../../src/hash-code/generators/value-of-generator')
 
-describe('hash-code/generators/value-of-generator:ValueOfHashCodeGenerator', function() {
+describe('hash-code/generators/date-generator:DateHashCodeGenerator', function() {
   var generator
 
   before(function() {
-    generator = new ValueOfHashCodeGenerator()
+    generator = new DateHashCodeGenerator()
   })
 
   it('should be a HashCodeGenerator', function() {
@@ -44,11 +44,11 @@ describe('hash-code/generators/value-of-generator:ValueOfHashCodeGenerator', fun
     it('should generate hash code for date values', function() {
       var value = new Date(0)
 
-      expect(generator.generate(new HashCodeContext(value, hashCode))).to.equal(48)
+      expect(generator.generate(new HashCodeContext(value, hashCode))).to.equal(0)
 
-      value = new Date(2017, 2, 17, 12, 0, 0)
+      value = new Date()
 
-      expect(generator.generate(new HashCodeContext(value, hashCode))).to.equal(863529008)
+      expect(generator.generate(new HashCodeContext(value, hashCode))).to.equal(value.getTime())
     })
   })
 
