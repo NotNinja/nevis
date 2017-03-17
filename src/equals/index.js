@@ -68,7 +68,7 @@ var activeComparators = [
  * If neither value is <code>null</code> and both are not exactly (strictly) equal, this method will first check whether
  * <code>value</code> has a method named "equals" and, if so, return the result of calling that method with
  * <code>other</code> passed to it. If no "equals" method exists on <code>value</code> or if the
- * <code>useEqualsMethod</code> option is disabled, it will attempt to test the equality internally based on their type.
+ * <code>ignoreEquals</code> option is enabled, it will attempt to test the equality internally based on their type.
  *
  * Plain objects are tested recursively for their properties and collections (e.g. arrays) are also tested recursively
  * for their elements.
@@ -92,7 +92,7 @@ function equals(value, other, options) {
 
   var context = new EqualsContext(value, other, equals, options)
 
-  if (context.options.useEqualsMethod && typeof value.equals === 'function') {
+  if (!context.options.ignoreEquals && typeof value.equals === 'function') {
     return value.equals(other)
   }
 
@@ -137,13 +137,13 @@ module.exports = equals
  * @typedef {Object} Nevis~EqualsOptions
  * @property {Nevis~EqualsFilterPropertyCallback} [filterProperty] - A function to be called to filter properties based
  * on their name and value when testing equality of objects to determine whether they should be tested. This is not
- * called for method properties when <code>skipMethods</code> is enabled.
+ * called for method properties when <code>ignoreMethods</code> is enabled.
  * @property {boolean} [ignoreCase] - <code>true</code> to ignore case when testing equality for strings; otherwise
  * <code>false</code>.
- * @property {boolean} [skipInherited] - <code>true</code> to skip inherited properties when testing equality for
- * objects; otherwise <code>false</code>.
- * @property {boolean} [skipMethods] - <code>true</code> to skip method properties when testing equality for objects;
+ * @property {boolean} [ignoreEquals] - <code>true</code> to ignore the "equals" method on value, when present;
  * otherwise <code>false</code>.
- * @property {boolean} [useEqualsMethod=true] - <code>true</code> to return the result of calling the "equals" method on
- * value, when present; otherwise <code>false</code>.
+ * @property {boolean} [ignoreInherited] - <code>true</code> to ignore inherited properties when testing equality for
+ * objects; otherwise <code>false</code>.
+ * @property {boolean} [ignoreMethods] - <code>true</code> to ignore method properties when testing equality for
+ * objects; otherwise <code>false</code>.
  */

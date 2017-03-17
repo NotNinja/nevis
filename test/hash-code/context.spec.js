@@ -47,9 +47,9 @@ describe('hash-code/context:HashCodeContext', function() {
         filterProperty: function() {
           return false
         },
-        skipInherited: true,
-        skipMethods: true,
-        useHashCodeMethod: false
+        ignoreHashCode: true,
+        ignoreInherited: true,
+        ignoreMethods: true
       }
 
       var ctx = new HashCodeContext(123, hashCodeSpy, expectedOptions)
@@ -85,9 +85,9 @@ describe('hash-code/context:HashCodeContext', function() {
           filterProperty: function() {
             return false
           },
-          skipInherited: true,
-          skipMethods: true,
-          useHashCodeMethod: false
+          ignoreHashCode: true,
+          ignoreInherited: true,
+          ignoreMethods: true
         }
 
         var ctx = new HashCodeContext(123, hashCodeSpy, expected)
@@ -105,9 +105,9 @@ describe('hash-code/context:HashCodeContext', function() {
         expect(ctx.options.allowCache).to.be.true
         expect(ctx.options.filterProperty).to.be.a('function')
         expect(ctx.options.filterProperty()).to.be.true
-        expect(ctx.options.skipInherited).to.be.false
-        expect(ctx.options.skipMethods).to.be.false
-        expect(ctx.options.useHashCodeMethod).to.be.true
+        expect(ctx.options.ignoreHashCode).to.be.false
+        expect(ctx.options.ignoreInherited).to.be.false
+        expect(ctx.options.ignoreMethods).to.be.false
       })
     })
   })

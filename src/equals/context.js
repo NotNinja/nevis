@@ -61,9 +61,9 @@ function EqualsContext(value, other, equals, options) {
       return true
     },
     ignoreCase: Boolean(options.ignoreCase),
-    skipInherited: Boolean(options.skipInherited),
-    skipMethods: Boolean(options.skipMethods),
-    useEqualsMethod: options.useEqualsMethod !== false
+    ignoreEquals: Boolean(options.ignoreEquals),
+    ignoreInherited: Boolean(options.ignoreInherited),
+    ignoreMethods: Boolean(options.ignoreMethods)
   }
 
   /**

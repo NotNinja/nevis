@@ -69,7 +69,7 @@ var defaultGenerator = new generators.ObjectHashCodeGenerator()
  *
  * If <code>value</code> is <code>null</code>, this method will always return zero. Otherwise, it will check whether
  * <code>value</code> has a method named "hashCode" and, if so, return the result of calling that method. If no
- * "hashCode" method exists on <code>value</code> or if the <code>useHashCodeMethod</code> option is disabled, it will
+ * "hashCode" method exists on <code>value</code> or if the <code>ignoreHashCode</code> option is enabled, it will
  * attempt to generate the hash code internally based on its type.
  *
  * Plain objects are hashed recursively for their properties and collections (e.g. arrays) are also hashed recursively
@@ -88,7 +88,7 @@ function hashCode(value, options) {
 
   var context = new HashCodeContext(value, hashCode, options)
 
-  if (context.options.useHashCodeMethod && typeof value.hashCode === 'function') {
+  if (!context.options.ignoreHashCode && typeof value.hashCode === 'function') {
     return value.hashCode()
   }
 
@@ -150,11 +150,11 @@ module.exports = hashCode
  * {@link CachingHashCodeGenerator}.
  * @property {Nevis~HashCodeFilterPropertyCallback} [filterProperty] - A function to be called to filter properties
  * based on their name and value when generating hash codes for objects to determine whether they should be included.
- * This is not called for method properties when <code>skipMethods</code> is enabled.
- * @property {boolean} [skipInherited] - <code>true</code> to skip inherited properties when generating hash codes for
+ * This is not called for method properties when <code>ignoreMethods</code> is enabled.
+ * @property {boolean} [ignoreHashCode] - <code>true</code> to ignore the "hashCode" method on value, when present;
+ * otherwise <code>false</code>.
+ * @property {boolean} [ignoreInherited] - <code>true</code> to ignore inherited properties when generating hash codes
+ * for objects; otherwise <code>false</code>.
+ * @property {boolean} [ignoreMethods] - <code>true</code> to ignore method properties when generating hash codes for
  * objects; otherwise <code>false</code>.
- * @property {boolean} [skipMethods] - <code>true</code> to skip method properties when generating hash codes for
- * objects; otherwise <code>false</code>.
- * @property {boolean} [useHashCodeMethod=true] - <code>true</code> to return the result of calling the "hashCode"
- * method on value, when present; otherwise <code>false</code>.
  */

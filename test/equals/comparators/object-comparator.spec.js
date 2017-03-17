@@ -92,30 +92,30 @@ describe('equals/comparators/object-comparator:ObjectEqualsComparator', function
       })
     })
 
-    context('when "skipInherited" option is enabled', function() {
+    context('when "ignoreInherited" option is enabled', function() {
       it('should ignore inherited properties when comparing object values', function() {
         expect(comparator.compare(new EqualsContext(value, {
           foo: 'bar',
           fizz: value.fizz
-        }, equals, { skipInherited: true }))).to.be.true
+        }, equals, { ignoreInherited: true }))).to.be.true
       })
 
-      context('and "skipMethods" option is enabled', function() {
+      context('and "ignoreMethods" option is enabled', function() {
         it('should ignore method properties when comparing object values', function() {
           expect(comparator.compare(new EqualsContext(value, { foo: 'bar' }, equals, {
-            skipInherited: true,
-            skipMethods: true
+            ignoreInherited: true,
+            ignoreMethods: true
           }))).to.be.true
         })
       })
     })
 
-    context('when "skipMethods" option is enabled', function() {
+    context('when "ignoreMethods" option is enabled', function() {
       it('should ignore method properties when comparing object values', function() {
         expect(comparator.compare(new EqualsContext(value, {
           foo: 'bar',
           fu: 'baz'
-        }, equals, { skipMethods: true }))).to.be.true
+        }, equals, { ignoreMethods: true }))).to.be.true
       })
     })
   })

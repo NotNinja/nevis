@@ -44,10 +44,10 @@ var ObjectEqualsComparator = HashEqualsComparator.extend({
     var value
 
     for (var key in hash) {
-      if (!options.skipInherited || Object.prototype.hasOwnProperty.call(hash, key)) {
+      if (!options.ignoreInherited || Object.prototype.hasOwnProperty.call(hash, key)) {
         value = this.getValue(hash, key, context)
 
-        if ((typeof value !== 'function' || !options.skipMethods) && options.filterProperty(key, value, hash)) {
+        if ((typeof value !== 'function' || !options.ignoreMethods) && options.filterProperty(key, value, hash)) {
           keys.push(key)
         }
       }

@@ -72,7 +72,7 @@ describe('hash-code/index:hashCode', function() {
       expect(value.hashCode.calledOnce).to.be.true
     })
 
-    context('and "useHashCodeMethod" option is disabled', function() {
+    context('and "ignoreHashCode" option is enabled', function() {
       it('should ignore "hashCode" method', function() {
         var value = {
           foo: 'bar',
@@ -83,7 +83,7 @@ describe('hash-code/index:hashCode', function() {
 
         sinon.spy(value, 'hashCode')
 
-        expect(hashCode(value, { useHashCodeMethod: false })).to.equal(61653)
+        expect(hashCode(value, { ignoreHashCode: true })).to.equal(61653)
         expect(value.hashCode.notCalled).to.be.true
       })
     })

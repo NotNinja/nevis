@@ -45,10 +45,10 @@ var ObjectHashCodeGenerator = HashHashCodeGenerator.extend({
     var value
 
     for (var name in hash) {
-      if (!options.skipInherited || Object.prototype.hasOwnProperty.call(hash, name)) {
+      if (!options.ignoreInherited || Object.prototype.hasOwnProperty.call(hash, name)) {
         value = hash[name]
 
-        if ((typeof value !== 'function' || !options.skipMethods) && options.filterProperty(name, value, hash)) {
+        if ((typeof value !== 'function' || !options.ignoreMethods) && options.filterProperty(name, value, hash)) {
           entries.push([ name, value ])
         }
       }

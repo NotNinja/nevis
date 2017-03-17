@@ -47,9 +47,9 @@ describe('equals/context:EqualsContext', function() {
           return false
         },
         ignoreCase: true,
-        skipInherited: true,
-        skipMethods: true,
-        useEqualsMethod: false
+        ignoreEquals: true,
+        ignoreInherited: true,
+        ignoreMethods: true
       }
 
       var ctx = new EqualsContext(123, 321, equalsSpy, expectedOptions)
@@ -86,9 +86,9 @@ describe('equals/context:EqualsContext', function() {
             return false
           },
           ignoreCase: true,
-          skipInherited: true,
-          skipMethods: true,
-          useEqualsMethod: false
+          ignoreEquals: true,
+          ignoreInherited: true,
+          ignoreMethods: true
         }
 
         var ctx = new EqualsContext(123, 321, equalsSpy, expected)
@@ -106,9 +106,9 @@ describe('equals/context:EqualsContext', function() {
         expect(ctx.options.filterProperty).to.be.a('function')
         expect(ctx.options.filterProperty()).to.be.true
         expect(ctx.options.ignoreCase).to.be.false
-        expect(ctx.options.skipInherited).to.be.false
-        expect(ctx.options.skipMethods).to.be.false
-        expect(ctx.options.useEqualsMethod).to.be.true
+        expect(ctx.options.ignoreEquals).to.be.false
+        expect(ctx.options.ignoreInherited).to.be.false
+        expect(ctx.options.ignoreMethods).to.be.false
       })
     })
   })

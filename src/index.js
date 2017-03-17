@@ -57,7 +57,7 @@ var staticToString = require('./to-string')
  * If neither value is <code>null</code> and both are not exactly (strictly) equal, this method will first check whether
  * <code>value</code> has a method named "equals" and, if so, return the result of calling that method with
  * <code>other</code> passed to it. If no "equals" method exists on <code>value</code> or if the
- * <code>useEqualsMethod</code> option is disabled, it will attempt to test the equality internally based on their type.
+ * <code>ignoreEquals</code> option is enabled, it will attempt to test the equality internally based on their type.
  *
  * Plain objects are tested recursively for their properties and collections (e.g. arrays) are also tested recursively
  * for their elements.
@@ -105,7 +105,7 @@ Nevis.EqualsBuilder = EqualsBuilder
  *
  * If <code>value</code> is <code>null</code>, this method will always return zero. Otherwise, it will check whether
  * <code>value</code> has a method named "hashCode" and, if so, return the result of calling that method. If no
- * "hashCode" method exists on <code>value</code> or if the <code>useHashCodeMethod</code> option is disabled, it will
+ * "hashCode" method exists on <code>value</code> or if the <code>ignoreHashCode</code> option is enabled, it will
  * attempt to generate the hash code internally based on its type.
  *
  * Plain objects are hashed recursively for their properties and collections (e.g. arrays) are also hashed recursively
@@ -222,7 +222,7 @@ Nevis.prototype.equals = function equals(obj) {
  * @memberof Nevis#
  */
 Nevis.prototype.hashCode = function hashCode() {
-  return staticHashCode(this, { useHashCodeMethod: false })
+  return staticHashCode(this, { ignoreHashCode: true })
 }
 
 /**

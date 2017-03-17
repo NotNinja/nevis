@@ -57,9 +57,9 @@ function HashCodeContext(value, hashCode, options) {
     filterProperty: options.filterProperty != null ? options.filterProperty : function() {
       return true
     },
-    skipInherited: Boolean(options.skipInherited),
-    skipMethods: Boolean(options.skipMethods),
-    useHashCodeMethod: options.useHashCodeMethod !== false
+    ignoreHashCode: Boolean(options.ignoreHashCode),
+    ignoreInherited: Boolean(options.ignoreInherited),
+    ignoreMethods: Boolean(options.ignoreMethods)
   }
 
   /**

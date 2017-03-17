@@ -69,24 +69,25 @@ describe('hash-code/generators/object-generator:ObjectHashCodeGenerator', functi
       })
     })
 
-    context('when "skipInherited" option is enabled', function() {
+    context('when "ignoreInherited" option is enabled', function() {
       it('should ignore inherited properties when generating hash code for object values', function() {
-        expect(generator.generate(new HashCodeContext(value, hashCode, { skipInherited: true }))).to.equal(-1637798867)
+        expect(generator.generate(new HashCodeContext(value, hashCode, { ignoreInherited: true })))
+          .to.equal(-1637798867)
       })
 
-      context('and "skipMethods" option is enabled', function() {
+      context('and "ignoreMethods" option is enabled', function() {
         it('should ignore method properties when generating hash code for object values', function() {
           expect(generator.generate(new HashCodeContext(value, hashCode, {
-            skipInherited: true,
-            skipMethods: true
+            ignoreInherited: true,
+            ignoreMethods: true
           }))).to.equal(61653)
         })
       })
     })
 
-    context('when "skipMethods" option is enabled', function() {
+    context('when "ignoreMethods" option is enabled', function() {
       it('should ignore method properties when generating hash code for object values', function() {
-        expect(generator.generate(new HashCodeContext(value, hashCode, { skipMethods: true }))).to.equal(156073)
+        expect(generator.generate(new HashCodeContext(value, hashCode, { ignoreMethods: true }))).to.equal(156073)
       })
     })
   })

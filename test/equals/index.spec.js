@@ -91,7 +91,7 @@ describe('equals/index:equals', function() {
       expect(equals(value, other)).to.be.true
     })
 
-    context('and "useEqualsMethod" option is disabled', function() {
+    context('and "ignoreEquals" option is enabled', function() {
       it('should ignore "equals" method', function() {
         var other = {}
         var value = {
@@ -102,7 +102,7 @@ describe('equals/index:equals', function() {
 
         sinon.spy(value, 'equals')
 
-        expect(equals(value, other, { useEqualsMethod: false })).to.be.false
+        expect(equals(value, other, { ignoreEquals: true })).to.be.false
         expect(value.equals.notCalled).to.be.true
       })
     })

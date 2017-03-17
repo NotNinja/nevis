@@ -178,7 +178,7 @@ returned. Otherwise, this method implements an equivalence relation on non-null 
 
 If neither value is `null` and both are not exactly (strictly) equal, this method will first check whether `value` has a
 method named "equals" and, if so, return the result of calling that method with `other` passed to it. If no "equals"
-method exists on `value` or if the `useEqualsMethod` option is disabled, it will attempt to test the equality internally
+method exists on `value` or if the `ignoreEquals` option is enabled, it will attempt to test the equality internally
 based on their type.
 
 Plain objects are tested recursively for their properties and collections (e.g. arrays) are also tested recursively for
@@ -186,13 +186,13 @@ their elements.
 
 The `options` parameter is entirely optional and supports the following:
 
-| Option            | Type     | Default | Description                                                                                                                                                         |
-| ----------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `filterProperty`  | Function | N/A     | A function to be called to filter properties for objects to determine whether they should be tested. Not called for method properties when `skipMethods` is `true`. |
-| `ignoreCase`      | Boolean  | `false` | Whether to ignore case when testing equality for strings.                                                                                                           |
-| `skipInherited`   | Boolean  | `false` | Whether to skip inherited properties when testing equality for objects.                                                                                             |
-| `skipMethods`     | Boolean  | `false` | Whether to skip method properties when testing equality for objects.                                                                                                |
-| `useEqualsMethod` | Boolean  | `true`  | Whether to return the result of calling the `equals` method on `value`, when present                                                                                |
+| Option            | Type     | Default | Description                                                                                                                                                           |
+| ----------------- | -------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `filterProperty`  | Function | N/A     | A function to be called to filter properties for objects to determine whether they should be tested. Not called for method properties when `ignoreMethods` is `true`. |
+| `ignoreCase`      | Boolean  | `false` | Whether to ignore case when testing equality for strings.                                                                                                             |
+| `ignoreEquals`    | Boolean  | `false` | Whether to ignore the `equals` method on `value`, when present                                                                                                        |
+| `ignoreInherited` | Boolean  | `false` | Whether to ignore inherited properties when testing equality for objects.                                                                                             |
+| `ignoreMethods`   | Boolean  | `false` | Whether to ignore method properties when testing equality for objects.                                                                                                |
 
 ``` javascript
 var obj = {
@@ -216,7 +216,7 @@ Nevis.equals(obj, {
   doSomething: function() {
     return 321
   }
-}, { skipMethods: true })
+}, { ignoreMethods: true })
 //=> true
 Nevis.equals(bob, bob)
 //=> true
@@ -310,20 +310,20 @@ hash tables and it has the same general contract as `Nevis.prototype.hashCode`.
  
 If `value` is `null`, this method will always return zero. Otherwise, it will check whether `value` has a method named
 "hashCode" and, if so, return the result of calling that method. If no "hashCode" method exists on `value` or if the
-`useHashCodeMethod` option is disabled, it will attempt to generate the hash code internally based on its type.
+`ignoreHashCode` option is enabled, it will attempt to generate the hash code internally based on its type.
 
 Plain objects are hashed recursively for their properties and collections (e.g. arrays) are also hashed recursively for
 their elements.
 
 The `options` parameter is entirely optional and supports the following:
 
-| Option              | Type     | Default | Description                                                                                                                                                           |
-| ------------------- | -------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `allowCache`        | Boolean  | `true`  | Whether to allow hash codes generated for certain immutable types to be cached for faster re-generation.                                                              |
-| `filterProperty`    | Function | N/A     | A function to be called to filter properties for objects to determine whether they should be included. Not called for method properties when `skipMethods` is `true`. |
-| `skipInherited`     | Boolean  | `false` | Whether to skip inherited properties when generating hash codes for objects.                                                                                          |
-| `skipMethods`       | Boolean  | `false` | Whether to skip method properties when generating hash codes for objects.                                                                                             |
-| `useHashCodeMethod` | Boolean  | `true`  | Whether to return the result of calling the `hashCode` method on `value`, when present                                                                                |
+| Option            | Type     | Default | Description                                                                                                                                                             |
+| ----------------- | -------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `allowCache`      | Boolean  | `true`  | Whether to allow hash codes generated for certain immutable types to be cached for faster re-generation.                                                                |
+| `filterProperty`  | Function | N/A     | A function to be called to filter properties for objects to determine whether they should be included. Not called for method properties when `ignoreMethods` is `true`. |
+| `ignoreHashCode`  | Boolean  | `false` | Whether to ignore the `hashCode` method on `value`, when present                                                                                                        |
+| `ignoreInherited` | Boolean  | `false` | Whether to ignore inherited properties when generating hash codes for objects.                                                                                          |
+| `ignoreMethods`   | Boolean  | `false` | Whether to ignore method properties when generating hash codes for objects.                                                                                             |
 
 ``` javascript
 var obj = {
@@ -335,7 +335,7 @@ var obj = {
 
 Nevis.hashCode(obj)
 //=> 688071817
-Nevis.hashCode(obj, { skipMethods: true })
+Nevis.hashCode(obj, { ignoreMethods: true })
 //=> 61653
 Nevis.hashCode(bob)
 //=> 201348816

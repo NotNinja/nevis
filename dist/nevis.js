@@ -441,10 +441,10 @@
       var value;
 
       for (var key in hash) {
-        if (!options.skipInherited || Object.prototype.hasOwnProperty.call(hash, key)) {
+        if (!options.ignoreInherited || Object.prototype.hasOwnProperty.call(hash, key)) {
           value = this.getValue(hash, key, context);
 
-          if ((typeof value !== 'function' || !options.skipMethods) && options.filterProperty(key, value, hash)) {
+          if ((typeof value !== 'function' || !options.ignoreMethods) && options.filterProperty(key, value, hash)) {
             keys.push(key);
           }
         }
@@ -661,9 +661,9 @@
         return true
       },
       ignoreCase: Boolean(options.ignoreCase),
-      skipInherited: Boolean(options.skipInherited),
-      skipMethods: Boolean(options.skipMethods),
-      useEqualsMethod: options.useEqualsMethod !== false
+      ignoreEquals: Boolean(options.ignoreEquals),
+      ignoreInherited: Boolean(options.ignoreInherited),
+      ignoreMethods: Boolean(options.ignoreMethods)
     };
 
     /**
@@ -796,7 +796,7 @@
    * If neither value is <code>null</code> and both are not exactly (strictly) equal, this method will first check whether
    * <code>value</code> has a method named "equals" and, if so, return the result of calling that method with
    * <code>other</code> passed to it. If no "equals" method exists on <code>value</code> or if the
-   * <code>useEqualsMethod</code> option is disabled, it will attempt to test the equality internally based on their type.
+   * <code>ignoreEquals</code> option is enabled, it will attempt to test the equality internally based on their type.
    *
    * Plain objects are tested recursively for their properties and collections (e.g. arrays) are also tested recursively
    * for their elements.
@@ -820,7 +820,7 @@
 
     var context$$1 = new context(value, other, equals, options);
 
-    if (context$$1.options.useEqualsMethod && typeof value.equals === 'function') {
+    if (!context$$1.options.ignoreEquals && typeof value.equals === 'function') {
       return value.equals(other)
     }
 
@@ -865,15 +865,15 @@
    * @typedef {Object} Nevis~EqualsOptions
    * @property {Nevis~EqualsFilterPropertyCallback} [filterProperty] - A function to be called to filter properties based
    * on their name and value when testing equality of objects to determine whether they should be tested. This is not
-   * called for method properties when <code>skipMethods</code> is enabled.
+   * called for method properties when <code>ignoreMethods</code> is enabled.
    * @property {boolean} [ignoreCase] - <code>true</code> to ignore case when testing equality for strings; otherwise
    * <code>false</code>.
-   * @property {boolean} [skipInherited] - <code>true</code> to skip inherited properties when testing equality for
-   * objects; otherwise <code>false</code>.
-   * @property {boolean} [skipMethods] - <code>true</code> to skip method properties when testing equality for objects;
+   * @property {boolean} [ignoreEquals] - <code>true</code> to ignore the "equals" method on value, when present;
    * otherwise <code>false</code>.
-   * @property {boolean} [useEqualsMethod=true] - <code>true</code> to return the result of calling the "equals" method on
-   * value, when present; otherwise <code>false</code>.
+   * @property {boolean} [ignoreInherited] - <code>true</code> to ignore inherited properties when testing equality for
+   * objects; otherwise <code>false</code>.
+   * @property {boolean} [ignoreMethods] - <code>true</code> to ignore method properties when testing equality for
+   * objects; otherwise <code>false</code>.
    */
 
   /**
@@ -1301,10 +1301,10 @@
       var value;
 
       for (var name in hash) {
-        if (!options.skipInherited || Object.prototype.hasOwnProperty.call(hash, name)) {
+        if (!options.ignoreInherited || Object.prototype.hasOwnProperty.call(hash, name)) {
           value = hash[name];
 
-          if ((typeof value !== 'function' || !options.skipMethods) && options.filterProperty(name, value, hash)) {
+          if ((typeof value !== 'function' || !options.ignoreMethods) && options.filterProperty(name, value, hash)) {
             entries.push([ name, value ]);
           }
         }
@@ -1509,9 +1509,9 @@
       filterProperty: options.filterProperty != null ? options.filterProperty : function() {
         return true
       },
-      skipInherited: Boolean(options.skipInherited),
-      skipMethods: Boolean(options.skipMethods),
-      useHashCodeMethod: options.useHashCodeMethod !== false
+      ignoreHashCode: Boolean(options.ignoreHashCode),
+      ignoreInherited: Boolean(options.ignoreInherited),
+      ignoreMethods: Boolean(options.ignoreMethods)
     };
 
     /**
@@ -1618,7 +1618,7 @@
    *
    * If <code>value</code> is <code>null</code>, this method will always return zero. Otherwise, it will check whether
    * <code>value</code> has a method named "hashCode" and, if so, return the result of calling that method. If no
-   * "hashCode" method exists on <code>value</code> or if the <code>useHashCodeMethod</code> option is disabled, it will
+   * "hashCode" method exists on <code>value</code> or if the <code>ignoreHashCode</code> option is enabled, it will
    * attempt to generate the hash code internally based on its type.
    *
    * Plain objects are hashed recursively for their properties and collections (e.g. arrays) are also hashed recursively
@@ -1637,7 +1637,7 @@
 
     var context = new context$2(value, hashCode, options);
 
-    if (context.options.useHashCodeMethod && typeof value.hashCode === 'function') {
+    if (!context.options.ignoreHashCode && typeof value.hashCode === 'function') {
       return value.hashCode()
     }
 
@@ -1699,13 +1699,13 @@
    * {@link CachingHashCodeGenerator}.
    * @property {Nevis~HashCodeFilterPropertyCallback} [filterProperty] - A function to be called to filter properties
    * based on their name and value when generating hash codes for objects to determine whether they should be included.
-   * This is not called for method properties when <code>skipMethods</code> is enabled.
-   * @property {boolean} [skipInherited] - <code>true</code> to skip inherited properties when generating hash codes for
+   * This is not called for method properties when <code>ignoreMethods</code> is enabled.
+   * @property {boolean} [ignoreHashCode] - <code>true</code> to ignore the "hashCode" method on value, when present;
+   * otherwise <code>false</code>.
+   * @property {boolean} [ignoreInherited] - <code>true</code> to ignore inherited properties when generating hash codes
+   * for objects; otherwise <code>false</code>.
+   * @property {boolean} [ignoreMethods] - <code>true</code> to ignore method properties when generating hash codes for
    * objects; otherwise <code>false</code>.
-   * @property {boolean} [skipMethods] - <code>true</code> to skip method properties when generating hash codes for
-   * objects; otherwise <code>false</code>.
-   * @property {boolean} [useHashCodeMethod=true] - <code>true</code> to return the result of calling the "hashCode"
-   * method on value, when present; otherwise <code>false</code>.
    */
 
   /**
@@ -1940,7 +1940,7 @@
    * If neither value is <code>null</code> and both are not exactly (strictly) equal, this method will first check whether
    * <code>value</code> has a method named "equals" and, if so, return the result of calling that method with
    * <code>other</code> passed to it. If no "equals" method exists on <code>value</code> or if the
-   * <code>useEqualsMethod</code> option is disabled, it will attempt to test the equality internally based on their type.
+   * <code>ignoreEquals</code> option is enabled, it will attempt to test the equality internally based on their type.
    *
    * Plain objects are tested recursively for their properties and collections (e.g. arrays) are also tested recursively
    * for their elements.
@@ -1988,7 +1988,7 @@
    *
    * If <code>value</code> is <code>null</code>, this method will always return zero. Otherwise, it will check whether
    * <code>value</code> has a method named "hashCode" and, if so, return the result of calling that method. If no
-   * "hashCode" method exists on <code>value</code> or if the <code>useHashCodeMethod</code> option is disabled, it will
+   * "hashCode" method exists on <code>value</code> or if the <code>ignoreHashCode</code> option is enabled, it will
    * attempt to generate the hash code internally based on its type.
    *
    * Plain objects are hashed recursively for their properties and collections (e.g. arrays) are also hashed recursively
@@ -2105,7 +2105,7 @@
    * @memberof Nevis#
    */
   nevis.prototype.hashCode = function hashCode() {
-    return index$6(this, { useHashCodeMethod: false })
+    return index$6(this, { ignoreHashCode: true })
   };
 
   /**
