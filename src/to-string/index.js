@@ -23,10 +23,11 @@
 'use strict'
 
 /**
- * Returns the result of calling the <code>toString</code> on the specified <code>value</code> when it is non-null.
+ * Returns the result of calling the <code>toString</code> method on the specified <code>value</code> when it is
+ * non-null.
  *
- * If <code>value</code> is <code>null</code> or <code>undefined</code>, this method will return "null" or "undefined"
- * respectively.
+ * If <code>value</code> is <code>null</code> or <code>undefined</code>, this method will return <code>"null"</code> or
+ * <code>"undefined"</code> respectively.
  *
  * @param {*} value - the value whose string representation is to be returned (may be <code>null</code>)
  * @return {string} The string representation of <code>value</code>.

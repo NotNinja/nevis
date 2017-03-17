@@ -1,7 +1,7 @@
 {
   "name": "nevis",
   "version": "1.0.0alpha",
-  "description": "Simple OOP for JavaScript",
+  "description": "Makes JavaScript more object-orientated",
   "homepage": "https://github.com/Skelp/nevis",
   "bugs": {
     "url": "https://github.com/Skelp/nevis/issues"
@@ -14,9 +14,16 @@
   "license": "MIT",
   "keywords": [
     "oop",
+    "object",
+    "orientated",
+    "programming",
     "class",
+    "inheritance",
     "extend",
-    "inheritance"
+    "equals",
+    "hash",
+    "hashcode",
+    "builder"
   ],
   "repository": {
     "type": "git",

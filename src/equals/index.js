@@ -141,6 +141,6 @@ module.exports = equals
  * objects; otherwise <code>false</code>.
  * @property {boolean} [skipMethods] - <code>true</code> to skip method properties when testing equality for objects;
  * otherwise <code>false</code>.
- * @property {boolean} [useEqualsMethod=true] - <code>true</code> to call "equals" method on value, when present;
- * otherwise <code>false</code>.
+ * @property {boolean} [useEqualsMethod=true] - <code>true</code> to return the result of calling the "equals" method on
+ * value, when present; otherwise <code>false</code>.
  */

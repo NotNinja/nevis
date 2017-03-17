@@ -11,7 +11,7 @@
 * Add `Nevis.hashCode(value[, options])` static method to generate Java-like hash code for an object
 * Add `Nevis.HashCodeBuilder([initial][, multiplier])` static constructor to generate Java-like hash codes for complex classes
 * Add `Nevis.toString(value[, options])` static method to generate string representation for instance
-* Release *lite* version where never only contains `Nevis.extends` static method
+* Release *lite* version where never only contains `Nevis****.extends` static method
 * Track code coverage in build
 
 ## Version 0.2.0, 2016.11.24

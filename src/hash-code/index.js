@@ -155,6 +155,6 @@ module.exports = hashCode
  * objects; otherwise <code>false</code>.
  * @property {boolean} [skipMethods] - <code>true</code> to skip method properties when generating hash codes for
  * objects; otherwise <code>false</code>.
- * @property {boolean} [useHashCodeMethod=true] - <code>true</code> to call "hashCode" method on value, when present;
- * otherwise <code>false</code>.
+ * @property {boolean} [useHashCodeMethod=true] - <code>true</code> to return the result of calling the "hashCode"
+ * method on value, when present; otherwise <code>false</code>.
  */

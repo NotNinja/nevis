@@ -140,10 +140,11 @@ Nevis.hashCode = staticHashCode
 Nevis.HashCodeBuilder = HashCodeBuilder
 
 /**
- * Returns the result of calling the <code>toString</code> on the specified <code>value</code> when it is non-null.
+ * Returns the result of calling the <code>toString</code> method on the specified <code>value</code> when it is
+ * non-null.
  *
- * If <code>value</code> is <code>null</code> or <code>undefined</code>, this method will return "null" or "undefined"
- * respectively.
+ * If <code>value</code> is <code>null</code> or <code>undefined</code>, this method will return <code>"null"</code> or
+ * <code>"undefined"</code> respectively.
  *
  * @param {*} value - the value whose string representation is to be returned (may be <code>null</code>)
  * @return {string} The string representation of <code>value</code>.
@@ -211,7 +212,7 @@ Nevis.prototype.equals = function equals(obj) {
  * </ul>
  *
  * The default implementation of this method will attempt to generate the hash code based on all of the fields on this
- * class.
+ * instance.
  *
  * Please note that it is generally necessary to override the {@link Nevis#equals} method whenever this method is
  * overridden, so as to maintain the above contract where equal objects must have equal hash codes.
