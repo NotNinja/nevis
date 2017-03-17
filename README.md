@@ -246,7 +246,88 @@ Nevis.equals(bob, undefined)
 
 ---
 
-TODO: Document EqualsBuilder
+Nevis provides a builder to support creating good equals for complex classes.
+
+> Unavailable in *lite* version
+
+``` javascript
+Nevis.EqualsBuilder()
+```
+
+The best way to describe it is by using an example that demonstrates it's API:
+
+``` javascript
+// TODO: Example
+var Animal = Nevis.extend('Animal', function(species) {
+  this.species = species
+}, {
+  equals: function(obj) {
+    if (obj == null) {
+      return false
+    }
+
+    return new Nevis.EqualsBuilder()
+      .append(this.species, obj.species)
+      .build()
+  }
+})
+var Human = Nevis.extend('Human', function(name, age) {
+  Human.super_.call(this, 'human')
+
+  this.name = name
+  this.age = age
+}, {
+  equals: function(obj) {
+    if (obj == null) {
+      return false
+    }
+
+    return new Nevis.EqualsBuilder()
+      .appendSuper(Human.super_.prototype.equals.call(this, obj))
+      .append(this.name, obj.name)
+      .append(this.age, obj.age)
+      .build()
+  }
+})
+var Lion = Nevis.extend('Lion', function(name, age) {
+  Lion.super_.call(this, 'lion')
+
+  this.name = name
+  this.age = age
+}, {
+  equals: function(obj) {
+    if (obj == null) {
+      return false
+    }
+
+    return new Nevis.EqualsBuilder()
+      .appendSuper(Lion.super_.prototype.equals.call(this, obj))
+      .append(this.name, obj.name)
+      .append(this.age, obj.age)
+      .build()
+  }
+})
+var humanBob = new Human('Bob', 58)
+var humanSuzie = new Human('Suzie', 30)
+var lionBob = new Lion('Bob', 58)
+
+humanBob.equals(humanBob)
+//=> true
+humanBob.equals(new Human('Bob', 58))
+//=> true
+humanBob.equals(lionBob)
+//=> false
+humanBob.equals(humanSuzie)
+//=> false
+humanSuzie.name = 'Bob'
+humanSuzie.age = 58
+humanBob.equals(humanSuzie)
+//=> true
+humanBob.equals(null)
+//=> false
+humanBob.equals(undefined)
+//=> false
+```
 
 ### Hash Codes
 
@@ -377,6 +458,15 @@ var random = new RandomHolder()
 
 random.toString()
 //=> "RandomHolder@8e53b013"
+
+var UnnamedObject = Nevis.extend({
+  foo: 'bar',
+  fu: 'baz'
+})
+var unnamed = new UnnamedObject()
+
+unnamed.toString()
+//=> "Nevis@222ce899"
 ```
 
 ---
