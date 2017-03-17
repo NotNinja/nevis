@@ -257,7 +257,6 @@ Nevis.EqualsBuilder()
 The best way to describe it is by using an example that demonstrates it's API:
 
 ``` javascript
-// TODO: Example
 var Animal = Nevis.extend('Animal', function(species) {
   this.species = species
 }, {
@@ -328,6 +327,9 @@ humanBob.equals(null)
 humanBob.equals(undefined)
 //=> false
 ```
+
+When using `Nevis.EqualsBuilder` in an `equals` method, it's recommended to use `Nevis.HashCodeBuilder` in the
+`hashCode` method on the same object.
 
 ### Hash Codes
 
@@ -430,7 +432,79 @@ Nevis.hashCode(undefined)
 
 ---
 
-TODO: Document HashCodeBuilder
+Nevis provides a builder to support generating hash codes for complex classes.
+
+> Unavailable in *lite* version
+
+``` javascript
+Nevis.HashCodeBuilder([initial][, multipler])
+```
+
+Ideally the `initial` value and `multiplier` should be different for each class, however, this is not vital. Prime 
+numbers are preferred, especially for `multiplier`.
+
+If specified, both `initial` and `multiplier` *must* be odd numbers.
+
+The best way to describe it is by using an example that demonstrates it's API:
+
+``` javascript
+var Animal = Nevis.extend('Animal', function(species) {
+  this.species = species
+}, {
+  hashCode: function() {
+    return new Nevis.HashCodeBuilder()
+      .append(this.species)
+      .build()
+  }
+})
+var Human = Nevis.extend('Human', function(name, age) {
+  Human.super_.call(this, 'human')
+
+  this.name = name
+  this.age = age
+}, {
+  hashCode: function() {
+    return new Nevis.HashCodeBuilder()
+      .appendSuper(Human.super_.prototype.hashCode.call(this))
+      .append(this.name)
+      .append(this.age)
+      .build()
+  }
+})
+var Lion = Nevis.extend('Lion', function(name, age) {
+  Lion.super_.call(this, 'lion')
+
+  this.name = name
+  this.age = age
+}, {
+  hashCode: function() {
+    return new Nevis.HashCodeBuilder()
+      .appendSuper(Lion.super_.prototype.hashCode.call(this))
+      .append(this.name)
+      .append(this.age)
+      .build()
+  }
+})
+var humanBob = new Human('Bob', 58)
+var humanSuzie = new Human('Suzie', 30)
+var lionBob = new Lion('Bob', 58)
+
+humanBob.hashCode()
+//=> 1833817583205
+humanBob.hashCode() === new Human('Bob', 58).hashCode()
+//=> true
+lionBob.hashCode()
+//=> 1048852432588
+humanSuzie.hashCode()
+//=> 1946724180777
+humanSuzie.name = 'Bob'
+humanSuzie.age = 58
+humanBob.hashCode() === humanSuzie.hashCode()
+//=> true
+```
+
+When using `Nevis.HashCodeBuilder` in a `hashCode` method, it's recommended to use `Nevis.EqualsBuilder` in the `equals`
+method on the same object.
 
 ### String Representations
 
