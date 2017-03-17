@@ -31,7 +31,6 @@ var CollectionHashCodeGenerator = require('../../../src/hash-code/generators/col
 var HashCodeGenerator = require('../../../src/hash-code/generators/generator')
 var generators = require('../../../src/hash-code/generators')
 var HashHashCodeGenerator = require('../../../src/hash-code/generators/hash-generator')
-var NumberHashCodeGenerator = require('../../../src/hash-code/generators/number-generator')
 var ObjectHashCodeGenerator = require('../../../src/hash-code/generators/object-generator')
 var StringHashCodeGenerator = require('../../../src/hash-code/generators/string-generator')
 var ToStringHashCodeGenerator = require('../../../src/hash-code/generators/to-string-generator')
@@ -46,7 +45,6 @@ describe('hash-code/generators/index', function() {
       CollectionHashCodeGenerator: CollectionHashCodeGenerator,
       HashCodeGenerator: HashCodeGenerator,
       HashHashCodeGenerator: HashHashCodeGenerator,
-      NumberHashCodeGenerator: NumberHashCodeGenerator,
       ObjectHashCodeGenerator: ObjectHashCodeGenerator,
       StringHashCodeGenerator: StringHashCodeGenerator,
       ToStringHashCodeGenerator: ToStringHashCodeGenerator,

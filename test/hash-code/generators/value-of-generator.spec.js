@@ -44,11 +44,11 @@ describe('hash-code/generators/value-of-generator:ValueOfHashCodeGenerator', fun
     it('should generate hash code for date values', function() {
       var value = new Date(0)
 
-      expect(generator.generate(new HashCodeContext(value, hashCode))).to.equal(0)
+      expect(generator.generate(new HashCodeContext(value, hashCode))).to.equal(48)
 
-      value = new Date()
+      value = new Date(2017, 2, 17, 12, 0, 0)
 
-      expect(generator.generate(new HashCodeContext(value, hashCode))).to.equal(value.getTime())
+      expect(generator.generate(new HashCodeContext(value, hashCode))).to.equal(863529008)
     })
   })
 

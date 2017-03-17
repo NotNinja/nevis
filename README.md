@@ -288,9 +288,9 @@ var bob = new Person('Bob')
 var suzie = new Person('Suzie')
 
 bob.hashCode()
-//=> 201348816
+//=> 658009303
 suzie.hashCode()
-//=> 281655185
+//=> 738315672
 bob.hashCode() === new Person('Bob').hashCode()
 //=> true
 ```
@@ -338,7 +338,7 @@ Nevis.hashCode(obj)
 Nevis.hashCode(obj, { ignoreMethods: true })
 //=> 61653
 Nevis.hashCode(bob)
-//=> 201348816
+//=> 658009303
 Nevis.hashCode('foo')
 //=> 101574
 Nevis.hashCode(null)
@@ -371,12 +371,12 @@ character (`@`), and the hexadecimal representation of the hash code of the inst
 
 ``` javascript
 var RandomHolder = Nevis.extend('RandomHolder', function() {
-  this.value = Math.random()
+  this.value = Math.random() * 100
 })
 var random = new RandomHolder()
 
 random.toString()
-//=> "RandomHolder@d9f025a"
+//=> "RandomHolder@8e53b013"
 ```
 
 ---
@@ -393,7 +393,7 @@ If value is `null` or `undefined`, this method will return `"null"` or `"undefin
 
 ``` javascript
 Nevis.toString(random)
-//=> "RandomHolder@d9f025a"
+//=> "RandomHolder@8e53b013"
 Nevis.toString(123)
 //=> "123"
 Nevis.toString(null)

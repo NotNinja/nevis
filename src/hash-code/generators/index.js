@@ -28,7 +28,6 @@ var CachingHashCodeGenerator = require('./caching-generator')
 var CollectionHashCodeGenerator = require('./collection-generator')
 var HashCodeGenerator = require('./generator')
 var HashHashCodeGenerator = require('./hash-generator')
-var NumberHashCodeGenerator = require('./number-generator')
 var ObjectHashCodeGenerator = require('./object-generator')
 var StringHashCodeGenerator = require('./string-generator')
 var ToStringHashCodeGenerator = require('./to-string-generator')
@@ -47,7 +46,6 @@ module.exports = {
   CollectionHashCodeGenerator: CollectionHashCodeGenerator,
   HashCodeGenerator: HashCodeGenerator,
   HashHashCodeGenerator: HashHashCodeGenerator,
-  NumberHashCodeGenerator: NumberHashCodeGenerator,
   ObjectHashCodeGenerator: ObjectHashCodeGenerator,
   StringHashCodeGenerator: StringHashCodeGenerator,
   ToStringHashCodeGenerator: ToStringHashCodeGenerator,

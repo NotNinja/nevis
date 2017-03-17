@@ -34,7 +34,6 @@ var HashCodeContext = require('./context')
  */
 var activeGenerators = [
   new generators.BooleanHashCodeGenerator(),
-  new generators.NumberHashCodeGenerator(),
   new generators.StringHashCodeGenerator(),
   new generators.ToStringHashCodeGenerator(),
   new generators.ValueOfHashCodeGenerator(),

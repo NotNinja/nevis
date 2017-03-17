@@ -72,7 +72,7 @@ describe('hash-code/builder:HashCodeBuilder', function() {
           }
         })).to.equal(builder)
 
-        expect(builder.build()).to.equal(624515545)
+        expect(builder.build()).to.equal(626312524)
       })
     })
 
@@ -87,7 +87,7 @@ describe('hash-code/builder:HashCodeBuilder', function() {
           }
         })).to.equal(builder)
 
-        expect(builder.build()).to.equal(624489437)
+        expect(builder.build()).to.equal(625023674)
       })
     })
   })

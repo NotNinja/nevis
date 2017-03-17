@@ -43,7 +43,7 @@ describe('hash-code/generators/array-generator:ArrayHashCodeGenerator', function
   describe('#generate', function() {
     it('should generate hash code for array values', function() {
       expect(generator.generate(new HashCodeContext([], hashCode))).to.equal(1)
-      expect(generator.generate(new HashCodeContext([ 'foo', 123 ], hashCode))).to.equal(3149878)
+      expect(generator.generate(new HashCodeContext([ 'foo', 123 ], hashCode))).to.equal(3198445)
     })
   })
 

@@ -1,6 +1,6 @@
 {
   "name": "nevis",
-  "version": "1.0.0alpha",
+  "version": "0.3.0alpha",
   "description": "Makes JavaScript more object-orientated",
   "homepage": "https://github.com/Skelp/nevis",
   "bugs": {

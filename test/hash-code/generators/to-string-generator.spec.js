@@ -50,6 +50,17 @@ describe('hash-code/generators/to-string-generator:ToStringHashCodeGenerator', f
       expect(generator.generate(new HashCodeContext(function bar() {}, hashCode))).to.equal(254160374)
     })
 
+    it('should generate hash code for number values', function() {
+      expect(generator.generate(new HashCodeContext(0, hashCode))).to.equal(48)
+      expect(generator.generate(new HashCodeContext(123, hashCode))).to.equal(48690)
+      expect(generator.generate(new HashCodeContext(-123, hashCode))).to.equal(1389285)
+      expect(generator.generate(new HashCodeContext(123.456, hashCode))).to.equal(2017986585)
+      expect(generator.generate(new HashCodeContext(1.234e+5, hashCode))).to.equal(1450575298)
+      expect(generator.generate(new HashCodeContext(Infinity, hashCode))).to.equal(237817416)
+      expect(generator.generate(new HashCodeContext(-Infinity, hashCode))).to.equal(506745205)
+      expect(generator.generate(new HashCodeContext(NaN, hashCode))).to.equal(78043)
+    })
+
     it('should generate hash code for regular expression values', function() {
       expect(generator.generate(new HashCodeContext(/foo/, hashCode))).to.equal(46554328)
       expect(generator.generate(new HashCodeContext(/foo/i, hashCode))).to.equal(1443184273)
@@ -62,13 +73,19 @@ describe('hash-code/generators/to-string-generator:ToStringHashCodeGenerator', f
       expect(generator.supports(new HashCodeContext(function foo() {}, hashCode))).to.be.true
     })
 
+    it('should return true for number values', function() {
+      expect(generator.supports(new HashCodeContext(0, hashCode))).to.be.true
+      expect(generator.supports(new HashCodeContext(123, hashCode))).to.be.true
+      expect(generator.supports(new HashCodeContext(Infinity, hashCode))).to.be.true
+      expect(generator.supports(new HashCodeContext(NaN, hashCode))).to.be.true
+    })
+
     it('should return true for regular expression values', function() {
       expect(generator.supports(new HashCodeContext(/foo/, hashCode))).to.be.true
     })
 
     it('should return false for other values', function() {
       expect(generator.supports(new HashCodeContext(true, hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext(123, hashCode))).to.be.false
       expect(generator.supports(new HashCodeContext('foo', hashCode))).to.be.false
       expect(generator.supports(new HashCodeContext(new Date(), hashCode))).to.be.false
       expect(generator.supports(new HashCodeContext([ 'foo', 'bar' ], hashCode))).to.be.false

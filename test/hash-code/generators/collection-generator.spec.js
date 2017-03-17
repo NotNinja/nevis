@@ -53,7 +53,7 @@ describe('hash-code/generators/collection-generator:CollectionHashCodeGenerator'
       }, hashCode))).to.equal(1)
       expect(generator.generate(new HashCodeContext(function() {
         return [ 'foo', 123 ]
-      }, hashCode))).to.equal(3149878)
+      }, hashCode))).to.equal(3198445)
     })
   })
 
