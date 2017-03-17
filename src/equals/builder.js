@@ -22,7 +22,7 @@
 
 'use strict'
 
-var eq = require('./')
+var staticEquals = require('./')
 
 /**
  * Assists in building good equals for complex classes.
@@ -55,7 +55,7 @@ function EqualsBuilder() {
  */
 EqualsBuilder.prototype.append = function append(value, other, options) {
   if (this._equals) {
-    this._equals = eq(value, other, options)
+    this._equals = staticEquals(value, other, options)
   }
 
   return this

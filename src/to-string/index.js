@@ -22,32 +22,25 @@
 
 'use strict'
 
-var expect = require('chai').expect
+/**
+ * Returns the result of calling the <code>toString</code> on the specified <code>value</code> when it is non-null.
+ *
+ * If <code>value</code> is <code>null</code> or <code>undefined</code>, this method will return "null" or "undefined"
+ * respectively.
+ *
+ * @param {*} value - the value whose string representation is to be returned (may be <code>null</code>)
+ * @return {string} The string representation of <code>value</code>.
+ * @public
+ */
+function toString(value) {
+  if (typeof value === 'undefined') {
+    return 'undefined'
+  }
+  if (value == null) {
+    return 'null'
+  }
 
-var extend = require('../src/extend')
-var Nevis = require('../src/nevis')
+  return value.toString()
+}
 
-describe('nevis:Nevis', function() {
-  it('should be a constructor', function() {
-    expect(Nevis).to.be.a('function')
-    expect(new Nevis()).to.be.an('object')
-  })
-
-  describe('.class_', function() {
-    it('should be Nevis', function() {
-      expect(Nevis.class_).to.equal('Nevis')
-    })
-  })
-
-  describe('.super_', function() {
-    it('should be Object', function() {
-      expect(Nevis.super_).to.equal(Object)
-    })
-  })
-
-  describe('.extend', function() {
-    it('should reference the internal extend function', function() {
-      expect(Nevis.extend).to.equal(extend)
-    })
-  })
-})
+module.exports = toString

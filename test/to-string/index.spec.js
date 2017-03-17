@@ -24,42 +24,25 @@
 
 var expect = require('chai').expect
 
-var EqualsComparator = require('../../../src/equals/comparators/comparator')
-var extend = require('../../../src/extend')
+var toString = require('../../src/to-string/index')
 
-describe('equals/comparators/comparator:EqualsComparator', function() {
-  it('should be a constructor', function() {
-    expect(EqualsComparator).to.be.a('function')
-    expect(new EqualsComparator()).to.be.an('object')
+describe('to-string/index:toString', function() {
+  it('should return result of calling "toString" method', function() {
+    expect(toString(0)).to.equal('0')
+    expect(toString(NaN)).to.equal('NaN')
+    expect(toString({})).to.equal('[object Object]')
+    expect(toString([ 'foo', 'bar' ])).to.equal('foo,bar')
   })
 
-  describe('.class_', function() {
-    it('should be EqualsComparator', function() {
-      expect(EqualsComparator.class_).to.equal('EqualsComparator')
+  context('when value is null', function() {
+    it('should return "null"', function() {
+      expect(toString(null)).to.equal('null')
     })
   })
 
-  describe('.super_', function() {
-    it('should be Object', function() {
-      expect(EqualsComparator.super_).to.equal(Object)
-    })
-  })
-
-  describe('.extend', function() {
-    it('should reference the internal extend function', function() {
-      expect(EqualsComparator.extend).to.equal(extend)
-    })
-  })
-
-  describe('#compare', function() {
-    it('should be an abstract method', function() {
-      expect(EqualsComparator.prototype.compare).to.be.a('function')
-    })
-  })
-
-  describe('#supports', function() {
-    it('should be an abstract method', function() {
-      expect(EqualsComparator.prototype.supports).to.be.a('function')
+  context('when value is undefined', function() {
+    it('should return "undefined"', function() {
+      expect(toString()).to.equal('undefined')
     })
   })
 })

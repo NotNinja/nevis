@@ -30,6 +30,7 @@ var hashCode = require('../src/hash-code/index')
 var HashCodeBuilder = require('../src/hash-code/builder')
 var index = require('../src/index')
 var Nevis = require('../src/nevis')
+var toString = require('../src/to-string/index')
 
 describe('index:Nevis', function() {
   it('should export Nevis', function() {
@@ -57,6 +58,12 @@ describe('index:Nevis', function() {
   describe('.HashCodeBuilder', function() {
     it('should reference the internal HashCodeBuilder constructor', function() {
       expect(index.HashCodeBuilder).to.equal(HashCodeBuilder)
+    })
+  })
+
+  describe('.toString', function() {
+    it('should reference the internal toString function', function() {
+      expect(index.toString).to.equal(toString)
     })
   })
 
@@ -88,7 +95,31 @@ describe('index:Nevis', function() {
         return 123
       }
 
-      expect(value.hashCode()).to.equal(1669087569)
+      // These checks have to suffice as a fixed hash code here would be too frustrating to maintain between commits etc
+      var hash = value.hashCode()
+      expect(hash).to.be.a('number')
+      expect(hash).not.to.equal(0)
+      expect(value.hashCode()).to.equal(hash)
+    })
+  })
+
+  describe('#toString', function() {
+    it('should return a string representation of the instance', function() {
+      var Test1 = index.extend({
+        foo: 'bar',
+        fizz: function() {
+          return 123
+        }
+      })
+      var Test2 = index.extend('Test2', {
+        fu: 'baz',
+        buzz: function() {
+          return 321
+        }
+      })
+
+      expect(new Test1().toString()).to.match(/Nevis@-?[0-9a-f]+/)
+      expect(new Test2().toString()).to.match(/Test2@-?[0-9a-f]+/)
     })
   })
 })

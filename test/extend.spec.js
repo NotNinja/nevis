@@ -34,8 +34,10 @@ describe('extend:extend', function() {
   before(function() {
     Base = function() {}
     Base.extend = extend
+    Base.class_ = 'Base'
+    Base.super_ = Object
 
-    Parent = Base.extend(function(name) {
+    Parent = Base.extend('Parent', function(name) {
       this.name = name
     }, {
       greet: function(name) {
@@ -59,7 +61,7 @@ describe('extend:extend', function() {
       this.id = 123
     }
 
-    var Child = Parent.extend(ChildConstructor, {
+    var Child = Parent.extend('Child', ChildConstructor, {
       farewell: function(name) {
         return 'Goodbye ' + name
       }
@@ -93,7 +95,7 @@ describe('extend:extend', function() {
       return 123
     }
 
-    var Child = Parent.extend(proto)
+    var Child = Parent.extend('Child', proto)
     var child = new Child('Foo')
 
     expect(child.hasOwnProperty('name')).to.be.true
@@ -105,10 +107,10 @@ describe('extend:extend', function() {
   })
 
   it('should return constructor with correct inheritance', function() {
-    var SubParent = Parent.extend(function() {
+    var SubParent = Parent.extend('SubParent', function() {
       SubParent.super_.apply(this, arguments)
     })
-    var Child = SubParent.extend(function() {
+    var Child = SubParent.extend('Child', function() {
       Child.super_.apply(this, arguments)
     })
     var child = new Child('Foo')
@@ -119,11 +121,24 @@ describe('extend:extend', function() {
     expect(child).to.be.an.instanceof(Child)
   })
 
-  it('should give constructor reference to super constructor', function() {
-    var SubParent = Parent.extend(function() {
+  it('should give constructor class name', function() {
+    var SubParent = Parent.extend('SubParent', function() {
       SubParent.super_.apply(this, arguments)
     })
-    var Child = SubParent.extend(function() {
+    var Child = SubParent.extend('Child', function() {
+      Child.super_.apply(this, arguments)
+    })
+
+    expect(Child.class_).to.equal('Child')
+    expect(SubParent.class_).to.equal('SubParent')
+    expect(Parent.class_).to.equal('Parent')
+  })
+
+  it('should give constructor reference to super constructor', function() {
+    var SubParent = Parent.extend('SubParent', function() {
+      SubParent.super_.apply(this, arguments)
+    })
+    var Child = SubParent.extend('Child', function() {
       Child.super_.apply(this, arguments)
     })
 
@@ -133,7 +148,7 @@ describe('extend:extend', function() {
   })
 
   it('should allow semi-inheritance of existing classes', function() {
-    var Child = Parent.extend(function() {
+    var Child = Parent.extend('Child', function() {
       Child.super_.apply(this, arguments)
 
       EventEmitter.call(this)
@@ -152,7 +167,7 @@ describe('extend:extend', function() {
 
   context('when no constructor is passed', function() {
     it('should extend the prototype and static properties', function() {
-      var Child = Parent.extend({
+      var Child = Parent.extend('Child', {
         farewell: function(name) {
           return 'Goodbye ' + name
         }
@@ -171,8 +186,8 @@ describe('extend:extend', function() {
     })
 
     it('should return a constructor with correct inheritance', function() {
-      var SubParent = Parent.extend()
-      var Child = SubParent.extend()
+      var SubParent = Parent.extend('SubParent')
+      var Child = SubParent.extend('Child')
       var child = new Child('Foo')
 
       expect(child).to.be.an.instanceof(Object)
@@ -183,12 +198,47 @@ describe('extend:extend', function() {
     })
 
     it('should return a constructor with reference to super constructor', function() {
-      var SubParent = Parent.extend()
-      var Child = SubParent.extend()
+      var SubParent = Parent.extend('SubParent')
+      var Child = SubParent.extend('Child')
 
       expect(Child.super_).to.equal(SubParent)
       expect(SubParent.super_).to.equal(Parent)
       expect(Parent.super_).to.equal(Base)
+    })
+
+    it('should return a constructor with class name', function() {
+      var SubParent = Parent.extend('SubParent')
+      var Child = SubParent.extend('Child')
+
+      expect(Child.class_).to.equal('Child')
+      expect(SubParent.class_).to.equal('SubParent')
+      expect(Parent.class_).to.equal('Parent')
+    })
+
+    context('and no name is passed', function() {
+      it('should return a constructor with class name of super constructor', function() {
+        var SubParent = Parent.extend()
+        var Child = SubParent.extend()
+
+        expect(Child.class_).to.equal('Parent')
+        expect(SubParent.class_).to.equal('Parent')
+        expect(Parent.class_).to.equal('Parent')
+      })
+    })
+  })
+
+  context('when no name is passed', function() {
+    it('should give constructor class name of super constructor', function() {
+      var SubParent = Parent.extend(function() {
+        SubParent.super_.apply(this, arguments)
+      })
+      var Child = SubParent.extend(function() {
+        Child.super_.apply(this, arguments)
+      })
+
+      expect(Child.class_).to.equal('Parent')
+      expect(SubParent.class_).to.equal('Parent')
+      expect(Parent.class_).to.equal('Parent')
     })
   })
 })

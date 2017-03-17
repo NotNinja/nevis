@@ -80,19 +80,32 @@
    * Extends the constructor to which this method is associated with the <code>prototype</code> and/or
    * <code>statics</code> provided.
    *
+   * If <code>name</code> is provided, it will be used as the class name and can be accessed via a special
+   * <code>class_</code> property on the child constructor, otherwise the class name of the super constructor will be used
+   * instead. The class name may also be used string representation for instances of the child constructor (via
+   * <code>toString</code>), but this is not applicable to the <i>lite</i> version of Nevis.
+   *
    * If <code>constructor</code> is provided, it will be used as the constructor for the child, otherwise a simple
    * constructor which only calls the super constructor will be used instead.
    *
    * The super constructor can be accessed via a special <code>super_</code> property on the child constructor.
    *
+   * @param {string} [name=this.class_] - the class name to be used for the child constructor
    * @param {Function} [constructor] - the constructor for the child
    * @param {Object} [prototype] - the prototype properties to be defined for the child
    * @param {Object} [statics] - the static properties to be defined for the child
    * @return {Function} The child <code>constructor</code> provided or the one created if none was given.
    * @public
    */
-  function extend(constructor, prototype, statics) {
+  function extend(name, constructor, prototype, statics) {
     var superConstructor = this;
+
+    if (typeof name !== 'string') {
+      statics = prototype;
+      prototype = constructor;
+      constructor = name;
+      name = null;
+    }
 
     if (typeof constructor !== 'function') {
       statics = prototype;
@@ -107,6 +120,7 @@
     constructor.prototype = createObject(superConstructor.prototype, prototype);
     constructor.prototype.constructor = constructor;
 
+    constructor.class_ = name || superConstructor.class_;
     constructor.super_ = superConstructor;
 
     return constructor
@@ -160,16 +174,24 @@
    * @constructor
    */
   function EqualsComparator() {}
+  EqualsComparator.class_ = 'EqualsComparator';
+  EqualsComparator.super_ = Object;
 
   /**
    * Extends the constructor to which this method is associated with the <code>prototype</code> and/or
    * <code>statics</code> provided.
+   *
+   * If <code>name</code> is provided, it will be used as the class name and can be accessed via a special
+   * <code>class_</code> property on the child constructor, otherwise "Nevis" will be used instead. The class name may
+   * also be used string representation for instances of the child constructor (via <code>toString</code>), but this is
+   * not applicable to the <i>lite</i> version of Nevis.
    *
    * If <code>constructor</code> is provided, it will be used as the constructor for the child, otherwise a simple
    * constructor which only calls the super constructor will be used instead.
    *
    * The super constructor can be accessed via a special <code>super_</code> property on the child constructor.
    *
+   * @param {string} [name="Nevis"] - the class name to be used for the child constructor
    * @param {Function} [constructor] - the constructor for the child
    * @param {Object} [prototype] - the prototype properties to be defined for the child
    * @param {Object} [statics] - the static properties to be defined for the child
@@ -890,16 +912,24 @@
    * @constructor
    */
   function HashCodeGenerator() {}
+  HashCodeGenerator.class_ = 'HashCodeGenerator';
+  HashCodeGenerator.super_ = Object;
 
   /**
    * Extends the constructor to which this method is associated with the <code>prototype</code> and/or
    * <code>statics</code> provided.
+   *
+   * If <code>name</code> is provided, it will be used as the class name and can be accessed via a special
+   * <code>class_</code> property on the child constructor, otherwise "Nevis" will be used instead. The class name may
+   * also be used string representation for instances of the child constructor (via <code>toString</code>), but this is
+   * not applicable to the <i>lite</i> version of Nevis.
    *
    * If <code>constructor</code> is provided, it will be used as the constructor for the child, otherwise a simple
    * constructor which only calls the super constructor will be used instead.
    *
    * The super constructor can be accessed via a special <code>super_</code> property on the child constructor.
    *
+   * @param {string} [name="Nevis"] - the class name to be used for the child constructor
    * @param {Function} [constructor] - the constructor for the child
    * @param {Object} [prototype] - the prototype properties to be defined for the child
    * @param {Object} [statics] - the static properties to be defined for the child
@@ -1762,17 +1792,24 @@
    * @constructor
    */
   function Nevis() {}
+  Nevis.class_ = 'Nevis';
   Nevis.super_ = Object;
 
   /**
    * Extends the constructor to which this method is associated with the <code>prototype</code> and/or
    * <code>statics</code> provided.
    *
+   * If <code>name</code> is provided, it will be used as the class name and can be accessed via a special
+   * <code>class_</code> property on the child constructor, otherwise "Nevis" will be used instead. The class name may
+   * also be used string representation for instances of the child constructor (via <code>toString</code>), but this is
+   * not applicable to the <i>lite</i> version of Nevis.
+   *
    * If <code>constructor</code> is provided, it will be used as the constructor for the child, otherwise a simple
    * constructor which only calls the super constructor will be used instead.
    *
    * The super constructor can be accessed via a special <code>super_</code> property on the child constructor.
    *
+   * @param {string} [name="Nevis"] - the class name to be used for the child constructor
    * @param {Function} [constructor] - the constructor for the child
    * @param {Object} [prototype] - the prototype properties to be defined for the child
    * @param {Object} [statics] - the static properties to be defined for the child
@@ -1784,6 +1821,51 @@
   Nevis.extend = extend_1;
 
   var nevis = Nevis;
+
+  /*
+   * Copyright (C) 2017 Alasdair Mercer, Skelp
+   *
+   * Permission is hereby granted, free of charge, to any person obtaining a copy
+   * of this software and associated documentation files (the "Software"), to deal
+   * in the Software without restriction, including without limitation the rights
+   * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+   * copies of the Software, and to permit persons to whom the Software is
+   * furnished to do so, subject to the following conditions:
+   *
+   * The above copyright notice and this permission notice shall be included in all
+   * copies or substantial portions of the Software.
+   *
+   * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+   * SOFTWARE.
+   */
+
+  /**
+   * Returns the result of calling the <code>toString</code> on the specified <code>value</code> when it is non-null.
+   *
+   * If <code>value</code> is <code>null</code> or <code>undefined</code>, this method will return "null" or "undefined"
+   * respectively.
+   *
+   * @param {*} value - the value whose string representation is to be returned (may be <code>null</code>)
+   * @return {string} The string representation of <code>value</code>.
+   * @public
+   */
+  function toString(value) {
+    if (typeof value === 'undefined') {
+      return 'undefined'
+    }
+    if (value == null) {
+      return 'null'
+    }
+
+    return value.toString()
+  }
+
+  var index$10 = toString;
 
   /**
    * Returns whether the specified <code>value</code> is "equal to" the <code>other</code> provided using the given
@@ -1896,6 +1978,20 @@
   nevis.HashCodeBuilder = builder$2;
 
   /**
+   * Returns the result of calling the <code>toString</code> on the specified <code>value</code> when it is non-null.
+   *
+   * If <code>value</code> is <code>null</code> or <code>undefined</code>, this method will return "null" or "undefined"
+   * respectively.
+   *
+   * @param {*} value - the value whose string representation is to be returned (may be <code>null</code>)
+   * @return {string} The string representation of <code>value</code>.
+   * @public
+   * @static
+   * @memberof Nevis
+   */
+  nevis.toString = index$10;
+
+  /**
    * Returns whether this instance is "equal to" the specified <code>obj</code>.
    *
    * This method implements an equivalence relation on non-null object references:
@@ -1964,6 +2060,23 @@
    */
   nevis.prototype.hashCode = function hashCode() {
     return index$6(this, { useHashCodeMethod: false })
+  };
+
+  /**
+   * Returns a string representation of this instance.
+   *
+   * In general, the {@code Nevis#toString} method returns a string that "textually represents" this instance. The result
+   * should be a concise but informative representation that is easy for a person to read.
+   *
+   * The default implementation of this method will return a string consisting of this instance's class name, the at-sign
+   * character (<code>@</code>), and the hexadecimal representation of the hash code of this instance.
+   *
+   * @return {string} A string representation of this instance.
+   * @public
+   * @memberof Nevis#
+   */
+  nevis.prototype.toString = function toString() {
+    return this.constructor.class_ + '@' + this.hashCode().toString(16)
   };
 
   var index = nevis;

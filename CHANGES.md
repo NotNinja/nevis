@@ -2,7 +2,7 @@
 
 * Rename library to Nevis (**breaking change**)
 * Replace usage of ES6 modules with CommonJS (**breaking change**)
-* Change `Nevis.extends` static method so that the class name can be passed as the first argument optionally
+* Change `Nevis.extends` static method so that the class name (`class_`) can be passed as the first argument optionally
 * Add `Nevis#equals(obj)` instance method to check if instance is equal to another
 * Add `Nevis#hashCode()` instance method to generate Java-like hash code for instance
 * Add `Nevis#toString()` instance method to generate string representation for instance

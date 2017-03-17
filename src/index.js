@@ -22,11 +22,12 @@
 
 'use strict'
 
-var eq = require('./equals')
 var EqualsBuilder = require('./equals/builder')
-var hash = require('./hash-code')
 var HashCodeBuilder = require('./hash-code/builder')
 var Nevis = require('./nevis')
+var staticEquals = require('./equals')
+var staticHashCode = require('./hash-code')
+var staticToString = require('./to-string')
 
 /**
  * Returns whether the specified <code>value</code> is "equal to" the <code>other</code> provided using the given
@@ -72,7 +73,7 @@ var Nevis = require('./nevis')
  * @static
  * @memberof Nevis
  */
-Nevis.equals = eq
+Nevis.equals = staticEquals
 
 /**
  * Assists in building good equals for complex classes.
@@ -118,7 +119,7 @@ Nevis.EqualsBuilder = EqualsBuilder
  * @static
  * @memberof Nevis
  */
-Nevis.hashCode = hash
+Nevis.hashCode = staticHashCode
 
 /**
  * Assists in building hash codes for complex classes.
@@ -137,6 +138,20 @@ Nevis.hashCode = hash
  * @memberof Nevis
  */
 Nevis.HashCodeBuilder = HashCodeBuilder
+
+/**
+ * Returns the result of calling the <code>toString</code> on the specified <code>value</code> when it is non-null.
+ *
+ * If <code>value</code> is <code>null</code> or <code>undefined</code>, this method will return "null" or "undefined"
+ * respectively.
+ *
+ * @param {*} value - the value whose string representation is to be returned (may be <code>null</code>)
+ * @return {string} The string representation of <code>value</code>.
+ * @public
+ * @static
+ * @memberof Nevis
+ */
+Nevis.toString = staticToString
 
 /**
  * Returns whether this instance is "equal to" the specified <code>obj</code>.
@@ -206,7 +221,24 @@ Nevis.prototype.equals = function equals(obj) {
  * @memberof Nevis#
  */
 Nevis.prototype.hashCode = function hashCode() {
-  return hash(this, { useHashCodeMethod: false })
+  return staticHashCode(this, { useHashCodeMethod: false })
+}
+
+/**
+ * Returns a string representation of this instance.
+ *
+ * In general, the {@code Nevis#toString} method returns a string that "textually represents" this instance. The result
+ * should be a concise but informative representation that is easy for a person to read.
+ *
+ * The default implementation of this method will return a string consisting of this instance's class name, the at-sign
+ * character (<code>@</code>), and the hexadecimal representation of the hash code of this instance.
+ *
+ * @return {string} A string representation of this instance.
+ * @public
+ * @memberof Nevis#
+ */
+Nevis.prototype.toString = function toString() {
+  return this.constructor.class_ + '@' + this.hashCode().toString(16)
 }
 
 module.exports = Nevis

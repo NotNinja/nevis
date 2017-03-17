@@ -51,7 +51,7 @@ TODO: Update API documentation
 The API is extremely simple and is designed to make it as easy as possible to implement traditional inheritance.
 
 ``` javascript
-Nevis.extend([constructor][, prototype][, statics])
+Nevis.extend([name][, constructor][, prototype][, statics])
 ```
 
 It is very flexible and can be used to extend *classes*:
@@ -85,7 +85,8 @@ var Person = ChildObject.extend(function(name, options) {
 })
 ```
 
-All constructors extended by Nevis are given a static `super_` property which references the super constructor. 
+All constructors extended by Nevis are given static properties `class_` and `super_` which are the name and reference
+to the super constructor respectively. 
 
 Also, this can be used to extend existing *classes* such as `EventEmitter`:
 

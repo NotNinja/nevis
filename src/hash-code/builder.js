@@ -22,7 +22,7 @@
 
 'use strict'
 
-var hash = require('./')
+var staticHashCode = require('./')
 
 /**
  * Assists in building hash codes for complex classes.
@@ -100,7 +100,7 @@ HashCodeBuilder.DEFAULT_MULTIPLIER_VALUE = 37
  * @memberof HashCodeBuilder#
  */
 HashCodeBuilder.prototype.append = function append(value, options) {
-  this._hash = (this._hash * this._multiplier) + hash(value, options)
+  this._hash = (this._hash * this._multiplier) + staticHashCode(value, options)
 
   return this
 }

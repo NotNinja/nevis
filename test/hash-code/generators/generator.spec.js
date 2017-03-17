@@ -27,10 +27,22 @@ var expect = require('chai').expect
 var extend = require('../../../src/extend')
 var HashCodeGenerator = require('../../../src/hash-code/generators/generator')
 
-describe('hash-code/generators/generator:Generator', function() {
+describe('hash-code/generators/generator:HashCodeGenerator', function() {
   it('should be a constructor', function() {
     expect(HashCodeGenerator).to.be.a('function')
     expect(new HashCodeGenerator()).to.be.an('object')
+  })
+
+  describe('.class_', function() {
+    it('should be HashCodeGenerator', function() {
+      expect(HashCodeGenerator.class_).to.equal('HashCodeGenerator')
+    })
+  })
+
+  describe('.super_', function() {
+    it('should be Object', function() {
+      expect(HashCodeGenerator.super_).to.equal(Object)
+    })
   })
 
   describe('.extend', function() {
