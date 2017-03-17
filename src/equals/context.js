@@ -60,6 +60,7 @@ function EqualsContext(value, other, equals, options) {
     filterProperty: options.filterProperty != null ? options.filterProperty : function() {
       return true
     },
+    ignoreCase: Boolean(options.ignoreCase),
     skipInherited: Boolean(options.skipInherited),
     skipMethods: Boolean(options.skipMethods),
     useEqualsMethod: options.useEqualsMethod !== false

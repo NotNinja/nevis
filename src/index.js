@@ -160,19 +160,19 @@ Nevis.toString = staticToString
  * This method implements an equivalence relation on non-null object references:
  *
  * <ul>
- *   <li>It is <i>reflexive</i>: for any non-null reference value <code>x</code>, <code>equals(x, x)</code> should
- *   return <code>true</code>.</li>
+ *   <li>It is <i>reflexive</i>: for any non-null reference value <code>x</code>, <code>x.equals(x)</code> should return
+ *   <code>true</code>.</li>
  *   <li>It is <i>symmetric</i>: for any non-null reference values <code>x</code> and <code>y</code>,
- *   <code>equals(x, y)</code> should return <code>true</code> if and only if <code>equals(y, x)</code> returns
+ *   <code>x.equals(y)</code> should return <code>true</code> if and only if <code>y.equals(x)</code> returns
  *   <code>true</code>.</li>
  *   <li>It is <i>transitive</i>: for any non-null reference values <code>x</code>, <code>y</code>, and <code>z</code>,
- *   if <code>equals(x, y)</code> returns <code>true</code> and <code>equals(y, z)</code> returns <code>true</code>,
- *   then <code>equals(x, z)</code> should return <code>true</code>.</li>
+ *   if <code>x.equals(y)</code> returns <code>true</code> and <code>y.equals(z)</code> returns <code>true</code>, then
+ *   <code>x.equals(z)</code> should return <code>true</code>.</li>
  *   <li>It is <i>consistent</i>: for any non-null reference values <code>x</code> and <code>y</code>, multiple
- *   invocations of <code>equals(x, y)</code> consistently return <code>true</code> or consistently return
+ *   invocations of <code>x.equals(y)</code> consistently return <code>true</code> or consistently return
  *   <code>false</code>, provided no information used in <code>equals</code> comparisons on the objects is
  *   modified.</li>
- *   <li>For any non-null reference value <code>x</code>, <code>equals(x, null)</code> should return
+ *   <li>For any non-null reference value <code>x</code>, <code>x.equals(null)</code> should return
  *   <code>false</code>.</li>
  * </ul>
  *

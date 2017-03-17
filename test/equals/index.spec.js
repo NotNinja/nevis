@@ -40,7 +40,7 @@ describe('equals/index:equals', function() {
 
   context('when no comparator supports values', function() {
     it('should return false', function() {
-      expect(equals('foo', 'bar')).to.be.false
+      expect(equals(true, false)).to.be.false
     })
   })
 

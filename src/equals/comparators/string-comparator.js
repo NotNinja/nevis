@@ -22,30 +22,43 @@
 
 'use strict'
 
-var ArrayEqualsComparator = require('./array-comparator')
-var CollectionEqualsComparator = require('./collection-comparator')
 var EqualsComparator = require('./comparator')
-var HashEqualsComparator = require('./hash-comparator')
-var NumberEqualsComparator = require('./number-comparator')
-var ObjectEqualsComparator = require('./object-comparator')
-var StringEqualsComparator = require('./string-comparator')
-var ToStringEqualsComparator = require('./to-string-comparator')
-var ValueOfEqualsComparator = require('./value-of-comparator')
 
 /**
- * A hash containing constructors for all equals comparators.
+ * An implementation of {@link EqualsComparator} that supports string values.
  *
- * @public
- * @type {Object.<string, Function>}
+ * @protected
+ * @constructor
+ * @extends EqualsComparator
  */
-module.exports = {
-  ArrayEqualsComparator: ArrayEqualsComparator,
-  CollectionEqualsComparator: CollectionEqualsComparator,
-  EqualsComparator: EqualsComparator,
-  HashEqualsComparator: HashEqualsComparator,
-  NumberEqualsComparator: NumberEqualsComparator,
-  ObjectEqualsComparator: ObjectEqualsComparator,
-  StringEqualsComparator: StringEqualsComparator,
-  ToStringEqualsComparator: ToStringEqualsComparator,
-  ValueOfEqualsComparator: ValueOfEqualsComparator
-}
+var StringEqualsComparator = EqualsComparator.extend({
+
+  /**
+   * @inheritdoc
+   * @override
+   * @memberof StringEqualsComparator#
+   */
+  compare: function compare(context) {
+    var other = context.other
+    var value = context.value
+
+    if (context.options.ignoreCase) {
+      other = other.toLocaleUpperCase()
+      value = value.toLocaleUpperCase()
+    }
+
+    return value === other
+  },
+
+  /**
+   * @inheritdoc
+   * @override
+   * @memberof StringEqualsComparator#
+   */
+  supports: function supports(context) {
+    return context.type === 'string'
+  }
+
+})
+
+module.exports = StringEqualsComparator

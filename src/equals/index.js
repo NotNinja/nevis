@@ -33,6 +33,7 @@ var EqualsContext = require('./context')
  */
 var activeComparators = [
   new comparators.NumberEqualsComparator(),
+  new comparators.StringEqualsComparator(),
   new comparators.ToStringEqualsComparator(),
   new comparators.ValueOfEqualsComparator(),
   new comparators.ArrayEqualsComparator(),
@@ -137,6 +138,8 @@ module.exports = equals
  * @property {Nevis~EqualsFilterPropertyCallback} [filterProperty] - A function to be called to filter properties based
  * on their name and value when testing equality of objects to determine whether they should be tested. This is not
  * called for method properties when <code>skipMethods</code> is enabled.
+ * @property {boolean} [ignoreCase] - <code>true</code> to ignore case when testing equality for strings; otherwise
+ * <code>false</code>.
  * @property {boolean} [skipInherited] - <code>true</code> to skip inherited properties when testing equality for
  * objects; otherwise <code>false</code>.
  * @property {boolean} [skipMethods] - <code>true</code> to skip method properties when testing equality for objects;

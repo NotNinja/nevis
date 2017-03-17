@@ -106,7 +106,147 @@ only reference the constructor that is extended.
 
 ### Equality
 
-TODO: Document
+Nevis adds a means of testing whether an object is equal to another that's more advanced than just `==` or `===`.
+
+> Unavailable in *lite* version
+
+``` javascript
+Nevis.prototype.equals(obj)
+```
+
+Returns whether the instance is "equal to" the specified `obj`.
+
+This method implements an equivalence relation on non-null object references:
+
+* It is *reflexive*: for any non-null reference value `x`, `x.equals(x)` should return `true`.
+* It is *symmetric*: for any non-null reference values `x` and `y`, `x.equals(y)` should return `true` if and only if
+  `y.equals(x)` returns `true`.
+* It is *transitive*: for any non-null reference values `x`, `y`, and `z`, if `x.equals(y)` returns `true` and
+  `y.equals(z)` returns `true`, then `x.equals(z)` should return `true`.
+* It is *consistent*: for any non-null reference values `x` and `y`, multiple invocations of `x.equals(y)` consistently
+  return `true` or consistently return `false`, provided no information used in `equals` comparisons on the objects is
+  modified.
+* For any non-null reference value `x`, `x.equals(null)` should return `false`.
+
+The default implementation of this method is the most discriminating possible equivalence relation on objects; that is,
+for any non-null reference values `x` and `y`, this method returns `true` if, and only if, `x` and `y` are exactly equal
+(`x === y` has the value `true`).
+
+Please note that it is generally necessary to override the `Nevis.prototype.hashCode` method whenever this method is
+overridden, so as to maintain the general contract for the `Nevis.prototype.hashCode` method, which states that equal
+objects must have equal hash codes.
+
+``` javascript
+var Person = Nevis.extend('Person', function(name, age) {
+  this.name = name
+  this.age = age
+}, {
+  greet: function(name) {
+    return 'Hello ' + name + ', my name is ' + this.name
+  }
+})
+var bob = new Person('Bob', 58)
+var suzie = new Person('Suzie', 30)
+
+bob.equals(bob)
+//=> true
+bob.equals(new Person('Bob', 58))
+//=> false
+bob.equals(suzie)
+//=> false
+bob.equals(null)
+//=> false
+bob.equals(undefined)
+//=> false
+```
+
+Continue reading for information on how to create a good equals for complex classes using `Nevis.EqualsBuilder`.
+
+---
+
+Nevis also provides a null-safe static method for testing the equality of two values of any type.
+
+``` javascript
+Nevis.equals(value, other[, options])
+```
+
+Returns whether the specified `value` is "equal to" the `other` provided using the given `options`.
+
+Consequently, if both arguments are `null`, `true` is returned and if exactly one argument is `null`, `false` is
+returned. Otherwise, this method implements an equivalence relation on non-null object references in the same way as
+`Nevis.prototype.equals`.
+
+If neither value is `null` and both are not exactly (strictly) equal, this method will first check whether `value` has a
+method named "equals" and, if so, return the result of calling that method with `other` passed to it. If no "equals"
+method exists on `value` or if the `useEqualsMethod` option is disabled, it will attempt to test the equality internally
+based on their type.
+
+Plain objects are tested recursively for their properties and collections (e.g. arrays) are also tested recursively for
+their elements.
+
+The `options` parameter is entirely optional and supports the following:
+
+| Option            | Type     | Default | Description                                                                                                                                                         |
+| ----------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `filterProperty`  | Function | N/A     | A function to be called to filter properties for objects to determine whether they should be tested. Not called for method properties when `skipMethods` is `true`. |
+| `ignoreCase`      | Boolean  | `false` | Whether to ignore case when testing equality for strings.                                                                                                           |
+| `skipInherited`   | Boolean  | `false` | Whether to skip inherited properties when testing equality for objects.                                                                                             |
+| `skipMethods`     | Boolean  | `false` | Whether to skip method properties when testing equality for objects.                                                                                                |
+| `useEqualsMethod` | Boolean  | `true`  | Whether to return the result of calling the `equals` method on `value`, when present                                                                                |
+
+``` javascript
+var obj = {
+  foo: 'bar',
+  doSomething: function() {
+    return 123
+  }
+}
+
+Nevis.equals(obj, obj)
+//=> true
+Nevis.equals(obj, {
+  foo: 'bar',
+  doSomething: function() {
+    return 321
+  }
+})
+//=> false
+Nevis.equals(obj, {
+  foo: 'bar',
+  doSomething: function() {
+    return 321
+  }
+}, { skipMethods: true })
+//=> true
+Nevis.equals(bob, bob)
+//=> true
+Nevis.equals(bob, new Person('Bob', 58))
+//=> false
+Nevis.equals(bob, suzie)
+//=> false
+Nevis.equals('foo', 'foo')
+//=> true
+Nevis.equals('foo', 'FOO')
+//=> false
+Nevis.equals('foo', 'FOO', { ignoreCase: true })
+//=> true
+Nevis.equals(NaN, NaN)
+//=> true
+Nevis.equals(null, null)
+//=> true
+Nevis.equals(undefined, undefined)
+//=> true
+Nevis.equals(null, undefined)
+//=> false
+Nevis.equals(bob, null)
+//=> false
+Nevis.equals(bob, undefined)
+//=> false
+```
+
+---
+
+TODO: Document EqualsBuilder
 
 ### Hash Codes
 
@@ -123,14 +263,14 @@ Returns the hash code for the instance. This method is supported for the benefit
 The general contract of `hashCode` is: 
 
 * Whenever it is invoked on the same instance more than once during an execution of an application, the `hashCode`
-method must consistently return the same number, provided no information used to generate the hash code on the instance
-is modified. This number need not remain consistent from one execution of an application to another execution of the same
-application.
+  method must consistently return the same number, provided no information used to generate the hash code on the
+  instance is modified. This number need not remain consistent from one execution of an application to another execution
+  of the same application.
 * If two instances are equal, that calling the `hashCode` method on each of the two instances must produce the same
-number result.
+  number result.
 * It is not required that if two instances are unequal, that calling the `hashCode` method on each of the two instances
-must produce distinct number results. However, the programmer should be aware that producing distinct number results for
-unequal instances may improve the performance of hash tables.
+  must produce distinct number results. However, the programmer should be aware that producing distinct number results
+  for unequal instances may improve the performance of hash tables.
  
 The default implementation of this method will attempt to generate the hash code based on all of the fields on the
 instance. Please note that it is generally necessary to override the `Nevis.prototype.equals` method whenever this
@@ -151,10 +291,11 @@ bob.hashCode()
 //=> 201348816
 suzie.hashCode()
 //=> 281655185
-
 bob.hashCode() === new Person('Bob').hashCode()
 //=> true
 ```
+
+Continue reading for information on how to generate hash codes for complex classes using `Nevis.HashCodeBuilder`.
 
 ---
 
@@ -205,6 +346,10 @@ Nevis.hashCode(null)
 Nevis.hashCode(undefined)
 //=> 0
 ```
+
+---
+
+TODO: Document HashCodeBuilder
 
 ### String Representations
 

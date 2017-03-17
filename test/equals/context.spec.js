@@ -46,6 +46,7 @@ describe('equals/context:EqualsContext', function() {
         filterProperty: function() {
           return false
         },
+        ignoreCase: true,
         skipInherited: true,
         skipMethods: true,
         useEqualsMethod: false
@@ -84,6 +85,7 @@ describe('equals/context:EqualsContext', function() {
           filterProperty: function() {
             return false
           },
+          ignoreCase: true,
           skipInherited: true,
           skipMethods: true,
           useEqualsMethod: false
@@ -103,6 +105,7 @@ describe('equals/context:EqualsContext', function() {
         expect(ctx.options).to.be.an('object')
         expect(ctx.options.filterProperty).to.be.a('function')
         expect(ctx.options.filterProperty()).to.be.true
+        expect(ctx.options.ignoreCase).to.be.false
         expect(ctx.options.skipInherited).to.be.false
         expect(ctx.options.skipMethods).to.be.false
         expect(ctx.options.useEqualsMethod).to.be.true
