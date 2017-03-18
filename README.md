@@ -17,6 +17,7 @@
 
 * [Install](#install)
 * [API](#api)
+* [Why Nevis](#why-nevis)
 * [Migrating from Oopsy](#migrating-from-oopsy)
 * [Bugs](#bugs)
 * [Contributors](#contributors)
@@ -43,7 +44,7 @@ If you want to simply download the file to be used in the browser you can find t
 If you're only wanting support for inheritance, you can use the *lite* version instead:
 
 * [Development Version - Lite](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis-lite.js) (7.5kb)
-* [Production Version - Lite](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis-lite.min.js) (985b)
+* [Production Version - Lite](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis-lite.min.js) (980b)
 
 ## API
 
@@ -584,6 +585,11 @@ Nevis.toString(null)
 Nevis.toString(undefined)
 //=> "undefined"
 ```
+
+## Why Nevis?
+
+Because we are Scottish and it is named after [Ben Nevis](https://en.wikipedia.org/wiki/Ben_Nevis) since we felt like we
+conquered a mountain when creating this library.
 
 ## Migrating from Oopsy
 

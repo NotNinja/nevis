@@ -1,4 +1,4 @@
-## Version 0.3.0, YYYY.MM.DD
+## Version 0.3.0, 2017.03.18
 
 * Rename library to Nevis (**breaking change**)
 * Replace usage of ES6 modules with CommonJS (**breaking change**)
