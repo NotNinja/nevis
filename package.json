@@ -49,7 +49,7 @@
     "rollup-plugin-uglify": "^1.0.1",
     "sinon": "^2.0.0"
   },
-  "main": "src/index.js",
+  "main": "index.js",
   "browser": "dist/nevis.js",
   "scripts": {
     "build": "grunt build",
