@@ -17,7 +17,7 @@
 
 * [Install](#install)
 * [API](#api)
-* [Why Nevis](#why-nevis)
+* [Why Nevis?](#why-nevis)
 * [Migrating from Oopsy](#migrating-from-oopsy)
 * [Bugs](#bugs)
 * [Contributors](#contributors)
