@@ -4,7 +4,27 @@
     "node": true
   },
   "rules": {
+    "func-names": "off",
+    "max-params": [
+      "error",
+      4
+    ],
+    "no-bitwise": "off",
     "no-empty-function": "off",
-    "no-invalid-this": "off"
+    "no-inline-comments": "off",
+    "no-invalid-this": "off",
+    "no-unused-vars": [
+      "warn",
+      {
+        "args": "none"
+      }
+    ],
+    "no-use-before-define": [
+      "error",
+      {
+        "functions": false
+      }
+    ],
+    "sort-keys": "off"
   }
 }
