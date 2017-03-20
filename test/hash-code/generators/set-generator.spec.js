@@ -61,6 +61,7 @@ describe('hash-code/generators/set-generator:SetHashCodeGenerator', function() {
       expect(generator.supports(new HashCodeContext(new Date(), hashCode))).to.be.false
       expect(generator.supports(new HashCodeContext([ 'foo', 'bar' ], hashCode))).to.be.false
       expect(generator.supports(new HashCodeContext({ foo: 'bar' }, hashCode))).to.be.false
+      expect(generator.supports(new HashCodeContext(new Map(), hashCode))).to.be.false
     })
   })
 })

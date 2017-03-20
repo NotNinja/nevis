@@ -74,6 +74,7 @@ describe('equals/comparators/set-comparator:SetEqualsComparator', function() {
       expect(comparator.supports(new EqualsContext(new Date(), null, equals))).to.be.false
       expect(comparator.supports(new EqualsContext([ 'foo', 'bar' ], null, equals))).to.be.false
       expect(comparator.supports(new EqualsContext({ foo: 'bar' }, null, equals))).to.be.false
+      expect(comparator.supports(new EqualsContext(new Map(), null, equals))).to.be.false
     })
   })
 })

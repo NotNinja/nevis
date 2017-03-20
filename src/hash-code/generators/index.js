@@ -29,6 +29,7 @@ var CollectionHashCodeGenerator = require('./collection-generator')
 var DateHashCodeGenerator = require('./date-generator')
 var HashCodeGenerator = require('./generator')
 var HashHashCodeGenerator = require('./hash-generator')
+var MapHashCodeGenerator = require('./map-generator')
 var ObjectHashCodeGenerator = require('./object-generator')
 var SetHashCodeGenerator = require('./set-generator')
 var StringHashCodeGenerator = require('./string-generator')
@@ -48,6 +49,7 @@ module.exports = {
   DateHashCodeGenerator: DateHashCodeGenerator,
   HashCodeGenerator: HashCodeGenerator,
   HashHashCodeGenerator: HashHashCodeGenerator,
+  MapHashCodeGenerator: MapHashCodeGenerator,
   ObjectHashCodeGenerator: ObjectHashCodeGenerator,
   SetHashCodeGenerator: SetHashCodeGenerator,
   StringHashCodeGenerator: StringHashCodeGenerator,

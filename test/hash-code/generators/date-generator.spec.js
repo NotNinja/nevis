@@ -65,6 +65,7 @@ describe('hash-code/generators/date-generator:DateHashCodeGenerator', function()
       expect(generator.supports(new HashCodeContext(/foo/, hashCode))).to.be.false
       expect(generator.supports(new HashCodeContext([ 'foo', 'bar' ], hashCode))).to.be.false
       expect(generator.supports(new HashCodeContext({ foo: 'bar' }, hashCode))).to.be.false
+      expect(generator.supports(new HashCodeContext(new Map(), hashCode))).to.be.false
       expect(generator.supports(new HashCodeContext(new Set(), hashCode))).to.be.false
     })
   })

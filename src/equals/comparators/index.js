@@ -27,6 +27,7 @@ var CollectionEqualsComparator = require('./collection-comparator')
 var DateEqualsComparator = require('./date-comparator')
 var EqualsComparator = require('./comparator')
 var HashEqualsComparator = require('./hash-comparator')
+var MapEqualsComparator = require('./map-comparator')
 var NumberEqualsComparator = require('./number-comparator')
 var ObjectEqualsComparator = require('./object-comparator')
 var SetEqualsComparator = require('./set-comparator')
@@ -45,6 +46,7 @@ module.exports = {
   DateEqualsComparator: DateEqualsComparator,
   EqualsComparator: EqualsComparator,
   HashEqualsComparator: HashEqualsComparator,
+  MapEqualsComparator: MapEqualsComparator,
   NumberEqualsComparator: NumberEqualsComparator,
   ObjectEqualsComparator: ObjectEqualsComparator,
   SetEqualsComparator: SetEqualsComparator,

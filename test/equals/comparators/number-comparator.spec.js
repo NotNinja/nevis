@@ -88,6 +88,7 @@ describe('equals/comparators/number-comparator:NumberEqualsComparator', function
       expect(comparator.supports(new EqualsContext(new Date(), null, equals))).to.be.false
       expect(comparator.supports(new EqualsContext([ 'foo', 'bar' ], null, equals))).to.be.false
       expect(comparator.supports(new EqualsContext({ foo: 'bar' }, null, equals))).to.be.false
+      expect(comparator.supports(new EqualsContext(new Map(), null, equals))).to.be.false
       expect(comparator.supports(new EqualsContext(new Set(), null, equals))).to.be.false
     })
   })
