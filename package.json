@@ -53,6 +53,7 @@
   "browser": "dist/nevis.js",
   "scripts": {
     "build": "grunt build",
+    "ci": "grunt ci",
     "report-coverage": "grunt coveralls",
     "test": "grunt test"
   }
