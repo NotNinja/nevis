@@ -1,11 +1,11 @@
-                                         888b    888                   d8b             .d88  88b.
-                                         8888b   888                   Y8P            d88P"  "Y88b
-                                         88888b  888                                 d88P      Y88b
-    88888b.   .d88b.  888  888  888      888Y88b 888  .d88b.  888  888 888 .d8888b   888        888
-    888 "88b d8P  Y8b 888  888  888      888 Y88b888 d8P  Y8b 888  888 888 88K       888        888
-    888  888 88888888 888  888  888      888  Y88888 88888888 Y88  88P 888 "Y8888b.  Y88b      d88P
-    888  888 Y8b.     Y88b 888 d88P      888   Y8888 Y8b.      Y8bd8P  888      X88   Y88b.  .d88P
-    888  888  "Y8888   "Y8888888P"       888    Y888  "Y8888    Y88P   888  88888P'    "Y88  88P"
+    888b    888                   d8b
+    8888b   888                   Y8P
+    88888b  888
+    888Y88b 888  .d88b.  888  888 888 .d8888b
+    888 Y88b888 d8P  Y8b 888  888 888 88K
+    888  Y88888 88888888 Y88  88P 888 "Y8888b.
+    888   Y8888 Y8b.      Y8bd8P  888      X88
+    888    Y888  "Y8888    Y88P   888  88888P'
 
 [Nevis](https://github.com/Skelp/nevis) brings more of the Object-Orientated Programming (OOP) model to JavaScript.
 
