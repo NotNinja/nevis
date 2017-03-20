@@ -22,36 +22,46 @@
 
 'use strict'
 
-var arrays = require('../../util/arrays')
-var CollectionEqualsComparator = require('./collection-comparator')
+var HashEqualsComparator = require('./hash-comparator')
 
 /**
- * An implementation of {@link CollectionEqualsComparator} that supports array values.
+ * An implementation of {@link HashEqualsComparator} that supports map values.
+ *
+ * <code>MapEqualsComparator</code> ignores insertion order when comparing maps.
  *
  * @protected
  * @constructor
- * @extends CollectionEqualsComparator
+ * @extends HashEqualsComparator
  */
-var ArrayEqualsComparator = CollectionEqualsComparator.extend({
+var MapEqualsComparator = HashEqualsComparator.extend({
 
   /**
    * @inheritdoc
    * @override
-   * @memberof ArrayEqualsComparator#
+   * @memberof MapEqualsComparator#
    */
-  getElements: function getElements(collection) {
-    return collection
+  getKeys: function getKeys(hash) {
+    return Array.from(hash.keys())
   },
 
   /**
    * @inheritdoc
    * @override
-   * @memberof ArrayEqualsComparator#
+   * @memberof MapEqualsComparator#
+   */
+  getValue: function getValue(hash, key) {
+    return hash.get(key)
+  },
+
+  /**
+   * @inheritdoc
+   * @override
+   * @memberof MapEqualsComparator#
    */
   supports: function supports(context) {
-    return arrays.typeStrings.indexOf(context.string) >= 0
+    return context.string === '[object Map]'
   }
 
 })
 
-module.exports = ArrayEqualsComparator
+module.exports = MapEqualsComparator

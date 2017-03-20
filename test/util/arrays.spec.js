@@ -22,36 +22,25 @@
 
 'use strict'
 
-var arrays = require('../../util/arrays')
-var CollectionEqualsComparator = require('./collection-comparator')
+var expect = require('chai').expect
 
-/**
- * An implementation of {@link CollectionEqualsComparator} that supports array values.
- *
- * @protected
- * @constructor
- * @extends CollectionEqualsComparator
- */
-var ArrayEqualsComparator = CollectionEqualsComparator.extend({
+var arrays = require('../../src/util/arrays')
 
-  /**
-   * @inheritdoc
-   * @override
-   * @memberof ArrayEqualsComparator#
-   */
-  getElements: function getElements(collection) {
-    return collection
-  },
-
-  /**
-   * @inheritdoc
-   * @override
-   * @memberof ArrayEqualsComparator#
-   */
-  supports: function supports(context) {
-    return arrays.typeStrings.indexOf(context.string) >= 0
-  }
-
+describe('util/util/arrays', function() {
+  describe('.typeStrings', function() {
+    it('should contain all array type strings', function() {
+      expect(arrays.typeStrings).to.deep.equal([
+        '[object Array]',
+        '[object Int8Array]',
+        '[object Uint8Array]',
+        '[object Uint8ClampedArray]',
+        '[object Int16Array]',
+        '[object Uint16Array]',
+        '[object Int32Array]',
+        '[object Uint32Array]',
+        '[object Float32Array]',
+        '[object Float64Array]'
+      ])
+    })
+  })
 })
-
-module.exports = ArrayEqualsComparator

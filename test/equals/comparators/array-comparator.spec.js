@@ -45,6 +45,9 @@ describe('equals/comparators/array-comparator:ArrayEqualsComparator', function()
       it('should return true', function() {
         expect(comparator.compare(new EqualsContext([], [], equals))).to.be.true
         expect(comparator.compare(new EqualsContext([ 'foo', 'bar', 123 ], [ 'foo', 'bar', 123 ], equals))).to.be.true
+        expect(comparator.compare(new EqualsContext(new Int8Array(), new Int8Array(), equals))).to.be.true
+        expect(comparator.compare(new EqualsContext(new Int8Array([ 123, 321 ]), new Int8Array([ 123, 321 ]), equals)))
+          .to.be.true
       })
     })
 
@@ -53,6 +56,9 @@ describe('equals/comparators/array-comparator:ArrayEqualsComparator', function()
         expect(comparator.compare(new EqualsContext([], [ 'foo', 'bar', 123 ], equals))).to.be.false
         expect(comparator.compare(new EqualsContext([ 'foo', 'bar', 123 ], [ 'fu', 'baz', 321 ], equals))).to.be.false
         expect(comparator.compare(new EqualsContext([ 'foo', 'bar', 123 ], [ 123, 'bar', 'foo' ], equals))).to.be.false
+        expect(comparator.compare(new EqualsContext(new Int8Array(), new Int8Array([ 123, 321 ]), equals))).to.be.false
+        expect(comparator.compare(new EqualsContext(new Int8Array([ 123, 321 ]), new Int8Array([ 321, 123 ]), equals)))
+          .to.be.false
       })
     })
   })
@@ -60,6 +66,15 @@ describe('equals/comparators/array-comparator:ArrayEqualsComparator', function()
   describe('#supports', function() {
     it('should return true for array values', function() {
       expect(comparator.supports(new EqualsContext([], null, equals))).to.be.true
+      expect(comparator.supports(new EqualsContext(new Int8Array(), null, equals))).to.be.true
+      expect(comparator.supports(new EqualsContext(new Uint8Array(), null, equals))).to.be.true
+      expect(comparator.supports(new EqualsContext(new Uint8ClampedArray(), null, equals))).to.be.true
+      expect(comparator.supports(new EqualsContext(new Int16Array(), null, equals))).to.be.true
+      expect(comparator.supports(new EqualsContext(new Uint16Array(), null, equals))).to.be.true
+      expect(comparator.supports(new EqualsContext(new Int32Array(), null, equals))).to.be.true
+      expect(comparator.supports(new EqualsContext(new Uint32Array(), null, equals))).to.be.true
+      expect(comparator.supports(new EqualsContext(new Float32Array(), null, equals))).to.be.true
+      expect(comparator.supports(new EqualsContext(new Float64Array(), null, equals))).to.be.true
     })
 
     it('should return false for other values', function() {
@@ -70,6 +85,8 @@ describe('equals/comparators/array-comparator:ArrayEqualsComparator', function()
       expect(comparator.supports(new EqualsContext(/foo/, null, equals))).to.be.false
       expect(comparator.supports(new EqualsContext(new Date(), null, equals))).to.be.false
       expect(comparator.supports(new EqualsContext({ foo: 'bar' }, null, equals))).to.be.false
+      expect(comparator.supports(new EqualsContext(new Map(), null, equals))).to.be.false
+      expect(comparator.supports(new EqualsContext(new Set(), null, equals))).to.be.false
     })
   })
 })

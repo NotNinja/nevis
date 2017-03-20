@@ -24,69 +24,57 @@
 
 var expect = require('chai').expect
 
+var CollectionEqualsComparator = require('../../../src/equals/comparators/collection-comparator')
 var equals = require('../../../src/equals/index')
 var EqualsContext = require('../../../src/equals/context')
-var EqualsComparator = require('../../../src/equals/comparators/comparator')
-var StringEqualsComparator = require('../../../src/equals/comparators/string-comparator')
+var SetEqualsComparator = require('../../../src/equals/comparators/set-comparator')
 
-describe('equals/comparators/string-comparator:StringEqualsComparator', function() {
+describe('equals/comparators/set-comparator:SetEqualsComparator', function() {
   var comparator
 
   before(function() {
-    comparator = new StringEqualsComparator()
+    comparator = new SetEqualsComparator()
   })
 
-  it('should be a EqualsComparator', function() {
-    expect(comparator).to.be.an.instanceof(EqualsComparator)
+  it('should be a CollectionEqualsComparator', function() {
+    expect(comparator).to.be.an.instanceof(CollectionEqualsComparator)
   })
 
   describe('#compare', function() {
-    context('when string values are equal', function() {
+    context('when set values are equal', function() {
       it('should return true', function() {
-        expect(comparator.compare(new EqualsContext('', '', equals))).to.be.true
-        expect(comparator.compare(new EqualsContext('  ', '  ', equals))).to.be.true
-        expect(comparator.compare(new EqualsContext('foo', 'foo', equals))).to.be.true
-        expect(comparator.compare(new EqualsContext('FOO', 'FOO', equals))).to.be.true
-        expect(comparator.compare(new EqualsContext('  foo  ', '  foo  ', equals))).to.be.true
+        expect(comparator.compare(new EqualsContext(new Set(), new Set(), equals))).to.be.true
+        expect(comparator.compare(new EqualsContext(new Set([ 'foo', 'bar', 123 ]), new Set([ 'foo', 'bar', 123 ]),
+          equals))).to.be.true
       })
     })
 
-    context('when string values are not equal', function() {
+    context('when set values are not equal', function() {
       it('should return false', function() {
-        expect(comparator.compare(new EqualsContext('', '  ', equals))).to.be.false
-        expect(comparator.compare(new EqualsContext('', 'foo', equals))).to.be.false
-        expect(comparator.compare(new EqualsContext('foo', 'bar', equals))).to.be.false
-        expect(comparator.compare(new EqualsContext('foo', 'FOO', equals))).to.be.false
-        expect(comparator.compare(new EqualsContext('foo', '  foo  ', equals))).to.be.false
-      })
-    })
-
-    context('when "ignoreCase" option is enabled', function() {
-      it('should ignore case when comparing string values', function() {
-        expect(comparator.compare(new EqualsContext('foo', 'FOO', equals, { ignoreCase: true }))).to.be.true
-        expect(comparator.compare(new EqualsContext('FOO', 'FOO', equals, { ignoreCase: true }))).to.be.true
-        expect(comparator.compare(new EqualsContext('foo', 'BAR', equals, { ignoreCase: true }))).to.be.false
-        expect(comparator.compare(new EqualsContext('foo', '  FOO  ', equals, { ignoreCase: true }))).to.be.false
+        expect(comparator.compare(new EqualsContext(new Set(), new Set([ 'foo', 'bar', 123 ]), equals))).to.be.false
+        expect(comparator.compare(new EqualsContext(new Set([ 'foo', 'bar', 123 ]), new Set([ 'fu', 'baz', 321 ]),
+          equals))).to.be.false
+        expect(comparator.compare(new EqualsContext(new Set([ 'foo', 'bar', 123 ]), new Set([ 123, 'bar', 'foo' ]),
+          equals))).to.be.false
       })
     })
   })
 
   describe('#supports', function() {
-    it('should return true for string values', function() {
-      expect(comparator.supports(new EqualsContext('', null, equals))).to.be.true
-      expect(comparator.supports(new EqualsContext('foo', null, equals))).to.be.true
+    it('should return true for set values', function() {
+      expect(comparator.supports(new EqualsContext(new Set(), null, equals))).to.be.true
     })
 
     it('should return false for other values', function() {
       expect(comparator.supports(new EqualsContext(true, null, equals))).to.be.false
       expect(comparator.supports(new EqualsContext(123, null, equals))).to.be.false
+      expect(comparator.supports(new EqualsContext('foo', null, equals))).to.be.false
       expect(comparator.supports(new EqualsContext(function foo() {}, null, equals))).to.be.false
       expect(comparator.supports(new EqualsContext(/foo/, null, equals))).to.be.false
       expect(comparator.supports(new EqualsContext(new Date(), null, equals))).to.be.false
       expect(comparator.supports(new EqualsContext([ 'foo', 'bar' ], null, equals))).to.be.false
       expect(comparator.supports(new EqualsContext({ foo: 'bar' }, null, equals))).to.be.false
       expect(comparator.supports(new EqualsContext(new Map(), null, equals))).to.be.false
-      expect(comparator.supports(new EqualsContext(new Set(), null, equals))).to.be.false
     })
   })
 })

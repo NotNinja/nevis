@@ -134,4 +134,3 @@ describe('equals/comparators/object-comparator:ObjectEqualsComparator', function
     })
   })
 })
-

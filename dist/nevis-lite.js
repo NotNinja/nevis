@@ -60,7 +60,7 @@
    */
   function createObject(prototype, properties) {
     var result;
-    /* istanbul ignore else */
+    /* istanbul ignore next */
     if (typeof Object.create === 'function') {
       result = Object.create(prototype);
     } else {

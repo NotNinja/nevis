@@ -180,7 +180,8 @@ module.exports = function(grunt) {
 
   require('load-grunt-tasks')(grunt)
 
-  grunt.registerTask('default', [ 'eslint', 'clean', 'rollup', 'mocha_istanbul' ])
+  grunt.registerTask('default', [ 'ci' ])
   grunt.registerTask('build', [ 'eslint', 'clean:build', 'rollup' ])
+  grunt.registerTask('ci', [ 'eslint', 'clean', 'rollup', 'mocha_istanbul' ])
   grunt.registerTask('test', [ 'eslint', 'clean:test', 'mocha_istanbul' ])
 }

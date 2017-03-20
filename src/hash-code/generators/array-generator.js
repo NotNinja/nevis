@@ -22,6 +22,7 @@
 
 'use strict'
 
+var arrays = require('../../util/arrays')
 var CollectionHashCodeGenerator = require('./collection-generator')
 
 /**
@@ -48,7 +49,7 @@ var ArrayHashCodeGenerator = CollectionHashCodeGenerator.extend({
    * @memberof ArrayHashCodeGenerator#
    */
   supports: function support(context) {
-    return context.string === '[object Array]'
+    return arrays.typeStrings.indexOf(context.string) >= 0
   }
 
 })

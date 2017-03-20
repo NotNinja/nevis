@@ -22,36 +22,35 @@
 
 'use strict'
 
-var arrays = require('../../util/arrays')
 var CollectionEqualsComparator = require('./collection-comparator')
 
 /**
- * An implementation of {@link CollectionEqualsComparator} that supports array values.
+ * An implementation of {@link CollectionEqualsComparator} that supports set values.
  *
  * @protected
  * @constructor
  * @extends CollectionEqualsComparator
  */
-var ArrayEqualsComparator = CollectionEqualsComparator.extend({
+var SetEqualsComparator = CollectionEqualsComparator.extend({
 
   /**
    * @inheritdoc
    * @override
-   * @memberof ArrayEqualsComparator#
+   * @memberof SetEqualsComparator#
    */
   getElements: function getElements(collection) {
-    return collection
+    return Array.from(collection)
   },
 
   /**
    * @inheritdoc
    * @override
-   * @memberof ArrayEqualsComparator#
+   * @memberof SetEqualsComparator#
    */
   supports: function supports(context) {
-    return arrays.typeStrings.indexOf(context.string) >= 0
+    return context.string === '[object Set]'
   }
 
 })
 
-module.exports = ArrayEqualsComparator
+module.exports = SetEqualsComparator

@@ -37,6 +37,8 @@ var activeComparators = [
   new comparators.DateEqualsComparator(),
   new comparators.ToStringEqualsComparator(),
   new comparators.ArrayEqualsComparator(),
+  new comparators.SetEqualsComparator(),
+  new comparators.MapEqualsComparator(),
   new comparators.ObjectEqualsComparator()
 ]
 

@@ -22,36 +22,35 @@
 
 'use strict'
 
-var arrays = require('../../util/arrays')
-var CollectionEqualsComparator = require('./collection-comparator')
+var CollectionHashCodeGenerator = require('./collection-generator')
 
 /**
- * An implementation of {@link CollectionEqualsComparator} that supports array values.
+ * An implementation of {@link CollectionHashCodeGenerator} that supports set values.
  *
  * @protected
  * @constructor
- * @extends CollectionEqualsComparator
+ * @extends CollectionHashCodeGenerator
  */
-var ArrayEqualsComparator = CollectionEqualsComparator.extend({
+var SetHashCodeGenerator = CollectionHashCodeGenerator.extend({
 
   /**
    * @inheritdoc
    * @override
-   * @memberof ArrayEqualsComparator#
+   * @memberof SetHashCodeGenerator#
    */
-  getElements: function getElements(collection) {
-    return collection
+  getElements: function getElements(context) {
+    return Array.from(context.value)
   },
 
   /**
    * @inheritdoc
    * @override
-   * @memberof ArrayEqualsComparator#
+   * @memberof SetHashCodeGenerator#
    */
-  supports: function supports(context) {
-    return arrays.typeStrings.indexOf(context.string) >= 0
+  supports: function support(context) {
+    return context.string === '[object Set]'
   }
 
 })
 
-module.exports = ArrayEqualsComparator
+module.exports = SetHashCodeGenerator
