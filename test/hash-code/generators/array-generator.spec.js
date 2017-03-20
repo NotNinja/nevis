@@ -22,6 +22,8 @@
 
 'use strict'
 
+/* eslint-env es6 */
+
 var expect = require('chai').expect
 
 var ArrayHashCodeGenerator = require('../../../src/hash-code/generators/array-generator')
@@ -44,12 +46,22 @@ describe('hash-code/generators/array-generator:ArrayHashCodeGenerator', function
     it('should generate hash code for array values', function() {
       expect(generator.generate(new HashCodeContext([], hashCode))).to.equal(1)
       expect(generator.generate(new HashCodeContext([ 'foo', 123 ], hashCode))).to.equal(3198445)
+      expect(generator.generate(new HashCodeContext(new Int8Array([ 123, 321 ]), hashCode))).to.equal(1512078)
     })
   })
 
   describe('#supports', function() {
     it('should return true for array values', function() {
       expect(generator.supports(new HashCodeContext([], hashCode))).to.be.true
+      expect(generator.supports(new HashCodeContext(new Int8Array(), hashCode))).to.be.true
+      expect(generator.supports(new HashCodeContext(new Uint8Array(), hashCode))).to.be.true
+      expect(generator.supports(new HashCodeContext(new Uint8ClampedArray(), hashCode))).to.be.true
+      expect(generator.supports(new HashCodeContext(new Int16Array(), hashCode))).to.be.true
+      expect(generator.supports(new HashCodeContext(new Uint16Array(), hashCode))).to.be.true
+      expect(generator.supports(new HashCodeContext(new Int32Array(), hashCode))).to.be.true
+      expect(generator.supports(new HashCodeContext(new Uint32Array(), hashCode))).to.be.true
+      expect(generator.supports(new HashCodeContext(new Float32Array(), hashCode))).to.be.true
+      expect(generator.supports(new HashCodeContext(new Float64Array(), hashCode))).to.be.true
     })
 
     it('should return false for other values', function() {
