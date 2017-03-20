@@ -37,7 +37,8 @@ var activeGenerators = [
   new generators.StringHashCodeGenerator(),
   new generators.DateHashCodeGenerator(),
   new generators.ToStringHashCodeGenerator(),
-  new generators.ArrayHashCodeGenerator()
+  new generators.ArrayHashCodeGenerator(),
+  new generators.SetHashCodeGenerator()
 ]
 
 /**

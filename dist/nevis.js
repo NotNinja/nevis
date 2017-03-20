@@ -554,6 +554,37 @@
   var objectComparator = ObjectEqualsComparator;
 
   /**
+   * An implementation of {@link CollectionEqualsComparator} that supports set values.
+   *
+   * @protected
+   * @constructor
+   * @extends CollectionEqualsComparator
+   */
+  var SetEqualsComparator = collectionComparator.extend({
+
+    /**
+     * @inheritdoc
+     * @override
+     * @memberof SetEqualsComparator#
+     */
+    getElements: function getElements(collection) {
+      return Array.from(collection)
+    },
+
+    /**
+     * @inheritdoc
+     * @override
+     * @memberof SetEqualsComparator#
+     */
+    supports: function supports(context) {
+      return context.string === '[object Set]'
+    }
+
+  });
+
+  var setComparator = SetEqualsComparator;
+
+  /**
    * An implementation of {@link EqualsComparator} that supports string values.
    *
    * @protected
@@ -640,6 +671,7 @@
     HashEqualsComparator: hashComparator,
     NumberEqualsComparator: numberComparator,
     ObjectEqualsComparator: objectComparator,
+    SetEqualsComparator: setComparator,
     StringEqualsComparator: stringComparator,
     ToStringEqualsComparator: toStringComparator
   };
@@ -809,6 +841,7 @@
     new index$6.DateEqualsComparator(),
     new index$6.ToStringEqualsComparator(),
     new index$6.ArrayEqualsComparator(),
+    new index$6.SetEqualsComparator(),
     new index$6.ObjectEqualsComparator()
   ];
 
@@ -1365,6 +1398,37 @@
   var objectGenerator = ObjectHashCodeGenerator;
 
   /**
+   * An implementation of {@link CollectionHashCodeGenerator} that supports set values.
+   *
+   * @protected
+   * @constructor
+   * @extends CollectionHashCodeGenerator
+   */
+  var SetHashCodeGenerator = collectionGenerator.extend({
+
+    /**
+     * @inheritdoc
+     * @override
+     * @memberof SetHashCodeGenerator#
+     */
+    getElements: function getElements(context) {
+      return Array.from(context.value)
+    },
+
+    /**
+     * @inheritdoc
+     * @override
+     * @memberof SetHashCodeGenerator#
+     */
+    supports: function support(context) {
+      return context.string === '[object Set]'
+    }
+
+  });
+
+  var setGenerator = SetHashCodeGenerator;
+
+  /**
    * An implementation of {@link CachingHashCodeGenerator} that supports string values.
    *
    * @protected
@@ -1451,6 +1515,7 @@
     HashCodeGenerator: generator,
     HashHashCodeGenerator: hashGenerator,
     ObjectHashCodeGenerator: objectGenerator,
+    SetHashCodeGenerator: setGenerator,
     StringHashCodeGenerator: stringGenerator,
     ToStringHashCodeGenerator: toStringGenerator
   };
@@ -1589,7 +1654,8 @@
     new index$10.StringHashCodeGenerator(),
     new index$10.DateHashCodeGenerator(),
     new index$10.ToStringHashCodeGenerator(),
-    new index$10.ArrayHashCodeGenerator()
+    new index$10.ArrayHashCodeGenerator(),
+    new index$10.SetHashCodeGenerator()
   ];
 
   /**

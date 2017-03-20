@@ -24,42 +24,45 @@
 
 var expect = require('chai').expect
 
-var DateEqualsComparator = require('../../../src/equals/comparators/date-comparator')
+var CollectionEqualsComparator = require('../../../src/equals/comparators/collection-comparator')
 var equals = require('../../../src/equals/index')
 var EqualsContext = require('../../../src/equals/context')
-var EqualsComparator = require('../../../src/equals/comparators/comparator')
+var SetEqualsComparator = require('../../../src/equals/comparators/set-comparator')
 
-describe('equals/comparators/date-comparator:DateEqualsComparator', function() {
+describe('equals/comparators/set-comparator:SetEqualsComparator', function() {
   var comparator
 
   before(function() {
-    comparator = new DateEqualsComparator()
+    comparator = new SetEqualsComparator()
   })
 
-  it('should be a EqualsComparator', function() {
-    expect(comparator).to.be.an.instanceof(EqualsComparator)
+  it('should be a CollectionEqualsComparator', function() {
+    expect(comparator).to.be.an.instanceof(CollectionEqualsComparator)
   })
 
   describe('#compare', function() {
-    context('when date values are equal', function() {
+    context('when set values are equal', function() {
       it('should return true', function() {
-        var date = new Date()
-
-        expect(comparator.compare(new EqualsContext(date, new Date(date.getTime()), equals))).to.be.true
-        expect(comparator.compare(new EqualsContext(new Date(0), new Date(0), equals))).to.be.true
+        expect(comparator.compare(new EqualsContext(new Set(), new Set(), equals))).to.be.true
+        expect(comparator.compare(new EqualsContext(new Set([ 'foo', 'bar', 123 ]), new Set([ 'foo', 'bar', 123 ]),
+          equals))).to.be.true
       })
     })
 
-    context('when date values are not equal', function() {
+    context('when set values are not equal', function() {
       it('should return false', function() {
-        expect(comparator.compare(new EqualsContext(new Date(), new Date(0), equals))).to.be.false
+        expect(comparator.compare(new EqualsContext(new Set(), new Set([ 'foo', 'bar', 123 ]), equals))).to.be.false
+        expect(comparator.compare(new EqualsContext(new Set([ 'foo', 'bar', 123 ]), new Set([ 'fu', 'baz', 321 ]),
+          equals))).to.be.false
+        expect(comparator.compare(new EqualsContext(new Set([ 'foo', 'bar', 123 ]), new Set([ 123, 'bar', 'foo' ]),
+          equals))).to.be.false
       })
     })
   })
 
   describe('#supports', function() {
-    it('should return true for date values', function() {
-      expect(comparator.supports(new EqualsContext(new Date(), null, equals))).to.be.true
+    it('should return true for set values', function() {
+      expect(comparator.supports(new EqualsContext(new Set(), null, equals))).to.be.true
     })
 
     it('should return false for other values', function() {
@@ -68,9 +71,9 @@ describe('equals/comparators/date-comparator:DateEqualsComparator', function() {
       expect(comparator.supports(new EqualsContext('foo', null, equals))).to.be.false
       expect(comparator.supports(new EqualsContext(function foo() {}, null, equals))).to.be.false
       expect(comparator.supports(new EqualsContext(/foo/, null, equals))).to.be.false
+      expect(comparator.supports(new EqualsContext(new Date(), null, equals))).to.be.false
       expect(comparator.supports(new EqualsContext([ 'foo', 'bar' ], null, equals))).to.be.false
       expect(comparator.supports(new EqualsContext({ foo: 'bar' }, null, equals))).to.be.false
-      expect(comparator.supports(new EqualsContext(new Set(), null, equals))).to.be.false
     })
   })
 })

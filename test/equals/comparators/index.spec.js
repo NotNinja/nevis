@@ -32,6 +32,7 @@ var DateEqualsComparator = require('../../../src/equals/comparators/date-compara
 var HashEqualsComparator = require('../../../src/equals/comparators/hash-comparator')
 var NumberEqualsComparator = require('../../../src/equals/comparators/number-comparator')
 var ObjectEqualsComparator = require('../../../src/equals/comparators/object-comparator')
+var SetEqualsComparator = require('../../../src/equals/comparators/set-comparator')
 var StringEqualsComparator = require('../../../src/equals/comparators/string-comparator')
 var ToStringEqualsComparator = require('../../../src/equals/comparators/to-string-comparator')
 
@@ -45,6 +46,7 @@ describe('equals/comparators/index', function() {
       HashEqualsComparator: HashEqualsComparator,
       NumberEqualsComparator: NumberEqualsComparator,
       ObjectEqualsComparator: ObjectEqualsComparator,
+      SetEqualsComparator: SetEqualsComparator,
       StringEqualsComparator: StringEqualsComparator,
       ToStringEqualsComparator: ToStringEqualsComparator
     })

@@ -22,32 +22,35 @@
 
 'use strict'
 
-var ArrayEqualsComparator = require('./array-comparator')
 var CollectionEqualsComparator = require('./collection-comparator')
-var DateEqualsComparator = require('./date-comparator')
-var EqualsComparator = require('./comparator')
-var HashEqualsComparator = require('./hash-comparator')
-var NumberEqualsComparator = require('./number-comparator')
-var ObjectEqualsComparator = require('./object-comparator')
-var SetEqualsComparator = require('./set-comparator')
-var StringEqualsComparator = require('./string-comparator')
-var ToStringEqualsComparator = require('./to-string-comparator')
 
 /**
- * A hash containing constructors for all equals comparators.
+ * An implementation of {@link CollectionEqualsComparator} that supports set values.
  *
- * @public
- * @type {Object.<string, Function>}
+ * @protected
+ * @constructor
+ * @extends CollectionEqualsComparator
  */
-module.exports = {
-  ArrayEqualsComparator: ArrayEqualsComparator,
-  CollectionEqualsComparator: CollectionEqualsComparator,
-  DateEqualsComparator: DateEqualsComparator,
-  EqualsComparator: EqualsComparator,
-  HashEqualsComparator: HashEqualsComparator,
-  NumberEqualsComparator: NumberEqualsComparator,
-  ObjectEqualsComparator: ObjectEqualsComparator,
-  SetEqualsComparator: SetEqualsComparator,
-  StringEqualsComparator: StringEqualsComparator,
-  ToStringEqualsComparator: ToStringEqualsComparator
-}
+var SetEqualsComparator = CollectionEqualsComparator.extend({
+
+  /**
+   * @inheritdoc
+   * @override
+   * @memberof SetEqualsComparator#
+   */
+  getElements: function getElements(collection) {
+    return Array.from(collection)
+  },
+
+  /**
+   * @inheritdoc
+   * @override
+   * @memberof SetEqualsComparator#
+   */
+  supports: function supports(context) {
+    return context.string === '[object Set]'
+  }
+
+})
+
+module.exports = SetEqualsComparator
