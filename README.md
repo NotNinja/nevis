@@ -38,13 +38,13 @@ You'll need to have at least [Node.js](https://nodejs.org). While equals should 
 
 If you want to simply download the file to be used in the browser you can find them below:
 
-* [Development Version](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis.js) (77kb)
-* [Production Version](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis.min.js) (8.3kb)
+* [Development Version](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis.js) (81kb)
+* [Production Version](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis.min.js) (9.2kb - [Source Map](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis.min.js.map))
 
 If you're only wanting support for inheritance, you can use the *lite* version instead:
 
 * [Development Version - Lite](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis-lite.js) (7.5kb)
-* [Production Version - Lite](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis-lite.min.js) (980b)
+* [Production Version - Lite](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis-lite.min.js) (980b - [Source Map](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis-lite.min.js.map))
 
 ## API
 

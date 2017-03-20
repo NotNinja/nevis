@@ -1,3 +1,10 @@
+## Version 0.4.0, 2017.03.20
+
+* Support es2015 maps [#7](https://github.com/Skelp/nevis/issues/7)
+* Support es2015 sets [#8](https://github.com/Skelp/nevis/issues/8)
+* Support es2015 typed arrays [#9](https://github.com/Skelp/nevis/issues/9)
+* Add new script for testing on CI [#10](https://github.com/Skelp/nevis/issues/10)
+
 ## Version 0.3.0, 2017.03.18
 
 * Rename library to Nevis (**breaking change**)
