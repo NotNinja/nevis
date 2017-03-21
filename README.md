@@ -11,7 +11,7 @@
 
 [![Build Status](https://img.shields.io/travis/Skelp/nevis/develop.svg?style=flat-square)](https://travis-ci.org/Skelp/nevis)
 [![Coverage](https://img.shields.io/coveralls/Skelp/nevis/develop.svg?style=flat-square)](https://coveralls.io/github/Skelp/nevis)
-[![Dev Dependency Status](https://img.shields.io/david/dev/Skelp/nevis.svg?style=flat-square)](https://david-dm.org/Skelp/nevis#info=devDependencies)
+[![Dev Dependency Status](https://img.shields.io/david/dev/Skelp/nevis.svg?style=flat-square)](https://david-dm.org/Skelp/nevis?type=dev)
 [![License](https://img.shields.io/npm/l/nevis.svg?style=flat-square)](https://github.com/Skelp/nevis/blob/master/LICENSE.md)
 [![Release](https://img.shields.io/npm/v/nevis.svg?style=flat-square)](https://www.npmjs.com/package/nevis)
 
@@ -33,7 +33,8 @@ $ npm install --save nevis
 $ bower install --save nevis
 ```
 
-You'll need to have at least [Node.js](https://nodejs.org). While equals should be compatible with all versions of
+You'll need to have at least [Node.js](https://nodejs.org) and you'll only need [Bower](https://bower.io) if you want to
+install that way instead of using `npm`. While equals should be compatible with all versions of
 [Node.js](https://nodejs.org), it is only tested against version 4 and above.
 
 If you want to simply download the file to be used in the browser you can find them below:
@@ -616,4 +617,4 @@ A list of Nevis contributors can be found in [AUTHORS.md](https://github.com/Ske
 
 See [LICENSE.md](https://github.com/Skelp/nevis/raw/master/LICENSE.md) for more information on our MIT license.
 
-[![Copyright Skelp](https://rawgit.com/Skelp/skelp-branding/master/assets/footer/invert-filled/skelp-footer-invert-filled.svg)](https://skelp.io)
+[![Copyright Skelp](https://cdn.rawgit.com/Skelp/skelp-branding/master/assets/footer/invert-filled/skelp-footer-invert-filled.svg)](https://skelp.io)
