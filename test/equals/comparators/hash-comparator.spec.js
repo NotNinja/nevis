@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,116 +20,116 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var expect = require('chai').expect
+var expect = require('chai').expect;
 
-var equals = require('../../../src/equals/index')
-var EqualsContext = require('../../../src/equals/context')
-var EqualsComparator = require('../../../src/equals/comparators/comparator')
-var HashEqualsComparator = require('../../../src/equals/comparators/hash-comparator')
+var equals = require('../../../src/equals/index');
+var EqualsContext = require('../../../src/equals/context');
+var EqualsComparator = require('../../../src/equals/comparators/comparator');
+var HashEqualsComparator = require('../../../src/equals/comparators/hash-comparator');
 
 describe('equals/comparators/hash-comparator:HashEqualsComparator', function() {
-  var comparator
+  var comparator;
 
   before(function() {
     var TestComparator = HashEqualsComparator.extend({
       getKeys: function(hash) {
         return hash().map(function(entry) {
-          return entry[0]
-        })
+          return entry[0];
+        });
       },
       getValue: function(hash, key) {
         var match = hash().find(function(entry) {
-          return entry[0] === key
-        })
+          return entry[0] === key;
+        });
 
-        return match && match[1]
+        return match && match[1];
       }
-    })
+    });
 
-    comparator = new TestComparator()
-  })
+    comparator = new TestComparator();
+  });
 
   it('should be a EqualsComparator', function() {
-    expect(comparator).to.be.an.instanceof(EqualsComparator)
-  })
+    expect(comparator).to.be.an.instanceof(EqualsComparator);
+  });
 
   describe('#compare', function() {
     context('when hash values are equal', function() {
       it('should return true', function() {
         expect(comparator.compare(new EqualsContext(function() {
-          return []
+          return [];
         }, function() {
-          return []
-        }, equals))).to.be.true
+          return [];
+        }, equals))).to.be.true;
         expect(comparator.compare(new EqualsContext(function() {
           return [
             [ 'foo', 'bar' ],
             [ 'fu', 'baz' ]
-          ]
+          ];
         }, function() {
           return [
             [ 'foo', 'bar' ],
             [ 'fu', 'baz' ]
-          ]
-        }, equals))).to.be.true
-      })
-    })
+          ];
+        }, equals))).to.be.true;
+      });
+    });
 
     context('when hash values are not equal', function() {
       it('should return false', function() {
         expect(comparator.compare(new EqualsContext(function() {
-          return []
+          return [];
         }, function() {
           return [
             [ 'foo', 'bar' ]
-          ]
-        }, equals))).to.be.false
+          ];
+        }, equals))).to.be.false;
         expect(comparator.compare(new EqualsContext(function() {
           return [
             [ 'foo', 'bar' ]
-          ]
+          ];
         }, function() {
           return [
             [ 'bar', 'foo' ]
-          ]
-        }, equals))).to.be.false
+          ];
+        }, equals))).to.be.false;
         expect(comparator.compare(new EqualsContext(function() {
           return [
             [ 'foo', 'bar' ],
             [ 'fu', 'baz' ]
-          ]
+          ];
         }, function() {
           return [
             [ 'fu', 'baz' ]
-          ]
-        }, equals))).to.be.false
+          ];
+        }, equals))).to.be.false;
         expect(comparator.compare(new EqualsContext(function() {
           return [
             [ 'foo', 'bar' ],
             [ 'fu', 'baz' ]
-          ]
+          ];
         }, function() {
           return [
             [ 'fizz', 'buzz' ],
             [ 'quux', 123 ]
-          ]
-        }, equals))).to.be.false
-      })
-    })
-  })
+          ];
+        }, equals))).to.be.false;
+      });
+    });
+  });
 
   describe('#getKeys', function() {
     it('should be an abstract method', function() {
-      expect(HashEqualsComparator.prototype.getKeys).to.be.a('function')
-    })
-  })
+      expect(HashEqualsComparator.prototype.getKeys).to.be.a('function');
+    });
+  });
 
   describe('#getValue', function() {
     it('should be an abstract method', function() {
-      expect(HashEqualsComparator.prototype.getValue).to.be.a('function')
-    })
-  })
-})
+      expect(HashEqualsComparator.prototype.getValue).to.be.a('function');
+    });
+  });
+});
 

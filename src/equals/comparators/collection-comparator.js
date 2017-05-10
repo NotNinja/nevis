@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var EqualsComparator = require('./comparator')
+var EqualsComparator = require('./comparator');
 
 /**
  * An abstract implementation of {@link EqualsComparator} that is intended for implementations that wish to support
@@ -44,21 +44,21 @@ var CollectionEqualsComparator = EqualsComparator.extend({
    * @memberof CollectionEqualsComparator#
    */
   compare: function compare(context) {
-    var elements = this.getElements(context.value, context)
-    var otherElements = this.getElements(context.other, context)
-    var length = elements.length
+    var elements = this.getElements(context.value, context);
+    var otherElements = this.getElements(context.other, context);
+    var length = elements.length;
 
     if (length !== otherElements.length) {
-      return false
+      return false;
     }
 
     while (length--) {
       if (!context.equals(elements[length], otherElements[length])) {
-        return false
+        return false;
       }
     }
 
-    return true
+    return true;
   },
 
   /**
@@ -73,6 +73,6 @@ var CollectionEqualsComparator = EqualsComparator.extend({
    */
   getElements: /* istanbul ignore next */ function getElements(collection, context) {}
 
-})
+});
 
-module.exports = CollectionEqualsComparator
+module.exports = CollectionEqualsComparator;

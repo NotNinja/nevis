@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,88 +20,88 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var expect = require('chai').expect
+var expect = require('chai').expect;
 
-var hashCode = require('../../../src/hash-code/index')
-var HashCodeContext = require('../../../src/hash-code/context')
-var HashHashCodeGenerator = require('../../../src/hash-code/generators/hash-generator')
-var ObjectHashCodeGenerator = require('../../../src/hash-code/generators/object-generator')
+var hashCode = require('../../../src/hash-code/index');
+var HashCodeContext = require('../../../src/hash-code/context');
+var HashHashCodeGenerator = require('../../../src/hash-code/generators/hash-generator');
+var ObjectHashCodeGenerator = require('../../../src/hash-code/generators/object-generator');
 
 describe('hash-code/generators/object-generator:ObjectHashCodeGenerator', function() {
-  var generator
-  var value
+  var generator;
+  var value;
 
   before(function() {
     function Test() {}
-    Test.prototype.fu = 'baz'
+    Test.prototype.fu = 'baz';
     Test.prototype.buzz = function() {
-      return 321
-    }
+      return 321;
+    };
 
-    generator = new ObjectHashCodeGenerator()
+    generator = new ObjectHashCodeGenerator();
 
-    value = new Test()
-    value.foo = 'bar'
+    value = new Test();
+    value.foo = 'bar';
     value.fizz = function() {
-      return 123
-    }
-  })
+      return 123;
+    };
+  });
 
   it('should be a HashHashCodeGenerator', function() {
-    expect(generator).to.be.an.instanceof(HashHashCodeGenerator)
-  })
+    expect(generator).to.be.an.instanceof(HashHashCodeGenerator);
+  });
 
   describe('#generate', function() {
     it('should generate hash code for object values', function() {
-      expect(generator.generate(new HashCodeContext({}, hashCode))).to.equal(0)
-      expect(generator.generate(new HashCodeContext(value, hashCode))).to.equal(-75170231)
-    })
+      expect(generator.generate(new HashCodeContext({}, hashCode))).to.equal(0);
+      expect(generator.generate(new HashCodeContext(value, hashCode))).to.equal(1699786435);
+    });
 
     context('when "filterProperty" option is used', function() {
       it('should should only consider filtered properties when generating hash code for object values', function() {
         expect(generator.generate(new HashCodeContext(value, hashCode, {
           filterProperty: function(name) {
-            return name === 'fu'
+            return name === 'fu';
           }
-        }))).to.equal(94420)
-      })
-    })
+        }))).to.equal(94420);
+      });
+    });
 
     context('when "ignoreInherited" option is enabled', function() {
       it('should ignore inherited properties when generating hash code for object values', function() {
         expect(generator.generate(new HashCodeContext(value, hashCode, { ignoreInherited: true })))
-          .to.equal(-1637798867)
-      })
+          .to.equal(639664602);
+      });
 
       context('and "ignoreMethods" option is enabled', function() {
         it('should ignore method properties when generating hash code for object values', function() {
           expect(generator.generate(new HashCodeContext(value, hashCode, {
             ignoreInherited: true,
             ignoreMethods: true
-          }))).to.equal(61653)
-        })
-      })
-    })
+          }))).to.equal(61653);
+        });
+      });
+    });
 
     context('when "ignoreMethods" option is enabled', function() {
       it('should ignore method properties when generating hash code for object values', function() {
-        expect(generator.generate(new HashCodeContext(value, hashCode, { ignoreMethods: true }))).to.equal(156073)
-      })
-    })
-  })
+        expect(generator.generate(new HashCodeContext(value, hashCode, { ignoreMethods: true }))).to.equal(156073);
+      });
+    });
+  });
 
   describe('#supports', function() {
     it('should return true for object values', function() {
-      expect(generator.supports(new HashCodeContext({}, hashCode))).to.be.true
-    })
+      expect(generator.supports(new HashCodeContext({}, hashCode))).to.be.true;
+    });
 
     it('should return false for other values', function() {
-      expect(generator.supports(new HashCodeContext(true, hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext(123, hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext('foo', hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext(function foo() {}, hashCode))).to.be.false
-    })
-  })
-})
+      expect(generator.supports(new HashCodeContext(true, hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext(123, hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext('foo', hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext(function foo() {}, hashCode))).to.be.false;
+    });
+  });
+});

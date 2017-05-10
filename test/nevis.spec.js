@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,34 +20,34 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var expect = require('chai').expect
+var expect = require('chai').expect;
 
-var extend = require('../src/extend')
-var Nevis = require('../src/nevis')
+var extend = require('../src/extend');
+var Nevis = require('../src/nevis');
 
 describe('nevis:Nevis', function() {
   it('should be a constructor', function() {
-    expect(Nevis).to.be.a('function')
-    expect(new Nevis()).to.be.an('object')
-  })
+    expect(Nevis).to.be.a('function');
+    expect(new Nevis()).to.be.an('object');
+  });
 
   describe('.class_', function() {
     it('should be Nevis', function() {
-      expect(Nevis.class_).to.equal('Nevis')
-    })
-  })
+      expect(Nevis.class_).to.equal('Nevis');
+    });
+  });
 
   describe('.super_', function() {
     it('should be Object', function() {
-      expect(Nevis.super_).to.equal(Object)
-    })
-  })
+      expect(Nevis.super_).to.equal(Object);
+    });
+  });
 
   describe('.extend', function() {
     it('should reference the internal extend function', function() {
-      expect(Nevis.extend).to.equal(extend)
-    })
-  })
-})
+      expect(Nevis.extend).to.equal(extend);
+    });
+  });
+});

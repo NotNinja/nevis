@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,49 +20,49 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var expect = require('chai').expect
+var expect = require('chai').expect;
 
-var BooleanHashCodeGenerator = require('../../../src/hash-code/generators/boolean-generator')
-var hashCode = require('../../../src/hash-code/index')
-var HashCodeContext = require('../../../src/hash-code/context')
-var HashCodeGenerator = require('../../../src/hash-code/generators/generator')
+var BooleanHashCodeGenerator = require('../../../src/hash-code/generators/boolean-generator');
+var hashCode = require('../../../src/hash-code/index');
+var HashCodeContext = require('../../../src/hash-code/context');
+var HashCodeGenerator = require('../../../src/hash-code/generators/generator');
 
 describe('hash-code/generators/boolean-generator:BooleanHashCodeGenerator', function() {
-  var generator
+  var generator;
 
   before(function() {
-    generator = new BooleanHashCodeGenerator()
-  })
+    generator = new BooleanHashCodeGenerator();
+  });
 
   it('should be a HashCodeGenerator', function() {
-    expect(generator).to.be.an.instanceof(HashCodeGenerator)
-  })
+    expect(generator).to.be.an.instanceof(HashCodeGenerator);
+  });
 
   describe('#generate', function() {
     it('should generate hash code for boolean values', function() {
-      expect(generator.generate(new HashCodeContext(false, hashCode))).to.equal(1237)
-      expect(generator.generate(new HashCodeContext(true, hashCode))).to.equal(1231)
-    })
-  })
+      expect(generator.generate(new HashCodeContext(false, hashCode))).to.equal(1237);
+      expect(generator.generate(new HashCodeContext(true, hashCode))).to.equal(1231);
+    });
+  });
 
   describe('#supports', function() {
     it('should return true for boolean values', function() {
-      expect(generator.supports(new HashCodeContext(false, hashCode))).to.be.true
-      expect(generator.supports(new HashCodeContext(true, hashCode))).to.be.true
-    })
+      expect(generator.supports(new HashCodeContext(false, hashCode))).to.be.true;
+      expect(generator.supports(new HashCodeContext(true, hashCode))).to.be.true;
+    });
 
     it('should return false for other values', function() {
-      expect(generator.supports(new HashCodeContext(123, hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext('foo', hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext(function foo() {}, hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext(/foo/, hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext(new Date(), hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext([ 'foo', 'bar' ], hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext({ foo: 'bar' }, hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext(new Map(), hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext(new Set(), hashCode))).to.be.false
-    })
-  })
-})
+      expect(generator.supports(new HashCodeContext(123, hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext('foo', hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext(function foo() {}, hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext(/foo/, hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext(new Date(), hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext([ 'foo', 'bar' ], hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext({ foo: 'bar' }, hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext(new Map(), hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext(new Set(), hashCode))).to.be.false;
+    });
+  });
+});

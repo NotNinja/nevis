@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var CachingHashCodeGenerator = require('./caching-generator')
+var CachingHashCodeGenerator = require('./caching-generator');
 
 /**
  * An implementation of {@link CachingHashCodeGenerator} that supports string values.
@@ -39,14 +39,14 @@ var StringHashCodeGenerator = CachingHashCodeGenerator.extend({
    * @memberof StringHashCodeGenerator#
    */
   generateInternal: function generateInternal(context) {
-    var hash = 0
-    var length = context.value.length
+    var hash = 0;
+    var length = context.value.length;
 
     for (var i = 0; i < length; i++) {
-      hash = ((31 * hash) + context.value.charCodeAt(i)) | 0
+      hash = ((31 * hash) + context.value.charCodeAt(i)) | 0;
     }
 
-    return hash
+    return hash;
   },
 
   /**
@@ -55,9 +55,9 @@ var StringHashCodeGenerator = CachingHashCodeGenerator.extend({
    * @memberof StringHashCodeGenerator#
    */
   supports: function supports(context) {
-    return context.type === 'string'
+    return context.type === 'string';
   }
 
-})
+});
 
-module.exports = StringHashCodeGenerator
+module.exports = StringHashCodeGenerator;

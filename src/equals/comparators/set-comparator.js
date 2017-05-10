@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var CollectionEqualsComparator = require('./collection-comparator')
+var CollectionEqualsComparator = require('./collection-comparator');
 
 /**
  * An implementation of {@link CollectionEqualsComparator} that supports set values.
@@ -39,7 +39,7 @@ var SetEqualsComparator = CollectionEqualsComparator.extend({
    * @memberof SetEqualsComparator#
    */
   getElements: function getElements(collection) {
-    return Array.from(collection)
+    return Array.from(collection);
   },
 
   /**
@@ -48,9 +48,9 @@ var SetEqualsComparator = CollectionEqualsComparator.extend({
    * @memberof SetEqualsComparator#
    */
   supports: function supports(context) {
-    return context.string === '[object Set]'
+    return context.string === '[object Set]';
   }
 
-})
+});
 
-module.exports = SetEqualsComparator
+module.exports = SetEqualsComparator;

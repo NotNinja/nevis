@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var HashCodeGenerator = require('./generator')
+var HashCodeGenerator = require('./generator');
 
 /**
  * An abstract implementation of {@link HashCodeGenerator} that is intended for implementations that wish to cache
@@ -47,7 +47,7 @@ var CachingHashCodeGenerator = HashCodeGenerator.extend(function() {
    * @type {Object.<*, number>}
    * @memberof CachingHashCodeGenerator#
    */
-  this._cache = {}
+  this._cache = {};
 }, {
 
   /**
@@ -59,7 +59,7 @@ var CachingHashCodeGenerator = HashCodeGenerator.extend(function() {
    * @memberof CachingHashCodeGenerator#
    */
   clearCache: function clearCache() {
-    this._cache = {}
+    this._cache = {};
   },
 
   /**
@@ -68,17 +68,17 @@ var CachingHashCodeGenerator = HashCodeGenerator.extend(function() {
    * @memberof CachingHashCodeGenerator#
    */
   generate: function generate(context) {
-    var hash = this._cache[context.value]
+    var hash = this._cache[context.value];
 
     if (hash == null) {
-      hash = this.generateInternal(context)
+      hash = this.generateInternal(context);
 
       if (context.options.allowCache) {
-        this._cache[context.value] = hash
+        this._cache[context.value] = hash;
       }
     }
 
-    return hash
+    return hash;
   },
 
   /**
@@ -95,6 +95,6 @@ var CachingHashCodeGenerator = HashCodeGenerator.extend(function() {
    */
   generateInternal: /* istanbul ignore next */ function generateInternal(context) {}
 
-})
+});
 
-module.exports = CachingHashCodeGenerator
+module.exports = CachingHashCodeGenerator;

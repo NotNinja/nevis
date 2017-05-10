@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var HashHashCodeGenerator = require('./hash-generator')
+var HashHashCodeGenerator = require('./hash-generator');
 
 /**
  * An implementation of {@link HashHashCodeGenerator} that supports plain old object values.
@@ -39,22 +39,22 @@ var ObjectHashCodeGenerator = HashHashCodeGenerator.extend({
    * @memberof ObjectHashCodeGenerator#
    */
   getEntries: function getEntries(context) {
-    var entries = []
-    var hash = context.value
-    var options = context.options
-    var value
+    var entries = [];
+    var hash = context.value;
+    var options = context.options;
+    var value;
 
     for (var name in hash) {
       if (!options.ignoreInherited || Object.prototype.hasOwnProperty.call(hash, name)) {
-        value = hash[name]
+        value = hash[name];
 
         if ((typeof value !== 'function' || !options.ignoreMethods) && options.filterProperty(name, value, hash)) {
-          entries.push([ name, value ])
+          entries.push([ name, value ]);
         }
       }
     }
 
-    return entries
+    return entries;
   },
 
   /**
@@ -63,9 +63,9 @@ var ObjectHashCodeGenerator = HashHashCodeGenerator.extend({
    * @memberof ObjectHashCodeGenerator#
    */
   supports: function supports(context) {
-    return context.type === 'object'
+    return context.type === 'object';
   }
 
-})
+});
 
-module.exports = ObjectHashCodeGenerator
+module.exports = ObjectHashCodeGenerator;

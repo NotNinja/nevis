@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var StringHashCodeGenerator = require('./string-generator')
+var StringHashCodeGenerator = require('./string-generator');
 
 /**
  * An extension of {@link StringHashCodeGenerator} that supports miscellaneous values by generating hash codes for their
@@ -42,7 +42,7 @@ var ToStringHashCodeGenerator = StringHashCodeGenerator.extend({
    * @memberof ToStringHashCodeGenerator#
    */
   generate: function generate(context) {
-    return ToStringHashCodeGenerator.super_.prototype.generate.call(this, context.copy(context.value.toString()))
+    return ToStringHashCodeGenerator.super_.prototype.generate.call(this, context.copy(context.value.toString()));
   },
 
   /**
@@ -51,9 +51,9 @@ var ToStringHashCodeGenerator = StringHashCodeGenerator.extend({
    * @memberof ToStringHashCodeGenerator#
    */
   supports: function supports(context) {
-    return context.type === 'function' || context.type === 'number' || context.string === '[object RegExp]'
+    return context.type === 'function' || context.type === 'number' || context.string === '[object RegExp]';
   }
 
-})
+});
 
-module.exports = ToStringHashCodeGenerator
+module.exports = ToStringHashCodeGenerator;

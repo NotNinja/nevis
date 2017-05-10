@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var HashCodeGenerator = require('./generator')
+var HashCodeGenerator = require('./generator');
 
 /**
  * An implementation of {@link HashCodeGenerator} that supports boolean values.
@@ -39,7 +39,7 @@ var BooleanHashCodeGenerator = HashCodeGenerator.extend({
    * @memberof BooleanHashCodeGenerator#
    */
   generate: function generate(context) {
-    return context.value ? 1231 : 1237
+    return context.value ? 1231 : 1237;
   },
 
   /**
@@ -48,9 +48,9 @@ var BooleanHashCodeGenerator = HashCodeGenerator.extend({
    * @memberof BooleanHashCodeGenerator#
    */
   supports: function supports(context) {
-    return context.type === 'boolean'
+    return context.type === 'boolean';
   }
 
-})
+});
 
-module.exports = BooleanHashCodeGenerator
+module.exports = BooleanHashCodeGenerator;

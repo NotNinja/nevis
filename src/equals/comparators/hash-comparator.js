@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var EqualsComparator = require('./comparator')
+var EqualsComparator = require('./comparator');
 
 /**
  * An abstract implementation of {@link EqualsComparator} that is intended for implementations that wish to support
@@ -45,26 +45,26 @@ var HashEqualsComparator = EqualsComparator.extend({
    * @memberof HashEqualsComparator#
    */
   compare: function compare(context) {
-    var value = context.value
-    var other = context.other
-    var keys = this.getKeys(value, context)
-    var length = keys.length
+    var value = context.value;
+    var other = context.other;
+    var keys = this.getKeys(value, context);
+    var length = keys.length;
 
     if (length !== this.getKeys(other, context).length) {
-      return false
+      return false;
     }
 
-    var key
+    var key;
 
     while (length--) {
-      key = keys[length]
+      key = keys[length];
 
       if (!context.equals(this.getValue(value, key, context), this.getValue(other, key, context))) {
-        return false
+        return false;
       }
     }
 
-    return true
+    return true;
   },
 
   /**
@@ -92,6 +92,6 @@ var HashEqualsComparator = EqualsComparator.extend({
    */
   getValue: /* istanbul ignore next */ function getValue(hash, key, context) {}
 
-})
+});
 
-module.exports = HashEqualsComparator
+module.exports = HashEqualsComparator;

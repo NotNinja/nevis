@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var HashHashCodeGenerator = require('./hash-generator')
+var HashHashCodeGenerator = require('./hash-generator');
 
 /**
  * An implementation of {@link HashHashCodeGenerator} that supports map values.
@@ -41,7 +41,7 @@ var MapHashCodeGenerator = HashHashCodeGenerator.extend({
    * @memberof MapHashCodeGenerator#
    */
   getEntries: function getEntries(context) {
-    return Array.from(context.value.entries())
+    return Array.from(context.value.entries());
   },
 
   /**
@@ -50,9 +50,9 @@ var MapHashCodeGenerator = HashHashCodeGenerator.extend({
    * @memberof MapHashCodeGenerator#
    */
   supports: function supports(context) {
-    return context.string === '[object Map]'
+    return context.string === '[object Map]';
   }
 
-})
+});
 
-module.exports = MapHashCodeGenerator
+module.exports = MapHashCodeGenerator;

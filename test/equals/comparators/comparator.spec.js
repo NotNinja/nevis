@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,46 +20,46 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var expect = require('chai').expect
+var expect = require('chai').expect;
 
-var EqualsComparator = require('../../../src/equals/comparators/comparator')
-var extend = require('../../../src/extend')
+var EqualsComparator = require('../../../src/equals/comparators/comparator');
+var extend = require('../../../src/extend');
 
 describe('equals/comparators/comparator:EqualsComparator', function() {
   it('should be a constructor', function() {
-    expect(EqualsComparator).to.be.a('function')
-    expect(new EqualsComparator()).to.be.an('object')
-  })
+    expect(EqualsComparator).to.be.a('function');
+    expect(new EqualsComparator()).to.be.an('object');
+  });
 
   describe('.class_', function() {
     it('should be EqualsComparator', function() {
-      expect(EqualsComparator.class_).to.equal('EqualsComparator')
-    })
-  })
+      expect(EqualsComparator.class_).to.equal('EqualsComparator');
+    });
+  });
 
   describe('.super_', function() {
     it('should be Object', function() {
-      expect(EqualsComparator.super_).to.equal(Object)
-    })
-  })
+      expect(EqualsComparator.super_).to.equal(Object);
+    });
+  });
 
   describe('.extend', function() {
     it('should reference the internal extend function', function() {
-      expect(EqualsComparator.extend).to.equal(extend)
-    })
-  })
+      expect(EqualsComparator.extend).to.equal(extend);
+    });
+  });
 
   describe('#compare', function() {
     it('should be an abstract method', function() {
-      expect(EqualsComparator.prototype.compare).to.be.a('function')
-    })
-  })
+      expect(EqualsComparator.prototype.compare).to.be.a('function');
+    });
+  });
 
   describe('#supports', function() {
     it('should be an abstract method', function() {
-      expect(EqualsComparator.prototype.supports).to.be.a('function')
-    })
-  })
-})
+      expect(EqualsComparator.prototype.supports).to.be.a('function');
+    });
+  });
+});

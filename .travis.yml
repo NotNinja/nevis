@@ -3,8 +3,12 @@ language: node_js
 node_js:
   - "4"
   - "6"
-  - "7"
 script:
   - npm run ci
 after_script:
   - npm run report-coverage
+notifications:
+  slack:
+    rooms:
+      - secure: DGeV5CyianZijgVnftcsUneLZ4rOmn98KLSrJeVhTlP3o4aahdA6SU2+ynDryEcua4E2sjZlEcGST5u3aIssOI2HbYwfGhS/coHEbRrN0StDw3XfiJ80zMhGiWlK90TlGYPv3w6AiuPmKZuGnAWtgFnTs+2w9Os66dugHz8yh4WWFm7VDWcVjDZm4PccCCsZFuK7KfqtzQUOioJmSIEAOpbx3GnhOkJRC9Dl1h5DcKIZQDsnp/ZWoWtZWvL63JOJ+PXGQr3rGQ5wtvsvXbkTw6AVp4woL8bcycBXscqiThQQaWZvfWo0BOZELWfehJMWxULY9isJmQkh/NKWeENvm9vxFA1GFEFvfP/hHSzsAEYEKzqQwQ6QmevtKiWCCxWu/Vz2dXlW4j3MRd7ZKgbkHON4dAOcXk11n/tiMuPh9BZjugbVcA1caPb9f6H+CinNhchGpW1y8QJw6nZUW6slR1wnpHqQxtZUKEyE+4f5Pd7LS0TDyVwRaoWVu9VKHDKKTQ+0XtMZNU0Rj0i6WXzAPSGAGcTRG1DhfPsGUP0SDpJwKwI4ko5vQDkJfjO+cYpd7BNe/czHSEBpFd+19IfutX4YYSt6+FwCHnSYNr1COlmO3unTcx7iJ5veUCf1yEEOoeZCVB+alYg2t82kd18RSUAIsrj36F9B/IVBifbeDb0=
+    on_success: change

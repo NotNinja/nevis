@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,10 +20,10 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var generators = require('./generators')
-var HashCodeContext = require('./context')
+var generators = require('./generators');
+var HashCodeContext = require('./context');
 
 /**
  * The list of active generators that will be checked for any that support the value before falling back to
@@ -40,7 +40,7 @@ var activeGenerators = [
   new generators.ArrayHashCodeGenerator(),
   new generators.SetHashCodeGenerator(),
   new generators.MapHashCodeGenerator()
-]
+];
 
 /**
  * The default generator to be used when no others support the value.
@@ -48,7 +48,7 @@ var activeGenerators = [
  * @private
  * @type {HashCodeGenerator}
  */
-var defaultGenerator = new generators.ObjectHashCodeGenerator()
+var defaultGenerator = new generators.ObjectHashCodeGenerator();
 
 /**
  * Returns a hash code for the specified <code>value</code> using the <code>options</code> provided. This method is
@@ -84,27 +84,27 @@ var defaultGenerator = new generators.ObjectHashCodeGenerator()
  */
 function hashCode(value, options) {
   if (value == null) {
-    return 0
+    return 0;
   }
 
-  var context = new HashCodeContext(value, hashCode, options)
+  var context = new HashCodeContext(value, hashCode, options);
 
   if (!context.options.ignoreHashCode && typeof value.hashCode === 'function') {
-    return value.hashCode()
+    return value.hashCode();
   }
 
-  var generator
-  var length = activeGenerators.length
+  var generator;
+  var length = activeGenerators.length;
 
   for (var i = 0; i < length; i++) {
-    generator = activeGenerators[i]
+    generator = activeGenerators[i];
 
     if (generator.supports(context)) {
-      return generator.generate(context)
+      return generator.generate(context);
     }
   }
 
-  return defaultGenerator.generate(context)
+  return defaultGenerator.generate(context);
 }
 
 /**
@@ -123,12 +123,12 @@ function hashCode(value, options) {
 hashCode.clearCache = function clearCache() {
   activeGenerators.forEach(function(generator) {
     if (typeof generator.clearCache === 'function') {
-      generator.clearCache()
+      generator.clearCache();
     }
-  })
-}
+  });
+};
 
-module.exports = hashCode
+module.exports = hashCode;
 
 /**
  * Called with the name and value of a property belonging to an object for which a hash code is being generated to

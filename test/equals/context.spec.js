@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,170 +20,170 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var expect = require('chai').expect
-var sinon = require('sinon')
+var expect = require('chai').expect;
+var sinon = require('sinon');
 
-var equals = require('../../src/equals/index')
-var EqualsContext = require('../../src/equals/context')
+var equals = require('../../src/equals/index');
+var EqualsContext = require('../../src/equals/context');
 
 describe('equals/context:EqualsContext', function() {
-  var equalsSpy
+  var equalsSpy;
 
   beforeEach(function() {
-    equalsSpy = sinon.spy(equals)
-  })
+    equalsSpy = sinon.spy(equals);
+  });
 
   it('should be a constructor', function() {
-    expect(EqualsContext).to.be.a('function')
-    expect(new EqualsContext()).to.be.an('object')
-  })
+    expect(EqualsContext).to.be.a('function');
+    expect(new EqualsContext()).to.be.an('object');
+  });
 
   describe('#copy', function() {
     it('should create a copy of itself but based on the passed values', function() {
       var expectedOptions = {
         filterProperty: function() {
-          return false
+          return false;
         },
         ignoreCase: true,
         ignoreEquals: true,
         ignoreInherited: true,
         ignoreMethods: true
-      }
+      };
 
-      var ctx = new EqualsContext(123, 321, equalsSpy, expectedOptions)
-      var copy = ctx.copy(321, 123)
+      var ctx = new EqualsContext(123, 321, equalsSpy, expectedOptions);
+      var copy = ctx.copy(321, 123);
 
-      expect(copy).to.be.an.instanceof(EqualsContext)
-      expect(copy.options).not.to.equal(expectedOptions)
-      expect(copy.options).to.deep.equal(expectedOptions)
-      expect(copy.other).to.equal(123)
-      expect(copy.string).to.equal('[object Number]')
-      expect(copy.type).to.equal('number')
-      expect(copy.value).to.equal(321)
-      expect(copy.equals('321', '123')).to.be.false
+      expect(copy).to.be.an.instanceof(EqualsContext);
+      expect(copy.options).not.to.equal(expectedOptions);
+      expect(copy.options).to.deep.equal(expectedOptions);
+      expect(copy.other).to.equal(123);
+      expect(copy.string).to.equal('[object Number]');
+      expect(copy.type).to.equal('number');
+      expect(copy.value).to.equal(321);
+      expect(copy.equals('321', '123')).to.be.false;
 
-      expect(equalsSpy.calledWith('321', '123', copy.options)).to.be.true
-    })
-  })
+      expect(equalsSpy.calledWith('321', '123', copy.options)).to.be.true;
+    });
+  });
 
   describe('#equals', function() {
     it('should delegate to the equals function passed to the constructor', function() {
-      var ctx = new EqualsContext(123, 321, equalsSpy)
+      var ctx = new EqualsContext(123, 321, equalsSpy);
 
-      expect(ctx.equals('123', '321')).to.be.false
+      expect(ctx.equals('123', '321')).to.be.false;
 
-      expect(equalsSpy.calledWith('123', '321', ctx.options)).to.be.true
-    })
-  })
+      expect(equalsSpy.calledWith('123', '321', ctx.options)).to.be.true;
+    });
+  });
 
   describe('#options', function() {
     context('when options are passed to constructor', function() {
       it('should be based on options passed to constructor', function() {
         var expected = {
           filterProperty: function() {
-            return false
+            return false;
           },
           ignoreCase: true,
           ignoreEquals: true,
           ignoreInherited: true,
           ignoreMethods: true
-        }
+        };
 
-        var ctx = new EqualsContext(123, 321, equalsSpy, expected)
+        var ctx = new EqualsContext(123, 321, equalsSpy, expected);
 
-        expect(ctx.options).not.to.equal(expected)
-        expect(ctx.options).to.deep.equal(expected)
-      })
-    })
+        expect(ctx.options).not.to.equal(expected);
+        expect(ctx.options).to.deep.equal(expected);
+      });
+    });
 
     context('when no options are passed to constructor', function() {
       it('should be based on default options', function() {
-        var ctx = new EqualsContext(123, 312, equalsSpy)
+        var ctx = new EqualsContext(123, 312, equalsSpy);
 
-        expect(ctx.options).to.be.an('object')
-        expect(ctx.options.filterProperty).to.be.a('function')
-        expect(ctx.options.filterProperty()).to.be.true
-        expect(ctx.options.ignoreCase).to.be.false
-        expect(ctx.options.ignoreEquals).to.be.false
-        expect(ctx.options.ignoreInherited).to.be.false
-        expect(ctx.options.ignoreMethods).to.be.false
-      })
-    })
-  })
+        expect(ctx.options).to.be.an('object');
+        expect(ctx.options.filterProperty).to.be.a('function');
+        expect(ctx.options.filterProperty()).to.be.true;
+        expect(ctx.options.ignoreCase).to.be.false;
+        expect(ctx.options.ignoreEquals).to.be.false;
+        expect(ctx.options.ignoreInherited).to.be.false;
+        expect(ctx.options.ignoreMethods).to.be.false;
+      });
+    });
+  });
 
   describe('#other', function() {
     it('should be other value passed to constructor', function() {
-      var other = {}
-      var ctx = new EqualsContext('foo', other, equalsSpy)
+      var other = {};
+      var ctx = new EqualsContext('foo', other, equalsSpy);
 
-      expect(ctx.other).to.equal(other)
-    })
-  })
+      expect(ctx.other).to.equal(other);
+    });
+  });
 
   describe('#string', function() {
     it('should be based on value passed to constructor', function() {
-      var ctx = new EqualsContext({}, 'foo', equalsSpy)
+      var ctx = new EqualsContext({}, 'foo', equalsSpy);
 
-      expect(ctx.string).to.equal('[object Object]')
+      expect(ctx.string).to.equal('[object Object]');
 
-      ctx = new EqualsContext([], 'foo', equalsSpy)
+      ctx = new EqualsContext([], 'foo', equalsSpy);
 
-      expect(ctx.string).to.equal('[object Array]')
+      expect(ctx.string).to.equal('[object Array]');
 
-      ctx = new EqualsContext(123, 'foo', equalsSpy)
+      ctx = new EqualsContext(123, 'foo', equalsSpy);
 
-      expect(ctx.string).to.equal('[object Number]')
-    })
-  })
+      expect(ctx.string).to.equal('[object Number]');
+    });
+  });
 
   describe('#type', function() {
     it('should be based on value passed to constructor', function() {
-      var ctx = new EqualsContext({}, 'foo', equalsSpy)
+      var ctx = new EqualsContext({}, 'foo', equalsSpy);
 
-      expect(ctx.type).to.equal('object')
+      expect(ctx.type).to.equal('object');
 
-      ctx = new EqualsContext([], 'foo', equalsSpy)
+      ctx = new EqualsContext([], 'foo', equalsSpy);
 
-      expect(ctx.type).to.equal('object')
+      expect(ctx.type).to.equal('object');
 
-      ctx = new EqualsContext(123, 'foo', equalsSpy)
+      ctx = new EqualsContext(123, 'foo', equalsSpy);
 
-      expect(ctx.type).to.equal('number')
-    })
-  })
+      expect(ctx.type).to.equal('number');
+    });
+  });
 
   describe('#validate', function() {
     it('should return whether type of other matches that of value', function() {
-      var ctx = new EqualsContext('foo', 'bar', equalsSpy)
+      var ctx = new EqualsContext('foo', 'bar', equalsSpy);
 
-      expect(ctx.validate()).to.be.true
+      expect(ctx.validate()).to.be.true;
 
-      ctx = new EqualsContext({ foo: 'bar' }, { fu: 'baz' }, equalsSpy)
+      ctx = new EqualsContext({ foo: 'bar' }, { fu: 'baz' }, equalsSpy);
 
-      expect(ctx.validate()).to.be.true
+      expect(ctx.validate()).to.be.true;
 
-      ctx = new EqualsContext([ 'foo' ], [ 'bar' ], equalsSpy)
+      ctx = new EqualsContext([ 'foo' ], [ 'bar' ], equalsSpy);
 
-      expect(ctx.validate()).to.be.true
+      expect(ctx.validate()).to.be.true;
 
-      ctx = new EqualsContext([ 'foo' ], { fu: 'baz' }, equalsSpy)
+      ctx = new EqualsContext([ 'foo' ], { fu: 'baz' }, equalsSpy);
 
-      expect(ctx.validate()).to.be.false
+      expect(ctx.validate()).to.be.false;
 
-      ctx = new EqualsContext(123, '123', equalsSpy)
+      ctx = new EqualsContext(123, '123', equalsSpy);
 
-      expect(ctx.validate()).to.be.false
-    })
-  })
+      expect(ctx.validate()).to.be.false;
+    });
+  });
 
   describe('#value', function() {
     it('should be value passed to constructor', function() {
-      var value = {}
-      var ctx = new EqualsContext(value, 'foo', equalsSpy)
+      var value = {};
+      var ctx = new EqualsContext(value, 'foo', equalsSpy);
 
-      expect(ctx.value).to.equal(value)
-    })
-  })
-})
+      expect(ctx.value).to.equal(value);
+    });
+  });
+});

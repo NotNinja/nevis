@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var staticHashCode = require('./')
+var staticHashCode = require('./');
 
 /**
  * Assists in building hash codes for complex classes.
@@ -40,15 +40,15 @@ var staticHashCode = require('./')
  */
 function HashCodeBuilder(initial, multiplier) {
   if (initial == null) {
-    initial = HashCodeBuilder.DEFAULT_INITIAL_VALUE
+    initial = HashCodeBuilder.DEFAULT_INITIAL_VALUE;
   } else if (initial % 2 === 0) {
-    throw new Error('initial must be an odd number')
+    throw new Error('initial must be an odd number');
   }
 
   if (multiplier == null) {
-    multiplier = HashCodeBuilder.DEFAULT_MULTIPLIER_VALUE
+    multiplier = HashCodeBuilder.DEFAULT_MULTIPLIER_VALUE;
   } else if (multiplier % 2 === 0) {
-    throw new Error('multiplier must be an odd number')
+    throw new Error('multiplier must be an odd number');
   }
 
   /**
@@ -57,7 +57,7 @@ function HashCodeBuilder(initial, multiplier) {
    * @private
    * @type {number}
    */
-  this._hash = initial
+  this._hash = initial;
 
   /**
    * The multiplier to be used by this {@link HashCodeBuilder}.
@@ -65,7 +65,7 @@ function HashCodeBuilder(initial, multiplier) {
    * @private
    * @type {number}
    */
-  this._multiplier = multiplier
+  this._multiplier = multiplier;
 }
 
 /**
@@ -76,7 +76,7 @@ function HashCodeBuilder(initial, multiplier) {
  * @type {number}
  * @memberof HashCodeBuilder
  */
-HashCodeBuilder.DEFAULT_INITIAL_VALUE = 17
+HashCodeBuilder.DEFAULT_INITIAL_VALUE = 17;
 
 /**
  * The default multiplier value to use in hash code building.
@@ -86,7 +86,7 @@ HashCodeBuilder.DEFAULT_INITIAL_VALUE = 17
  * @type {number}
  * @memberof HashCodeBuilder
  */
-HashCodeBuilder.DEFAULT_MULTIPLIER_VALUE = 37
+HashCodeBuilder.DEFAULT_MULTIPLIER_VALUE = 37;
 
 /**
  * Appends the specified <code>value</code> to this {@link HashCodeBuilder}, generating the hash code for it using the
@@ -100,10 +100,10 @@ HashCodeBuilder.DEFAULT_MULTIPLIER_VALUE = 37
  * @memberof HashCodeBuilder#
  */
 HashCodeBuilder.prototype.append = function append(value, options) {
-  this._hash = (this._hash * this._multiplier) + staticHashCode(value, options)
+  this._hash = (this._hash * this._multiplier) + staticHashCode(value, options);
 
-  return this
-}
+  return this;
+};
 
 /**
  * Appends the result of computing the hash code for a super class to this {@link HashCodeBuilder}.
@@ -114,10 +114,10 @@ HashCodeBuilder.prototype.append = function append(value, options) {
  * @memberof HashCodeBuilder#
  */
 HashCodeBuilder.prototype.appendSuper = function appendSuper(superHashCode) {
-  this._hash = (this._hash * this._multiplier) + superHashCode
+  this._hash = (this._hash * this._multiplier) + superHashCode;
 
-  return this
-}
+  return this;
+};
 
 /**
  * Returns the computed hash code.
@@ -127,8 +127,8 @@ HashCodeBuilder.prototype.appendSuper = function appendSuper(superHashCode) {
  * @memberof HashCodeBuilder#
  */
 HashCodeBuilder.prototype.build = function build() {
-  return this._hash
-}
+  return this._hash;
+};
 
 /**
  * Returns the hash code for this {@link HashCodeBuilder}.
@@ -140,7 +140,7 @@ HashCodeBuilder.prototype.build = function build() {
  * @memberof HashCodeBuilder#
  */
 HashCodeBuilder.prototype.hashCode = function hashCode() {
-  return this._hash
-}
+  return this._hash;
+};
 
-module.exports = HashCodeBuilder
+module.exports = HashCodeBuilder;

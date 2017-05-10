@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,11 +20,11 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var expect = require('chai').expect
+var expect = require('chai').expect;
 
-var arrays = require('../../src/util/arrays')
+var arrays = require('../../src/util/arrays');
 
 describe('util/util/arrays', function() {
   describe('.typeStrings', function() {
@@ -40,7 +40,7 @@ describe('util/util/arrays', function() {
         '[object Uint32Array]',
         '[object Float32Array]',
         '[object Float64Array]'
-      ])
-    })
-  })
-})
+      ]);
+    });
+  });
+});

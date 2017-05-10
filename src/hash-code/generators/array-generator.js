@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,10 +20,10 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var arrays = require('../../util/arrays')
-var CollectionHashCodeGenerator = require('./collection-generator')
+var arrays = require('../../util/arrays');
+var CollectionHashCodeGenerator = require('./collection-generator');
 
 /**
  * An implementation of {@link CollectionHashCodeGenerator} that supports array values.
@@ -40,7 +40,7 @@ var ArrayHashCodeGenerator = CollectionHashCodeGenerator.extend({
    * @memberof ArrayHashCodeGenerator#
    */
   getElements: function getElements(context) {
-    return context.value
+    return context.value;
   },
 
   /**
@@ -48,10 +48,10 @@ var ArrayHashCodeGenerator = CollectionHashCodeGenerator.extend({
    * @override
    * @memberof ArrayHashCodeGenerator#
    */
-  supports: function support(context) {
-    return arrays.typeStrings.indexOf(context.string) >= 0
+  supports: function supports(context) {
+    return arrays.typeStrings.indexOf(context.string) >= 0;
   }
 
-})
+});
 
-module.exports = ArrayHashCodeGenerator
+module.exports = ArrayHashCodeGenerator;

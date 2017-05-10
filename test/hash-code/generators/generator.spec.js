@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,46 +20,46 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var expect = require('chai').expect
+var expect = require('chai').expect;
 
-var extend = require('../../../src/extend')
-var HashCodeGenerator = require('../../../src/hash-code/generators/generator')
+var extend = require('../../../src/extend');
+var HashCodeGenerator = require('../../../src/hash-code/generators/generator');
 
 describe('hash-code/generators/generator:HashCodeGenerator', function() {
   it('should be a constructor', function() {
-    expect(HashCodeGenerator).to.be.a('function')
-    expect(new HashCodeGenerator()).to.be.an('object')
-  })
+    expect(HashCodeGenerator).to.be.a('function');
+    expect(new HashCodeGenerator()).to.be.an('object');
+  });
 
   describe('.class_', function() {
     it('should be HashCodeGenerator', function() {
-      expect(HashCodeGenerator.class_).to.equal('HashCodeGenerator')
-    })
-  })
+      expect(HashCodeGenerator.class_).to.equal('HashCodeGenerator');
+    });
+  });
 
   describe('.super_', function() {
     it('should be Object', function() {
-      expect(HashCodeGenerator.super_).to.equal(Object)
-    })
-  })
+      expect(HashCodeGenerator.super_).to.equal(Object);
+    });
+  });
 
   describe('.extend', function() {
     it('should reference the internal extend function', function() {
-      expect(HashCodeGenerator.extend).to.equal(extend)
-    })
-  })
+      expect(HashCodeGenerator.extend).to.equal(extend);
+    });
+  });
 
   describe('#generate', function() {
     it('should be an abstract method', function() {
-      expect(HashCodeGenerator.prototype.generate).to.be.a('function')
-    })
-  })
+      expect(HashCodeGenerator.prototype.generate).to.be.a('function');
+    });
+  });
 
   describe('#supports', function() {
     it('should be an abstract method', function() {
-      expect(HashCodeGenerator.prototype.supports).to.be.a('function')
-    })
-  })
-})
+      expect(HashCodeGenerator.prototype.supports).to.be.a('function');
+    });
+  });
+});

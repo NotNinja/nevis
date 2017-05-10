@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var staticEquals = require('./')
+var staticEquals = require('./');
 
 /**
  * Assists in building good equals for complex classes.
@@ -37,7 +37,7 @@ function EqualsBuilder() {
    * @private
    * @type {boolean}
    */
-  this._equals = true
+  this._equals = true;
 }
 
 /**
@@ -55,11 +55,11 @@ function EqualsBuilder() {
  */
 EqualsBuilder.prototype.append = function append(value, other, options) {
   if (this._equals) {
-    this._equals = staticEquals(value, other, options)
+    this._equals = staticEquals(value, other, options);
   }
 
-  return this
-}
+  return this;
+};
 
 /**
  * Appends the result of testing equality for a super class to this {@link EqualsBuilder}.
@@ -71,11 +71,11 @@ EqualsBuilder.prototype.append = function append(value, other, options) {
  */
 EqualsBuilder.prototype.appendSuper = function appendSuper(superEquals) {
   if (this._equals) {
-    this._equals = superEquals
+    this._equals = superEquals;
   }
 
-  return this
-}
+  return this;
+};
 
 /**
  * Returns whether the values that have been appended to this {@link EqualsBuilder} are all equal.
@@ -85,7 +85,7 @@ EqualsBuilder.prototype.appendSuper = function appendSuper(superEquals) {
  * @memberof EqualsBuilder#
  */
 EqualsBuilder.prototype.build = function build() {
-  return this._equals
-}
+  return this._equals;
+};
 
-module.exports = EqualsBuilder
+module.exports = EqualsBuilder;

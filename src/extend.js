@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
 /**
  * A bare-bones constructor for surrogate prototype swapping.
@@ -28,21 +28,21 @@
  * @private
  * @constructor
  */
-var Constructor = /* istanbul ignore next */ function() {}
+var Constructor = /* istanbul ignore next */ function() {};
 /**
  * A reference to <code>Object.prototype.hasOwnProperty</code>.
  *
  * @private
  * @type {Function}
  */
-var hasOwnProperty = Object.prototype.hasOwnProperty
+var hasOwnProperty = Object.prototype.hasOwnProperty;
 /**
  * A reference to <code>Array.prototype.slice</code>.
  *
  * @private
  * @type {Function}
  */
-var slice = Array.prototype.slice
+var slice = Array.prototype.slice;
 
 /**
  * Creates an object which inherits the given <code>prototype</code>.
@@ -55,21 +55,21 @@ var slice = Array.prototype.slice
  * @private
  */
 function createObject(prototype, properties) {
-  var result
+  var result;
   /* istanbul ignore next */
   if (typeof Object.create === 'function') {
-    result = Object.create(prototype)
+    result = Object.create(prototype);
   } else {
-    Constructor.prototype = prototype
-    result = new Constructor()
-    Constructor.prototype = null
+    Constructor.prototype = prototype;
+    result = new Constructor();
+    Constructor.prototype = null;
   }
 
   if (properties) {
-    extendObject(true, result, properties)
+    extendObject(true, result, properties);
   }
 
-  return result
+  return result;
 }
 
 /**
@@ -94,32 +94,32 @@ function createObject(prototype, properties) {
  * @public
  */
 function extend(name, constructor, prototype, statics) {
-  var superConstructor = this
+  var superConstructor = this;
 
   if (typeof name !== 'string') {
-    statics = prototype
-    prototype = constructor
-    constructor = name
-    name = null
+    statics = prototype;
+    prototype = constructor;
+    constructor = name;
+    name = null;
   }
 
   if (typeof constructor !== 'function') {
-    statics = prototype
-    prototype = constructor
+    statics = prototype;
+    prototype = constructor;
     constructor = function() {
-      return superConstructor.apply(this, arguments)
-    }
+      return superConstructor.apply(this, arguments);
+    };
   }
 
-  extendObject(false, constructor, superConstructor, statics)
+  extendObject(false, constructor, superConstructor, statics);
 
-  constructor.prototype = createObject(superConstructor.prototype, prototype)
-  constructor.prototype.constructor = constructor
+  constructor.prototype = createObject(superConstructor.prototype, prototype);
+  constructor.prototype.constructor = constructor;
 
-  constructor.class_ = name || superConstructor.class_
-  constructor.super_ = superConstructor
+  constructor.class_ = name || superConstructor.class_;
+  constructor.super_ = superConstructor;
 
-  return constructor
+  return constructor;
 }
 
 /**
@@ -135,20 +135,20 @@ function extend(name, constructor, prototype, statics) {
  * @private
  */
 function extendObject(own, target, sources) {
-  sources = slice.call(arguments, 2)
+  sources = slice.call(arguments, 2);
 
-  var property
-  var source
+  var property;
+  var source;
 
   for (var i = 0, length = sources.length; i < length; i++) {
-    source = sources[i]
+    source = sources[i];
 
     for (property in source) {
       if (!own || hasOwnProperty.call(source, property)) {
-        target[property] = source[property]
+        target[property] = source[property];
       }
     }
   }
 }
 
-module.exports = extend
+module.exports = extend;

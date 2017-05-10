@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,58 +20,58 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var expect = require('chai').expect
+var expect = require('chai').expect;
 
-var DateEqualsComparator = require('../../../src/equals/comparators/date-comparator')
-var equals = require('../../../src/equals/index')
-var EqualsContext = require('../../../src/equals/context')
-var EqualsComparator = require('../../../src/equals/comparators/comparator')
+var DateEqualsComparator = require('../../../src/equals/comparators/date-comparator');
+var equals = require('../../../src/equals/index');
+var EqualsContext = require('../../../src/equals/context');
+var EqualsComparator = require('../../../src/equals/comparators/comparator');
 
 describe('equals/comparators/date-comparator:DateEqualsComparator', function() {
-  var comparator
+  var comparator;
 
   before(function() {
-    comparator = new DateEqualsComparator()
-  })
+    comparator = new DateEqualsComparator();
+  });
 
   it('should be a EqualsComparator', function() {
-    expect(comparator).to.be.an.instanceof(EqualsComparator)
-  })
+    expect(comparator).to.be.an.instanceof(EqualsComparator);
+  });
 
   describe('#compare', function() {
     context('when date values are equal', function() {
       it('should return true', function() {
-        var date = new Date()
+        var date = new Date();
 
-        expect(comparator.compare(new EqualsContext(date, new Date(date.getTime()), equals))).to.be.true
-        expect(comparator.compare(new EqualsContext(new Date(0), new Date(0), equals))).to.be.true
-      })
-    })
+        expect(comparator.compare(new EqualsContext(date, new Date(date.getTime()), equals))).to.be.true;
+        expect(comparator.compare(new EqualsContext(new Date(0), new Date(0), equals))).to.be.true;
+      });
+    });
 
     context('when date values are not equal', function() {
       it('should return false', function() {
-        expect(comparator.compare(new EqualsContext(new Date(), new Date(0), equals))).to.be.false
-      })
-    })
-  })
+        expect(comparator.compare(new EqualsContext(new Date(), new Date(0), equals))).to.be.false;
+      });
+    });
+  });
 
   describe('#supports', function() {
     it('should return true for date values', function() {
-      expect(comparator.supports(new EqualsContext(new Date(), null, equals))).to.be.true
-    })
+      expect(comparator.supports(new EqualsContext(new Date(), null, equals))).to.be.true;
+    });
 
     it('should return false for other values', function() {
-      expect(comparator.supports(new EqualsContext(true, null, equals))).to.be.false
-      expect(comparator.supports(new EqualsContext(123, null, equals))).to.be.false
-      expect(comparator.supports(new EqualsContext('foo', null, equals))).to.be.false
-      expect(comparator.supports(new EqualsContext(function foo() {}, null, equals))).to.be.false
-      expect(comparator.supports(new EqualsContext(/foo/, null, equals))).to.be.false
-      expect(comparator.supports(new EqualsContext([ 'foo', 'bar' ], null, equals))).to.be.false
-      expect(comparator.supports(new EqualsContext({ foo: 'bar' }, null, equals))).to.be.false
-      expect(comparator.supports(new EqualsContext(new Map(), null, equals))).to.be.false
-      expect(comparator.supports(new EqualsContext(new Set(), null, equals))).to.be.false
-    })
-  })
-})
+      expect(comparator.supports(new EqualsContext(true, null, equals))).to.be.false;
+      expect(comparator.supports(new EqualsContext(123, null, equals))).to.be.false;
+      expect(comparator.supports(new EqualsContext('foo', null, equals))).to.be.false;
+      expect(comparator.supports(new EqualsContext(function foo() {}, null, equals))).to.be.false;
+      expect(comparator.supports(new EqualsContext(/foo/, null, equals))).to.be.false;
+      expect(comparator.supports(new EqualsContext([ 'foo', 'bar' ], null, equals))).to.be.false;
+      expect(comparator.supports(new EqualsContext({ foo: 'bar' }, null, equals))).to.be.false;
+      expect(comparator.supports(new EqualsContext(new Map(), null, equals))).to.be.false;
+      expect(comparator.supports(new EqualsContext(new Set(), null, equals))).to.be.false;
+    });
+  });
+});

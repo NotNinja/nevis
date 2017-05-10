@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,89 +20,89 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var expect = require('chai').expect
+var expect = require('chai').expect;
 
-var equals = require('../../../src/equals/index')
-var EqualsContext = require('../../../src/equals/context')
-var EqualsComparator = require('../../../src/equals/comparators/comparator')
-var ToStringEqualsComparator = require('../../../src/equals/comparators/to-string-comparator')
+var equals = require('../../../src/equals/index');
+var EqualsContext = require('../../../src/equals/context');
+var EqualsComparator = require('../../../src/equals/comparators/comparator');
+var ToStringEqualsComparator = require('../../../src/equals/comparators/to-string-comparator');
 
 describe('equals/comparators/to-string-comparator:ToStringEqualsComparator', function() {
-  var comparator
+  var comparator;
 
   before(function() {
-    comparator = new ToStringEqualsComparator()
-  })
+    comparator = new ToStringEqualsComparator();
+  });
 
   it('should be a EqualsComparator', function() {
-    expect(comparator).to.be.an.instanceof(EqualsComparator)
-  })
+    expect(comparator).to.be.an.instanceof(EqualsComparator);
+  });
 
   describe('#compare', function() {
     context('when function values are equal', function() {
       it('should return true', function() {
-        expect(comparator.compare(new EqualsContext(function() {}, function() {}, equals))).to.be.true
-        expect(comparator.compare(new EqualsContext(function foo() {}, function foo() {}, equals))).to.be.true
+        expect(comparator.compare(new EqualsContext(function() {}, function() {}, equals))).to.be.true;
+        expect(comparator.compare(new EqualsContext(function foo() {}, function foo() {}, equals))).to.be.true;
         expect(comparator.compare(new EqualsContext(function foo() {
-          return 123
+          return 123;
         }, function foo() {
-          return 123
-        }, equals))).to.be.true
-      })
-    })
+          return 123;
+        }, equals))).to.be.true;
+      });
+    });
 
     context('when function values are not equal', function() {
       it('should return false', function() {
         expect(comparator.compare(new EqualsContext(function() {}, function() {
-          return 123
-        }, equals))).to.be.false
-        expect(comparator.compare(new EqualsContext(function() {}, function foo() {}, equals))).to.be.false
-        expect(comparator.compare(new EqualsContext(function foo() {}, function bar() {}, equals))).to.be.false
+          return 123;
+        }, equals))).to.be.false;
+        expect(comparator.compare(new EqualsContext(function() {}, function foo() {}, equals))).to.be.false;
+        expect(comparator.compare(new EqualsContext(function foo() {}, function bar() {}, equals))).to.be.false;
         expect(comparator.compare(new EqualsContext(function foo() {
-          return 123
+          return 123;
         }, function foo() {
-          return '123'
-        }, equals))).to.be.false
-      })
-    })
+          return '123';
+        }, equals))).to.be.false;
+      });
+    });
 
     context('when regular expression values are equal', function() {
       it('should return true', function() {
-        expect(comparator.compare(new EqualsContext(/foo/, /foo/, equals))).to.be.true
-        expect(comparator.compare(new EqualsContext(/foo/i, /foo/i, equals))).to.be.true
-      })
-    })
+        expect(comparator.compare(new EqualsContext(/foo/, /foo/, equals))).to.be.true;
+        expect(comparator.compare(new EqualsContext(/foo/i, /foo/i, equals))).to.be.true;
+      });
+    });
 
     context('when regular expression values are not equal', function() {
       it('should return false', function() {
-        expect(comparator.compare(new EqualsContext(/foo/, /bar/, equals))).to.be.false
-        expect(comparator.compare(new EqualsContext(/foo/i, /foo/, equals))).to.be.false
-        expect(comparator.compare(new EqualsContext(/foo/i, /foo/, equals))).to.be.false
-        expect(comparator.compare(new EqualsContext(/foo/i, /bar/i, equals))).to.be.false
-      })
-    })
-  })
+        expect(comparator.compare(new EqualsContext(/foo/, /bar/, equals))).to.be.false;
+        expect(comparator.compare(new EqualsContext(/foo/i, /foo/, equals))).to.be.false;
+        expect(comparator.compare(new EqualsContext(/foo/i, /foo/, equals))).to.be.false;
+        expect(comparator.compare(new EqualsContext(/foo/i, /bar/i, equals))).to.be.false;
+      });
+    });
+  });
 
   describe('#supports', function() {
     it('should return true for function values', function() {
-      expect(comparator.supports(new EqualsContext(function foo() {}, null, equals))).to.be.true
-    })
+      expect(comparator.supports(new EqualsContext(function foo() {}, null, equals))).to.be.true;
+    });
 
     it('should return true for regular expression values', function() {
-      expect(comparator.supports(new EqualsContext(/foo/, null, equals))).to.be.true
-    })
+      expect(comparator.supports(new EqualsContext(/foo/, null, equals))).to.be.true;
+    });
 
     it('should return false for other values', function() {
-      expect(comparator.supports(new EqualsContext(true, null, equals))).to.be.false
-      expect(comparator.supports(new EqualsContext(123, null, equals))).to.be.false
-      expect(comparator.supports(new EqualsContext('foo', null, equals))).to.be.false
-      expect(comparator.supports(new EqualsContext(new Date(), null, equals))).to.be.false
-      expect(comparator.supports(new EqualsContext([ 'foo', 'bar' ], null, equals))).to.be.false
-      expect(comparator.supports(new EqualsContext({ foo: 'bar' }, null, equals))).to.be.false
-      expect(comparator.supports(new EqualsContext(new Map(), null, equals))).to.be.false
-      expect(comparator.supports(new EqualsContext(new Set(), null, equals))).to.be.false
-    })
-  })
-})
+      expect(comparator.supports(new EqualsContext(true, null, equals))).to.be.false;
+      expect(comparator.supports(new EqualsContext(123, null, equals))).to.be.false;
+      expect(comparator.supports(new EqualsContext('foo', null, equals))).to.be.false;
+      expect(comparator.supports(new EqualsContext(new Date(), null, equals))).to.be.false;
+      expect(comparator.supports(new EqualsContext([ 'foo', 'bar' ], null, equals))).to.be.false;
+      expect(comparator.supports(new EqualsContext({ foo: 'bar' }, null, equals))).to.be.false;
+      expect(comparator.supports(new EqualsContext(new Map(), null, equals))).to.be.false;
+      expect(comparator.supports(new EqualsContext(new Set(), null, equals))).to.be.false;
+    });
+  });
+});

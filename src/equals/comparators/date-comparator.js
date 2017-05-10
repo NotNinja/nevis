@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var EqualsComparator = require('./comparator')
+var EqualsComparator = require('./comparator');
 
 /**
  * An implementation of {@link EqualsComparator} that supports date values.
@@ -39,7 +39,7 @@ var DateEqualsComparator = EqualsComparator.extend({
    * @memberof DateEqualsComparator#
    */
   compare: function compare(context) {
-    return context.value.getTime() === context.other.getTime()
+    return context.value.getTime() === context.other.getTime();
   },
 
   /**
@@ -48,9 +48,9 @@ var DateEqualsComparator = EqualsComparator.extend({
    * @memberof DateEqualsComparator#
    */
   supports: function supports(context) {
-    return context.string === '[object Date]'
+    return context.string === '[object Date]';
   }
 
-})
+});
 
-module.exports = DateEqualsComparator
+module.exports = DateEqualsComparator;

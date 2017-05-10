@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
 /**
  * Contains the values whose equality is to be tested as well as the string representation and type for the value which
@@ -39,7 +39,7 @@
  */
 function EqualsContext(value, other, equals, options) {
   if (options == null) {
-    options = {}
+    options = {};
   }
 
   /**
@@ -48,7 +48,7 @@ function EqualsContext(value, other, equals, options) {
    * @private
    * @type {Function}
    */
-  this._equals = equals
+  this._equals = equals;
 
   /**
    * The options to be used to test equality for both of the values.
@@ -58,13 +58,13 @@ function EqualsContext(value, other, equals, options) {
    */
   this.options = {
     filterProperty: options.filterProperty != null ? options.filterProperty : function() {
-      return true
+      return true;
     },
     ignoreCase: Boolean(options.ignoreCase),
     ignoreEquals: Boolean(options.ignoreEquals),
     ignoreInherited: Boolean(options.ignoreInherited),
     ignoreMethods: Boolean(options.ignoreMethods)
-  }
+  };
 
   /**
    * The other value to be checked against the <code>value</code>.
@@ -72,7 +72,7 @@ function EqualsContext(value, other, equals, options) {
    * @public
    * @type {*}
    */
-  this.other = other
+  this.other = other;
 
   /**
    * The string representation of the values to be tested for equality.
@@ -83,7 +83,7 @@ function EqualsContext(value, other, equals, options) {
    * @public
    * @type {string}
    */
-  this.string = Object.prototype.toString.call(value)
+  this.string = Object.prototype.toString.call(value);
 
   /**
    * The type of the values to be tested for equality.
@@ -93,7 +93,7 @@ function EqualsContext(value, other, equals, options) {
    * @public
    * @type {string}
    */
-  this.type = typeof value
+  this.type = typeof value;
 
   /**
    * The value to be checked against the <code>other</code>.
@@ -101,7 +101,7 @@ function EqualsContext(value, other, equals, options) {
    * @public
    * @type {*}
    */
-  this.value = value
+  this.value = value;
 }
 
 /**
@@ -118,8 +118,8 @@ function EqualsContext(value, other, equals, options) {
  * @memberof EqualsContext#
  */
 EqualsContext.prototype.copy = function copy(value, other) {
-  return new EqualsContext(value, other, this._equals, this.options)
-}
+  return new EqualsContext(value, other, this._equals, this.options);
+};
 
 /**
  * A convenient shorthand for calling {@link Nevis.equals} from within an {@link EqualsComparator}.
@@ -134,8 +134,8 @@ EqualsContext.prototype.copy = function copy(value, other) {
  * @memberof EqualsContext#
  */
 EqualsContext.prototype.equals = function equals(value, other) {
-  return this._equals(value, other, this.options)
-}
+  return this._equals(value, other, this.options);
+};
 
 /**
  * Validates this {@link EqualsContext} by checking whether its values share the same type.
@@ -148,7 +148,7 @@ EqualsContext.prototype.equals = function equals(value, other) {
  * @memberof EqualsContext#
  */
 EqualsContext.prototype.validate = function validate() {
-  return this.string === Object.prototype.toString.call(this.other) && this.type === typeof this.other
-}
+  return this.string === Object.prototype.toString.call(this.other) && this.type === typeof this.other;
+};
 
-module.exports = EqualsContext
+module.exports = EqualsContext;
