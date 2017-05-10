@@ -35,15 +35,6 @@ module.exports = function(grunt) {
       test: [ 'coverage/' ]
     },
 
-    coveralls: {
-      options: {
-        force: true
-      },
-      reportCoverage: {
-        src: [ 'coverage/lcov.info' ]
-      }
-    },
-
     eslint: {
       target: [
         'src/**/*.js',

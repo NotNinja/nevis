@@ -10,7 +10,7 @@
 [Nevis](https://github.com/NotNinja/nevis) brings more of the Object-Orientated Programming (OOP) model to JavaScript.
 
 [![Build Status](https://img.shields.io/travis/NotNinja/nevis/develop.svg?style=flat-square)](https://travis-ci.org/NotNinja/nevis)
-[![Coverage](https://img.shields.io/coveralls/NotNinja/nevis/develop.svg?style=flat-square)](https://coveralls.io/github/NotNinja/nevis)
+[![Coverage](https://img.shields.io/codecov/c/github/NotNinja/nevis/develop.svg?style=flat-square)](https://codecov.io/gh/NotNinja/nevis)
 [![Dev Dependency Status](https://img.shields.io/david/dev/NotNinja/nevis.svg?style=flat-square)](https://david-dm.org/NotNinja/nevis?type=dev)
 [![License](https://img.shields.io/npm/l/nevis.svg?style=flat-square)](https://github.com/NotNinja/nevis/blob/master/LICENSE.md)
 [![Release](https://img.shields.io/npm/v/nevis.svg?style=flat-square)](https://www.npmjs.com/package/nevis)
