@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,14 +20,14 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var EqualsBuilder = require('./equals/builder')
-var HashCodeBuilder = require('./hash-code/builder')
-var Nevis = require('./nevis')
-var staticEquals = require('./equals')
-var staticHashCode = require('./hash-code')
-var staticToString = require('./to-string')
+var EqualsBuilder = require('./equals/builder');
+var HashCodeBuilder = require('./hash-code/builder');
+var Nevis = require('./nevis');
+var staticEquals = require('./equals');
+var staticHashCode = require('./hash-code');
+var staticToString = require('./to-string');
 
 /**
  * Returns whether the specified <code>value</code> is "equal to" the <code>other</code> provided using the given
@@ -73,7 +73,7 @@ var staticToString = require('./to-string')
  * @static
  * @memberof Nevis
  */
-Nevis.equals = staticEquals
+Nevis.equals = staticEquals;
 
 /**
  * Assists in building good equals for complex classes.
@@ -83,7 +83,7 @@ Nevis.equals = staticEquals
  * @constructor
  * @memberof Nevis
  */
-Nevis.EqualsBuilder = EqualsBuilder
+Nevis.EqualsBuilder = EqualsBuilder;
 
 /**
  * Returns a hash code for the specified <code>value</code> using the <code>options</code> provided. This method is
@@ -119,7 +119,7 @@ Nevis.EqualsBuilder = EqualsBuilder
  * @static
  * @memberof Nevis
  */
-Nevis.hashCode = staticHashCode
+Nevis.hashCode = staticHashCode;
 
 /**
  * Assists in building hash codes for complex classes.
@@ -137,7 +137,7 @@ Nevis.hashCode = staticHashCode
  * @constructor
  * @memberof Nevis
  */
-Nevis.HashCodeBuilder = HashCodeBuilder
+Nevis.HashCodeBuilder = HashCodeBuilder;
 
 /**
  * Returns the result of calling the <code>toString</code> method on the specified <code>value</code> when it is
@@ -152,7 +152,7 @@ Nevis.HashCodeBuilder = HashCodeBuilder
  * @static
  * @memberof Nevis
  */
-Nevis.toString = staticToString
+Nevis.toString = staticToString;
 
 /**
  * Returns whether this instance is "equal to" the specified <code>obj</code>.
@@ -191,8 +191,8 @@ Nevis.toString = staticToString
  * @memberof Nevis#
  */
 Nevis.prototype.equals = function equals(obj) {
-  return this === obj
-}
+  return this === obj;
+};
 
 /**
  * Returns the hash code for this instance. This method is supported for the benefit of hash tables.
@@ -222,8 +222,8 @@ Nevis.prototype.equals = function equals(obj) {
  * @memberof Nevis#
  */
 Nevis.prototype.hashCode = function hashCode() {
-  return staticHashCode(this, { ignoreHashCode: true })
-}
+  return staticHashCode(this, { ignoreHashCode: true });
+};
 
 /**
  * Returns a string representation of this instance.
@@ -239,7 +239,7 @@ Nevis.prototype.hashCode = function hashCode() {
  * @memberof Nevis#
  */
 Nevis.prototype.toString = function toString() {
-  return this.constructor.class_ + '@' + this.hashCode().toString(16)
-}
+  return this.constructor.class_ + '@' + this.hashCode().toString(16);
+};
 
-module.exports = Nevis
+module.exports = Nevis;

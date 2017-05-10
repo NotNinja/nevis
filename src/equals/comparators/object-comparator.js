@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var HashEqualsComparator = require('./hash-comparator')
+var HashEqualsComparator = require('./hash-comparator');
 
 /**
  * An implementation of {@link HashEqualsComparator} that supports plain old object values.
@@ -39,21 +39,21 @@ var ObjectEqualsComparator = HashEqualsComparator.extend({
    * @memberof ObjectEqualsComparator#
    */
   getKeys: function getKeys(hash, context) {
-    var keys = []
-    var options = context.options
-    var value
+    var keys = [];
+    var options = context.options;
+    var value;
 
     for (var key in hash) {
       if (!options.ignoreInherited || Object.prototype.hasOwnProperty.call(hash, key)) {
-        value = this.getValue(hash, key, context)
+        value = this.getValue(hash, key, context);
 
         if ((typeof value !== 'function' || !options.ignoreMethods) && options.filterProperty(key, value, hash)) {
-          keys.push(key)
+          keys.push(key);
         }
       }
     }
 
-    return keys
+    return keys;
   },
 
   /**
@@ -62,7 +62,7 @@ var ObjectEqualsComparator = HashEqualsComparator.extend({
    * @memberof ObjectEqualsComparator#
    */
   getValue: function getValue(hash, key) {
-    return hash[key]
+    return hash[key];
   },
 
   /**
@@ -71,9 +71,9 @@ var ObjectEqualsComparator = HashEqualsComparator.extend({
    * @memberof ObjectEqualsComparator#
    */
   supports: function supports(context) {
-    return context.type === 'object'
+    return context.type === 'object';
   }
 
-})
+});
 
-module.exports = ObjectEqualsComparator
+module.exports = ObjectEqualsComparator;

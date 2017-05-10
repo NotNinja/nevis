@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var extend = require('../../extend')
+var extend = require('../../extend');
 
 /**
  * Responsible for generating a hash code for a specific {@link HashCodeContext}.
@@ -38,8 +38,8 @@ var extend = require('../../extend')
  * @constructor
  */
 function HashCodeGenerator() {}
-HashCodeGenerator.class_ = 'HashCodeGenerator'
-HashCodeGenerator.super_ = Object
+HashCodeGenerator.class_ = 'HashCodeGenerator';
+HashCodeGenerator.super_ = Object;
 
 /**
  * Extends the constructor to which this method is associated with the <code>prototype</code> and/or
@@ -64,7 +64,7 @@ HashCodeGenerator.super_ = Object
  * @static
  * @memberof HashCodeGenerator
  */
-HashCodeGenerator.extend = extend
+HashCodeGenerator.extend = extend;
 
 /**
  * Returns a hash code for the specified <code>context</code>.
@@ -78,7 +78,7 @@ HashCodeGenerator.extend = extend
  * @abstract
  * @memberof HashCodeGenerator#
  */
-HashCodeGenerator.prototype.generate = /* istanbul ignore next */ function generate(context) {}
+HashCodeGenerator.prototype.generate = /* istanbul ignore next */ function generate(context) {};
 
 /**
  * Returns whether this {@link HashCodeGenerator} supports the specified <code>context</code>.
@@ -93,6 +93,6 @@ HashCodeGenerator.prototype.generate = /* istanbul ignore next */ function gener
  * @abstract
  * @memberof HashCodeGenerator#
  */
-HashCodeGenerator.prototype.supports = /* istanbul ignore next */ function supports(context) {}
+HashCodeGenerator.prototype.supports = /* istanbul ignore next */ function supports(context) {};
 
-module.exports = HashCodeGenerator
+module.exports = HashCodeGenerator;

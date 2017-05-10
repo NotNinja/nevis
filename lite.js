@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +20,6 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-module.exports = require('./src/nevis')
+module.exports = require('./src/nevis');

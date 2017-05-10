@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,52 +20,52 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var expect = require('chai').expect
+var expect = require('chai').expect;
 
-var CachingHashCodeGenerator = require('../../../src/hash-code/generators/caching-generator')
-var hashCode = require('../../../src/hash-code/index')
-var HashCodeContext = require('../../../src/hash-code/context')
-var StringHashCodeGenerator = require('../../../src/hash-code/generators/string-generator')
+var CachingHashCodeGenerator = require('../../../src/hash-code/generators/caching-generator');
+var hashCode = require('../../../src/hash-code/index');
+var HashCodeContext = require('../../../src/hash-code/context');
+var StringHashCodeGenerator = require('../../../src/hash-code/generators/string-generator');
 
 describe('hash-code/generators/string-generator:StringHashCodeGenerator', function() {
-  var generator
+  var generator;
 
   before(function() {
-    generator = new StringHashCodeGenerator()
-  })
+    generator = new StringHashCodeGenerator();
+  });
 
   it('should be a CachingHashCodeGenerator', function() {
-    expect(generator).to.be.an.instanceof(CachingHashCodeGenerator)
-  })
+    expect(generator).to.be.an.instanceof(CachingHashCodeGenerator);
+  });
 
   describe('#generate', function() {
     it('should generate hash code for string values', function() {
-      expect(generator.generate(new HashCodeContext('', hashCode))).to.equal(0)
-      expect(generator.generate(new HashCodeContext(' ', hashCode))).to.equal(32)
-      expect(generator.generate(new HashCodeContext('foo', hashCode))).to.equal(101574)
-      expect(generator.generate(new HashCodeContext('foo\n\t  bar', hashCode))).to.equal(-876704082)
-      expect(generator.generate(new HashCodeContext(' bar ', hashCode))).to.equal(32568973)
-      expect(generator.generate(new HashCodeContext('i love generating hash codes', hashCode))).to.equal(1762106987)
-    })
-  })
+      expect(generator.generate(new HashCodeContext('', hashCode))).to.equal(0);
+      expect(generator.generate(new HashCodeContext(' ', hashCode))).to.equal(32);
+      expect(generator.generate(new HashCodeContext('foo', hashCode))).to.equal(101574);
+      expect(generator.generate(new HashCodeContext('foo\n\t  bar', hashCode))).to.equal(-876704082);
+      expect(generator.generate(new HashCodeContext(' bar ', hashCode))).to.equal(32568973);
+      expect(generator.generate(new HashCodeContext('i love generating hash codes', hashCode))).to.equal(1762106987);
+    });
+  });
 
   describe('#supports', function() {
     it('should return true for string values', function() {
-      expect(generator.supports(new HashCodeContext('foo', hashCode))).to.be.true
-    })
+      expect(generator.supports(new HashCodeContext('foo', hashCode))).to.be.true;
+    });
 
     it('should return false for other values', function() {
-      expect(generator.supports(new HashCodeContext(true, hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext(123, hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext(function foo() {}, hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext(/foo/, hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext(new Date(), hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext([ 'foo', 'bar' ], hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext({ foo: 'bar' }, hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext(new Map(), hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext(new Set(), hashCode))).to.be.false
-    })
-  })
-})
+      expect(generator.supports(new HashCodeContext(true, hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext(123, hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext(function foo() {}, hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext(/foo/, hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext(new Date(), hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext([ 'foo', 'bar' ], hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext({ foo: 'bar' }, hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext(new Map(), hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext(new Set(), hashCode))).to.be.false;
+    });
+  });
+});

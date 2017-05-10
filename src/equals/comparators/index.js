@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,19 +20,19 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var ArrayEqualsComparator = require('./array-comparator')
-var CollectionEqualsComparator = require('./collection-comparator')
-var DateEqualsComparator = require('./date-comparator')
-var EqualsComparator = require('./comparator')
-var HashEqualsComparator = require('./hash-comparator')
-var MapEqualsComparator = require('./map-comparator')
-var NumberEqualsComparator = require('./number-comparator')
-var ObjectEqualsComparator = require('./object-comparator')
-var SetEqualsComparator = require('./set-comparator')
-var StringEqualsComparator = require('./string-comparator')
-var ToStringEqualsComparator = require('./to-string-comparator')
+var ArrayEqualsComparator = require('./array-comparator');
+var CollectionEqualsComparator = require('./collection-comparator');
+var DateEqualsComparator = require('./date-comparator');
+var EqualsComparator = require('./comparator');
+var HashEqualsComparator = require('./hash-comparator');
+var MapEqualsComparator = require('./map-comparator');
+var NumberEqualsComparator = require('./number-comparator');
+var ObjectEqualsComparator = require('./object-comparator');
+var SetEqualsComparator = require('./set-comparator');
+var StringEqualsComparator = require('./string-comparator');
+var ToStringEqualsComparator = require('./to-string-comparator');
 
 /**
  * A hash containing constructors for all equals comparators.
@@ -52,4 +52,4 @@ module.exports = {
   SetEqualsComparator: SetEqualsComparator,
   StringEqualsComparator: StringEqualsComparator,
   ToStringEqualsComparator: ToStringEqualsComparator
-}
+};

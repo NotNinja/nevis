@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
 /**
  * Returns the result of calling the <code>toString</code> method on the specified <code>value</code> when it is
@@ -35,13 +35,13 @@
  */
 function toString(value) {
   if (typeof value === 'undefined') {
-    return 'undefined'
+    return 'undefined';
   }
   if (value == null) {
-    return 'null'
+    return 'null';
   }
 
-  return value.toString()
+  return value.toString();
 }
 
-module.exports = toString
+module.exports = toString;

@@ -5,7 +5,7 @@
 }(this, (function () { 'use strict';
 
   /*
-   * Copyright (C) 2017 Alasdair Mercer, Skelp
+   * Copyright (C) 2017 Alasdair Mercer, !ninja
    *
    * Permission is hereby granted, free of charge, to any person obtaining a copy
    * of this software and associated documentation files (the "Software"), to deal
@@ -44,7 +44,7 @@
     'Float32Array',
     'Float64Array'
   ].map(function(str) {
-    return '[object ' + str + ']'
+    return '[object ' + str + ']';
   });
 
   var arrays = {
@@ -52,7 +52,7 @@
   };
 
   /*
-   * Copyright (C) 2017 Alasdair Mercer, Skelp
+   * Copyright (C) 2017 Alasdair Mercer, !ninja
    *
    * Permission is hereby granted, free of charge, to any person obtaining a copy
    * of this software and associated documentation files (the "Software"), to deal
@@ -120,7 +120,7 @@
       extendObject(true, result, properties);
     }
 
-    return result
+    return result;
   }
 
   /**
@@ -158,7 +158,7 @@
       statics = prototype;
       prototype = constructor;
       constructor = function() {
-        return superConstructor.apply(this, arguments)
+        return superConstructor.apply(this, arguments);
       };
     }
 
@@ -170,7 +170,7 @@
     constructor.class_ = name || superConstructor.class_;
     constructor.super_ = superConstructor;
 
-    return constructor
+    return constructor;
   }
 
   /**
@@ -306,16 +306,16 @@
       var length = elements.length;
 
       if (length !== otherElements.length) {
-        return false
+        return false;
       }
 
       while (length--) {
         if (!context.equals(elements[length], otherElements[length])) {
-          return false
+          return false;
         }
       }
 
-      return true
+      return true;
     },
 
     /**
@@ -349,7 +349,7 @@
      * @memberof ArrayEqualsComparator#
      */
     getElements: function getElements(collection) {
-      return collection
+      return collection;
     },
 
     /**
@@ -358,7 +358,7 @@
      * @memberof ArrayEqualsComparator#
      */
     supports: function supports(context) {
-      return arrays.typeStrings.indexOf(context.string) >= 0
+      return arrays.typeStrings.indexOf(context.string) >= 0;
     }
 
   });
@@ -380,7 +380,7 @@
      * @memberof DateEqualsComparator#
      */
     compare: function compare(context) {
-      return context.value.getTime() === context.other.getTime()
+      return context.value.getTime() === context.other.getTime();
     },
 
     /**
@@ -389,7 +389,7 @@
      * @memberof DateEqualsComparator#
      */
     supports: function supports(context) {
-      return context.string === '[object Date]'
+      return context.string === '[object Date]';
     }
 
   });
@@ -423,7 +423,7 @@
       var length = keys.length;
 
       if (length !== this.getKeys(other, context).length) {
-        return false
+        return false;
       }
 
       var key;
@@ -432,11 +432,11 @@
         key = keys[length];
 
         if (!context.equals(this.getValue(value, key, context), this.getValue(other, key, context))) {
-          return false
+          return false;
         }
       }
 
-      return true
+      return true;
     },
 
     /**
@@ -485,7 +485,7 @@
      * @memberof MapEqualsComparator#
      */
     getKeys: function getKeys(hash) {
-      return Array.from(hash.keys())
+      return Array.from(hash.keys());
     },
 
     /**
@@ -494,7 +494,7 @@
      * @memberof MapEqualsComparator#
      */
     getValue: function getValue(hash, key) {
-      return hash.get(key)
+      return hash.get(key);
     },
 
     /**
@@ -503,7 +503,7 @@
      * @memberof MapEqualsComparator#
      */
     supports: function supports(context) {
-      return context.string === '[object Map]'
+      return context.string === '[object Map]';
     }
 
   });
@@ -525,7 +525,7 @@
      * @memberof NumberEqualsComparator#
      */
     compare: function compare(context) {
-      return context.value !== context.value ? context.other !== context.other : context.value === context.other
+      return context.value !== context.value ? context.other !== context.other : context.value === context.other;
     },
 
     /**
@@ -534,7 +534,7 @@
      * @memberof NumberEqualsComparator#
      */
     supports: function supports(context) {
-      return context.type === 'number'
+      return context.type === 'number';
     }
 
   });
@@ -570,7 +570,7 @@
         }
       }
 
-      return keys
+      return keys;
     },
 
     /**
@@ -579,7 +579,7 @@
      * @memberof ObjectEqualsComparator#
      */
     getValue: function getValue(hash, key) {
-      return hash[key]
+      return hash[key];
     },
 
     /**
@@ -588,7 +588,7 @@
      * @memberof ObjectEqualsComparator#
      */
     supports: function supports(context) {
-      return context.type === 'object'
+      return context.type === 'object';
     }
 
   });
@@ -610,7 +610,7 @@
      * @memberof SetEqualsComparator#
      */
     getElements: function getElements(collection) {
-      return Array.from(collection)
+      return Array.from(collection);
     },
 
     /**
@@ -619,7 +619,7 @@
      * @memberof SetEqualsComparator#
      */
     supports: function supports(context) {
-      return context.string === '[object Set]'
+      return context.string === '[object Set]';
     }
 
   });
@@ -649,7 +649,7 @@
         value = value.toLocaleUpperCase();
       }
 
-      return value === other
+      return value === other;
     },
 
     /**
@@ -658,7 +658,7 @@
      * @memberof StringEqualsComparator#
      */
     supports: function supports(context) {
-      return context.type === 'string'
+      return context.type === 'string';
     }
 
   });
@@ -683,7 +683,7 @@
      * @memberof ToStringEqualsComparator#
      */
     compare: function compare(context) {
-      return context.value.toString() === context.other.toString()
+      return context.value.toString() === context.other.toString();
     },
 
     /**
@@ -692,7 +692,7 @@
      * @memberof ToStringEqualsComparator#
      */
     supports: function supports(context) {
-      return context.type === 'function' || context.string === '[object RegExp]'
+      return context.type === 'function' || context.string === '[object RegExp]';
     }
 
   });
@@ -720,7 +720,7 @@
   };
 
   /*
-   * Copyright (C) 2017 Alasdair Mercer, Skelp
+   * Copyright (C) 2017 Alasdair Mercer, !ninja
    *
    * Permission is hereby granted, free of charge, to any person obtaining a copy
    * of this software and associated documentation files (the "Software"), to deal
@@ -777,7 +777,7 @@
      */
     this.options = {
       filterProperty: options.filterProperty != null ? options.filterProperty : function() {
-        return true
+        return true;
       },
       ignoreCase: Boolean(options.ignoreCase),
       ignoreEquals: Boolean(options.ignoreEquals),
@@ -837,7 +837,7 @@
    * @memberof EqualsContext#
    */
   EqualsContext.prototype.copy = function copy(value, other) {
-    return new EqualsContext(value, other, this._equals, this.options)
+    return new EqualsContext(value, other, this._equals, this.options);
   };
 
   /**
@@ -853,7 +853,7 @@
    * @memberof EqualsContext#
    */
   EqualsContext.prototype.equals = function equals(value, other) {
-    return this._equals(value, other, this.options)
+    return this._equals(value, other, this.options);
   };
 
   /**
@@ -867,7 +867,7 @@
    * @memberof EqualsContext#
    */
   EqualsContext.prototype.validate = function validate() {
-    return this.string === Object.prototype.toString.call(this.other) && this.type === typeof this.other
+    return this.string === Object.prototype.toString.call(this.other) && this.type === typeof this.other;
   };
 
   var context = EqualsContext;
@@ -933,20 +933,20 @@
    */
   function equals(value, other, options) {
     if (value === other) {
-      return true
+      return true;
     }
     if (value == null || other == null) {
-      return value === other
+      return value === other;
     }
 
     var context$$1 = new context(value, other, equals, options);
 
     if (!context$$1.options.ignoreEquals && typeof value.equals === 'function') {
-      return value.equals(other)
+      return value.equals(other);
     }
 
     if (!context$$1.validate()) {
-      return false
+      return false;
     }
 
     var comparator;
@@ -956,11 +956,11 @@
       comparator = activeComparators[i];
 
       if (comparator.supports(context$$1)) {
-        return comparator.compare(context$$1)
+        return comparator.compare(context$$1);
       }
     }
 
-    return false
+    return false;
   }
 
   var index$4 = equals;
@@ -1031,7 +1031,7 @@
       this._equals = index$4(value, other, options);
     }
 
-    return this
+    return this;
   };
 
   /**
@@ -1047,7 +1047,7 @@
       this._equals = superEquals;
     }
 
-    return this
+    return this;
   };
 
   /**
@@ -1058,7 +1058,7 @@
    * @memberof EqualsBuilder#
    */
   EqualsBuilder.prototype.build = function build() {
-    return this._equals
+    return this._equals;
   };
 
   var builder = EqualsBuilder;
@@ -1160,8 +1160,8 @@
       var elements = this.getElements(context);
 
       return elements.reduce(function(hash, element) {
-        return ((31 * hash) + context.hashCode(element)) | 0
-      }, 1)
+        return ((31 * hash) + context.hashCode(element)) | 0;
+      }, 1);
     },
 
     /**
@@ -1195,7 +1195,7 @@
      * @memberof ArrayHashCodeGenerator#
      */
     getElements: function getElements(context) {
-      return context.value
+      return context.value;
     },
 
     /**
@@ -1203,8 +1203,8 @@
      * @override
      * @memberof ArrayHashCodeGenerator#
      */
-    supports: function support(context) {
-      return arrays.typeStrings.indexOf(context.string) >= 0
+    supports: function supports(context) {
+      return arrays.typeStrings.indexOf(context.string) >= 0;
     }
 
   });
@@ -1226,7 +1226,7 @@
      * @memberof BooleanHashCodeGenerator#
      */
     generate: function generate(context) {
-      return context.value ? 1231 : 1237
+      return context.value ? 1231 : 1237;
     },
 
     /**
@@ -1235,7 +1235,7 @@
      * @memberof BooleanHashCodeGenerator#
      */
     supports: function supports(context) {
-      return context.type === 'boolean'
+      return context.type === 'boolean';
     }
 
   });
@@ -1296,7 +1296,7 @@
         }
       }
 
-      return hash
+      return hash;
     },
 
     /**
@@ -1332,7 +1332,7 @@
      * @memberof DateHashCodeGenerator#
      */
     generate: function generate(context) {
-      return context.value.getTime()
+      return context.value.getTime();
     },
 
     /**
@@ -1341,7 +1341,7 @@
      * @memberof DateHashCodeGenerator#
      */
     supports: function supports(context) {
-      return context.string === '[object Date]'
+      return context.string === '[object Date]';
     }
 
   });
@@ -1372,8 +1372,8 @@
       var entries = this.getEntries(context);
 
       return entries.reduce(function(hash, entry) {
-        return hash + (context.hashCode(entry[0]) ^ context.hashCode(entry[1]))
-      }, 0)
+        return hash + (context.hashCode(entry[0]) ^ context.hashCode(entry[1]));
+      }, 0);
     },
 
     /**
@@ -1412,7 +1412,7 @@
      * @memberof MapHashCodeGenerator#
      */
     getEntries: function getEntries(context) {
-      return Array.from(context.value.entries())
+      return Array.from(context.value.entries());
     },
 
     /**
@@ -1421,7 +1421,7 @@
      * @memberof MapHashCodeGenerator#
      */
     supports: function supports(context) {
-      return context.string === '[object Map]'
+      return context.string === '[object Map]';
     }
 
   });
@@ -1458,7 +1458,7 @@
         }
       }
 
-      return entries
+      return entries;
     },
 
     /**
@@ -1467,7 +1467,7 @@
      * @memberof ObjectHashCodeGenerator#
      */
     supports: function supports(context) {
-      return context.type === 'object'
+      return context.type === 'object';
     }
 
   });
@@ -1489,7 +1489,7 @@
      * @memberof SetHashCodeGenerator#
      */
     getElements: function getElements(context) {
-      return Array.from(context.value)
+      return Array.from(context.value);
     },
 
     /**
@@ -1497,8 +1497,8 @@
      * @override
      * @memberof SetHashCodeGenerator#
      */
-    supports: function support(context) {
-      return context.string === '[object Set]'
+    supports: function supports(context) {
+      return context.string === '[object Set]';
     }
 
   });
@@ -1527,7 +1527,7 @@
         hash = ((31 * hash) + context.value.charCodeAt(i)) | 0;
       }
 
-      return hash
+      return hash;
     },
 
     /**
@@ -1536,7 +1536,7 @@
      * @memberof StringHashCodeGenerator#
      */
     supports: function supports(context) {
-      return context.type === 'string'
+      return context.type === 'string';
     }
 
   });
@@ -1561,7 +1561,7 @@
      * @memberof ToStringHashCodeGenerator#
      */
     generate: function generate(context) {
-      return ToStringHashCodeGenerator.super_.prototype.generate.call(this, context.copy(context.value.toString()))
+      return ToStringHashCodeGenerator.super_.prototype.generate.call(this, context.copy(context.value.toString()));
     },
 
     /**
@@ -1570,7 +1570,7 @@
      * @memberof ToStringHashCodeGenerator#
      */
     supports: function supports(context) {
-      return context.type === 'function' || context.type === 'number' || context.string === '[object RegExp]'
+      return context.type === 'function' || context.type === 'number' || context.string === '[object RegExp]';
     }
 
   });
@@ -1599,7 +1599,7 @@
   };
 
   /*
-   * Copyright (C) 2017 Alasdair Mercer, Skelp
+   * Copyright (C) 2017 Alasdair Mercer, !ninja
    *
    * Permission is hereby granted, free of charge, to any person obtaining a copy
    * of this software and associated documentation files (the "Software"), to deal
@@ -1653,7 +1653,7 @@
     this.options = {
       allowCache: options.allowCache !== false,
       filterProperty: options.filterProperty != null ? options.filterProperty : function() {
-        return true
+        return true;
       },
       ignoreHashCode: Boolean(options.ignoreHashCode),
       ignoreInherited: Boolean(options.ignoreInherited),
@@ -1702,7 +1702,7 @@
    * @memberof HashCodeContext#
    */
   HashCodeContext.prototype.copy = function copy(value) {
-    return new HashCodeContext(value, this._hashCode, this.options)
+    return new HashCodeContext(value, this._hashCode, this.options);
   };
 
   /**
@@ -1715,7 +1715,7 @@
    * @memberof HashCodeContext#
    */
   HashCodeContext.prototype.hashCode = function hashCode(value) {
-    return this._hashCode(value, this.options)
+    return this._hashCode(value, this.options);
   };
 
   var context$2 = HashCodeContext;
@@ -1779,13 +1779,13 @@
    */
   function hashCode(value, options) {
     if (value == null) {
-      return 0
+      return 0;
     }
 
     var context = new context$2(value, hashCode, options);
 
     if (!context.options.ignoreHashCode && typeof value.hashCode === 'function') {
-      return value.hashCode()
+      return value.hashCode();
     }
 
     var generator;
@@ -1795,11 +1795,11 @@
       generator = activeGenerators[i];
 
       if (generator.supports(context)) {
-        return generator.generate(context)
+        return generator.generate(context);
       }
     }
 
-    return defaultGenerator.generate(context)
+    return defaultGenerator.generate(context);
   }
 
   /**
@@ -1873,13 +1873,13 @@
     if (initial == null) {
       initial = HashCodeBuilder.DEFAULT_INITIAL_VALUE;
     } else if (initial % 2 === 0) {
-      throw new Error('initial must be an odd number')
+      throw new Error('initial must be an odd number');
     }
 
     if (multiplier == null) {
       multiplier = HashCodeBuilder.DEFAULT_MULTIPLIER_VALUE;
     } else if (multiplier % 2 === 0) {
-      throw new Error('multiplier must be an odd number')
+      throw new Error('multiplier must be an odd number');
     }
 
     /**
@@ -1933,7 +1933,7 @@
   HashCodeBuilder.prototype.append = function append(value, options) {
     this._hash = (this._hash * this._multiplier) + index$8(value, options);
 
-    return this
+    return this;
   };
 
   /**
@@ -1947,7 +1947,7 @@
   HashCodeBuilder.prototype.appendSuper = function appendSuper(superHashCode) {
     this._hash = (this._hash * this._multiplier) + superHashCode;
 
-    return this
+    return this;
   };
 
   /**
@@ -1958,7 +1958,7 @@
    * @memberof HashCodeBuilder#
    */
   HashCodeBuilder.prototype.build = function build() {
-    return this._hash
+    return this._hash;
   };
 
   /**
@@ -1971,7 +1971,7 @@
    * @memberof HashCodeBuilder#
    */
   HashCodeBuilder.prototype.hashCode = function hashCode() {
-    return this._hash
+    return this._hash;
   };
 
   var builder$2 = HashCodeBuilder;
@@ -2014,7 +2014,7 @@
   var nevis = Nevis;
 
   /*
-   * Copyright (C) 2017 Alasdair Mercer, Skelp
+   * Copyright (C) 2017 Alasdair Mercer, !ninja
    *
    * Permission is hereby granted, free of charge, to any person obtaining a copy
    * of this software and associated documentation files (the "Software"), to deal
@@ -2048,13 +2048,13 @@
    */
   function toString(value) {
     if (typeof value === 'undefined') {
-      return 'undefined'
+      return 'undefined';
     }
     if (value == null) {
-      return 'null'
+      return 'null';
     }
 
-    return value.toString()
+    return value.toString();
   }
 
   var index$12 = toString;
@@ -2221,7 +2221,7 @@
    * @memberof Nevis#
    */
   nevis.prototype.equals = function equals(obj) {
-    return this === obj
+    return this === obj;
   };
 
   /**
@@ -2252,7 +2252,7 @@
    * @memberof Nevis#
    */
   nevis.prototype.hashCode = function hashCode() {
-    return index$8(this, { ignoreHashCode: true })
+    return index$8(this, { ignoreHashCode: true });
   };
 
   /**
@@ -2269,7 +2269,7 @@
    * @memberof Nevis#
    */
   nevis.prototype.toString = function toString() {
-    return this.constructor.class_ + '@' + this.hashCode().toString(16)
+    return this.constructor.class_ + '@' + this.hashCode().toString(16);
   };
 
   var index$2 = nevis;

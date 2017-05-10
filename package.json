@@ -2,14 +2,14 @@
   "name": "nevis",
   "version": "0.4.0",
   "description": "Makes JavaScript more object-orientated",
-  "homepage": "https://github.com/Skelp/nevis",
+  "homepage": "https://github.com/NotNinja/nevis",
   "bugs": {
-    "url": "https://github.com/Skelp/nevis/issues"
+    "url": "https://github.com/NotNinja/nevis/issues"
   },
   "author": {
     "name": "Alasdair Mercer",
-    "email": "alasdair@skelp.io",
-    "url": "https://skelp.io"
+    "email": "mercer.alasdair@gmail.com",
+    "url": "https://not.ninja"
   },
   "license": "MIT",
   "keywords": [
@@ -27,14 +27,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Skelp/nevis.git"
+    "url": "https://github.com/NotNinja/nevis.git"
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "eslint-config-skelp": "^0.1.5",
+    "eslint-config-notninja": "^0.1.1",
     "grunt": "^1.0.1",
     "grunt-cli": "^1.2.0",
-    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-coveralls": "^1.0.1",
     "grunt-eslint": "^19.0.0",
@@ -43,11 +43,11 @@
     "grunt-rollup": "^1.0.1",
     "istanbul": "^0.4.5",
     "load-grunt-tasks": "^3.5.2",
-    "mocha": "^3.2.0",
+    "mocha": "^3.3.0",
     "rollup-plugin-commonjs": "^8.0.2",
-    "rollup-plugin-node-resolve": "^2.0.0",
-    "rollup-plugin-uglify": "^1.0.1",
-    "sinon": "^2.0.0"
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-uglify": "^1.0.2",
+    "sinon": "^2.2.0"
   },
   "main": "index.js",
   "browser": "dist/nevis.js",

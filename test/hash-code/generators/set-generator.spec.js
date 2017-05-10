@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,48 +20,48 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var expect = require('chai').expect
+var expect = require('chai').expect;
 
-var CollectionHashCodeGenerator = require('../../../src/hash-code/generators/collection-generator')
-var hashCode = require('../../../src/hash-code/index')
-var HashCodeContext = require('../../../src/hash-code/context')
-var SetHashCodeGenerator = require('../../../src/hash-code/generators/set-generator')
+var CollectionHashCodeGenerator = require('../../../src/hash-code/generators/collection-generator');
+var hashCode = require('../../../src/hash-code/index');
+var HashCodeContext = require('../../../src/hash-code/context');
+var SetHashCodeGenerator = require('../../../src/hash-code/generators/set-generator');
 
 describe('hash-code/generators/set-generator:SetHashCodeGenerator', function() {
-  var generator
+  var generator;
 
   before(function() {
-    generator = new SetHashCodeGenerator()
-  })
+    generator = new SetHashCodeGenerator();
+  });
 
   it('should be a CollectionHashCodeGenerator', function() {
-    expect(generator).to.be.an.instanceof(CollectionHashCodeGenerator)
-  })
+    expect(generator).to.be.an.instanceof(CollectionHashCodeGenerator);
+  });
 
   describe('#generate', function() {
     it('should generate hash code for set values', function() {
-      expect(generator.generate(new HashCodeContext(new Set(), hashCode))).to.equal(1)
-      expect(generator.generate(new HashCodeContext(new Set([ 'foo', 123 ]), hashCode))).to.equal(3198445)
-    })
-  })
+      expect(generator.generate(new HashCodeContext(new Set(), hashCode))).to.equal(1);
+      expect(generator.generate(new HashCodeContext(new Set([ 'foo', 123 ]), hashCode))).to.equal(3198445);
+    });
+  });
 
   describe('#supports', function() {
     it('should return true for set values', function() {
-      expect(generator.supports(new HashCodeContext(new Set(), hashCode))).to.be.true
-    })
+      expect(generator.supports(new HashCodeContext(new Set(), hashCode))).to.be.true;
+    });
 
     it('should return false for other values', function() {
-      expect(generator.supports(new HashCodeContext(true, hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext(123, hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext('foo', hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext(function foo() {}, hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext(/foo/, hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext(new Date(), hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext([ 'foo', 'bar' ], hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext({ foo: 'bar' }, hashCode))).to.be.false
-      expect(generator.supports(new HashCodeContext(new Map(), hashCode))).to.be.false
-    })
-  })
-})
+      expect(generator.supports(new HashCodeContext(true, hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext(123, hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext('foo', hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext(function foo() {}, hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext(/foo/, hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext(new Date(), hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext([ 'foo', 'bar' ], hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext({ foo: 'bar' }, hashCode))).to.be.false;
+      expect(generator.supports(new HashCodeContext(new Map(), hashCode))).to.be.false;
+    });
+  });
+});

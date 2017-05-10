@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var HashCodeGenerator = require('./generator')
+var HashCodeGenerator = require('./generator');
 
 /**
  * An abstract implementation of {@link HashCodeGenerator} that is intended for implementations that wish to support
@@ -45,11 +45,11 @@ var CollectionHashCodeGenerator = HashCodeGenerator.extend({
    * @memberof CollectionHashCodeGenerator#
    */
   generate: function generate(context) {
-    var elements = this.getElements(context)
+    var elements = this.getElements(context);
 
     return elements.reduce(function(hash, element) {
-      return ((31 * hash) + context.hashCode(element)) | 0
-    }, 1)
+      return ((31 * hash) + context.hashCode(element)) | 0;
+    }, 1);
   },
 
   /**
@@ -64,6 +64,6 @@ var CollectionHashCodeGenerator = HashCodeGenerator.extend({
    */
   getElements: /* istanbul ignore next */ function getElements(context) {}
 
-})
+});
 
-module.exports = CollectionHashCodeGenerator
+module.exports = CollectionHashCodeGenerator;

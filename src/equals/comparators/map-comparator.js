@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var HashEqualsComparator = require('./hash-comparator')
+var HashEqualsComparator = require('./hash-comparator');
 
 /**
  * An implementation of {@link HashEqualsComparator} that supports map values.
@@ -41,7 +41,7 @@ var MapEqualsComparator = HashEqualsComparator.extend({
    * @memberof MapEqualsComparator#
    */
   getKeys: function getKeys(hash) {
-    return Array.from(hash.keys())
+    return Array.from(hash.keys());
   },
 
   /**
@@ -50,7 +50,7 @@ var MapEqualsComparator = HashEqualsComparator.extend({
    * @memberof MapEqualsComparator#
    */
   getValue: function getValue(hash, key) {
-    return hash.get(key)
+    return hash.get(key);
   },
 
   /**
@@ -59,9 +59,9 @@ var MapEqualsComparator = HashEqualsComparator.extend({
    * @memberof MapEqualsComparator#
    */
   supports: function supports(context) {
-    return context.string === '[object Map]'
+    return context.string === '[object Map]';
   }
 
-})
+});
 
-module.exports = MapEqualsComparator
+module.exports = MapEqualsComparator;

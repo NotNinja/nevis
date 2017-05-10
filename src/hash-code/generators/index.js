@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,20 +20,20 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var ArrayHashCodeGenerator = require('./array-generator')
-var BooleanHashCodeGenerator = require('./boolean-generator')
-var CachingHashCodeGenerator = require('./caching-generator')
-var CollectionHashCodeGenerator = require('./collection-generator')
-var DateHashCodeGenerator = require('./date-generator')
-var HashCodeGenerator = require('./generator')
-var HashHashCodeGenerator = require('./hash-generator')
-var MapHashCodeGenerator = require('./map-generator')
-var ObjectHashCodeGenerator = require('./object-generator')
-var SetHashCodeGenerator = require('./set-generator')
-var StringHashCodeGenerator = require('./string-generator')
-var ToStringHashCodeGenerator = require('./to-string-generator')
+var ArrayHashCodeGenerator = require('./array-generator');
+var BooleanHashCodeGenerator = require('./boolean-generator');
+var CachingHashCodeGenerator = require('./caching-generator');
+var CollectionHashCodeGenerator = require('./collection-generator');
+var DateHashCodeGenerator = require('./date-generator');
+var HashCodeGenerator = require('./generator');
+var HashHashCodeGenerator = require('./hash-generator');
+var MapHashCodeGenerator = require('./map-generator');
+var ObjectHashCodeGenerator = require('./object-generator');
+var SetHashCodeGenerator = require('./set-generator');
+var StringHashCodeGenerator = require('./string-generator');
+var ToStringHashCodeGenerator = require('./to-string-generator');
 
 /**
  * A hash containing constructors for all hash code generators.
@@ -54,4 +54,4 @@ module.exports = {
   SetHashCodeGenerator: SetHashCodeGenerator,
   StringHashCodeGenerator: StringHashCodeGenerator,
   ToStringHashCodeGenerator: ToStringHashCodeGenerator
-}
+};

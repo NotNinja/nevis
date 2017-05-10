@@ -7,12 +7,12 @@
     888   Y8888 Y8b.      Y8bd8P  888      X88
     888    Y888  "Y8888    Y88P   888  88888P'
 
-[Nevis](https://github.com/Skelp/nevis) brings more of the Object-Orientated Programming (OOP) model to JavaScript.
+[Nevis](https://github.com/NotNinja/nevis) brings more of the Object-Orientated Programming (OOP) model to JavaScript.
 
-[![Build Status](https://img.shields.io/travis/Skelp/nevis/develop.svg?style=flat-square)](https://travis-ci.org/Skelp/nevis)
-[![Coverage](https://img.shields.io/coveralls/Skelp/nevis/develop.svg?style=flat-square)](https://coveralls.io/github/Skelp/nevis)
-[![Dev Dependency Status](https://img.shields.io/david/dev/Skelp/nevis.svg?style=flat-square)](https://david-dm.org/Skelp/nevis?type=dev)
-[![License](https://img.shields.io/npm/l/nevis.svg?style=flat-square)](https://github.com/Skelp/nevis/blob/master/LICENSE.md)
+[![Build Status](https://img.shields.io/travis/NotNinja/nevis/develop.svg?style=flat-square)](https://travis-ci.org/NotNinja/nevis)
+[![Coverage](https://img.shields.io/coveralls/NotNinja/nevis/develop.svg?style=flat-square)](https://coveralls.io/github/NotNinja/nevis)
+[![Dev Dependency Status](https://img.shields.io/david/dev/NotNinja/nevis.svg?style=flat-square)](https://david-dm.org/NotNinja/nevis?type=dev)
+[![License](https://img.shields.io/npm/l/nevis.svg?style=flat-square)](https://github.com/NotNinja/nevis/blob/master/LICENSE.md)
 [![Release](https://img.shields.io/npm/v/nevis.svg?style=flat-square)](https://www.npmjs.com/package/nevis)
 
 * [Install](#install)
@@ -39,13 +39,13 @@ install that way instead of using `npm`. While equals should be compatible with 
 
 If you want to simply download the file to be used in the browser you can find them below:
 
-* [Development Version](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis.js) (81kb - [Source Map](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis.js.map))
-* [Production Version](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis.min.js) (9.2kb - [Source Map](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis.min.js.map))
+* [Development Version](https://cdn.rawgit.com/NotNinja/nevis/master/dist/nevis.js) (81kb - [Source Map](https://cdn.rawgit.com/NotNinja/nevis/master/dist/nevis.js.map))
+* [Production Version](https://cdn.rawgit.com/NotNinja/nevis/master/dist/nevis.min.js) (9.2kb - [Source Map](https://cdn.rawgit.com/NotNinja/nevis/master/dist/nevis.min.js.map))
 
 If you're only wanting support for inheritance, you can use the *lite* version instead:
 
-* [Development Version - Lite](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis-lite.js) (7.5kb - [Source Map](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis-lite.js.map))
-* [Production Version - Lite](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis-lite.min.js) (980b - [Source Map](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis-lite.min.js.map))
+* [Development Version - Lite](https://cdn.rawgit.com/NotNinja/nevis/master/dist/nevis-lite.js) (7.5kb - [Source Map](https://cdn.rawgit.com/NotNinja/nevis/master/dist/nevis-lite.js.map))
+* [Production Version - Lite](https://cdn.rawgit.com/NotNinja/nevis/master/dist/nevis-lite.min.js) (981b - [Source Map](https://cdn.rawgit.com/NotNinja/nevis/master/dist/nevis-lite.min.js.map))
 
 ## API
 
@@ -75,51 +75,51 @@ It is very flexible and can be used to extend *classes*:
 
 ``` javascript
 var Base = Nevis.extend('Base', function(attributes) {
-  this.attributes = attributes || {}
+  this.attributes = attributes || {};
 }, {
   getAttribute: function(name) {
-    return this.attributes[name]
+    return this.attributes[name];
   },
   setAttribute: function(name, value) {
-    this.attributes[name] = value
+    this.attributes[name] = value;
   }
-})
+});
 
 var Person = Base.extend('Person', function(name, attributes) {
-  Person.super_.call(this, attributes)
+  Person.super_.call(this, attributes);
 
-  this.name = name
+  this.name = name;
 
-  Person.people.push(this)
+  Person.people.push(this);
 }, {
   greet: function(name) {
-    return 'Hello ' + name + ', my name is ' + this.name
+    return 'Hello ' + name + ', my name is ' + this.name;
   }
 }, {
   people: []
-})
+});
 
-var bob = new Person('Bob', { age: 58 })
+var bob = new Person('Bob', { age: 58 });
 
-bob.name
+bob.name;
 //=> "Bob"
-bob.greet('Suzie')
+bob.greet('Suzie');
 //=> "Hello Suzie, my name is Bob"
-bob.getAttribute('age')
+bob.getAttribute('age');
 //=> 58
-Person.people
+Person.people;
 //=> [ "Bob" ]
 ```
 
 Also, this can be used to extend external classes such as `EventEmitter`:
 
 ``` javascript
-var EventEmitter = require('events').EventEmitter
-var Nevis = require('nevis')
+var EventEmitter = require('events').EventEmitter;
+var Nevis = require('nevis');
 
 var Events = Nevis.extend('Events', function() {
-  EventEmitter.call(this)
-}, EventEmitter.prototype, EventEmitter)
+  EventEmitter.call(this);
+}, EventEmitter.prototype, EventEmitter);
 ```
 
 However, this last approach has the caveats of `instanceof` not identifying this kind of inheritance and `super_` will
@@ -159,25 +159,25 @@ objects must have equal hash codes.
 
 ``` javascript
 var Person = Nevis.extend('Person', function(name, age) {
-  this.name = name
-  this.age = age
+  this.name = name;
+  this.age = age;
 }, {
   greet: function(name) {
-    return 'Hello ' + name + ', my name is ' + this.name
+    return 'Hello ' + name + ', my name is ' + this.name;
   }
-})
-var bob = new Person('Bob', 58)
-var suzie = new Person('Suzie', 30)
+});
+var bob = new Person('Bob', 58);
+var suzie = new Person('Suzie', 30);
 
-bob.equals(bob)
+bob.equals(bob);
 //=> true
-bob.equals(new Person('Bob', 58))
+bob.equals(new Person('Bob', 58));
 //=> false
-bob.equals(suzie)
+bob.equals(suzie);
 //=> false
-bob.equals(null)
+bob.equals(null);
 //=> false
-bob.equals(undefined)
+bob.equals(undefined);
 //=> false
 ```
 
@@ -219,49 +219,49 @@ The `options` parameter is entirely optional and supports the following:
 var obj = {
   foo: 'bar',
   doSomething: function() {
-    return 123
+    return 123;
   }
-}
+};
 
-Nevis.equals(obj, obj)
+Nevis.equals(obj, obj);
 //=> true
 Nevis.equals(obj, {
   foo: 'bar',
   doSomething: function() {
-    return 321
+    return 321;
   }
-})
+});
 //=> false
 Nevis.equals(obj, {
   foo: 'bar',
   doSomething: function() {
-    return 321
+    return 321;
   }
-}, { ignoreMethods: true })
+}, { ignoreMethods: true });
 //=> true
-Nevis.equals(bob, bob)
+Nevis.equals(bob, bob);
 //=> true
-Nevis.equals(bob, new Person('Bob', 58))
+Nevis.equals(bob, new Person('Bob', 58));
 //=> false
-Nevis.equals(bob, suzie)
+Nevis.equals(bob, suzie);
 //=> false
-Nevis.equals('foo', 'foo')
+Nevis.equals('foo', 'foo');
 //=> true
-Nevis.equals('foo', 'FOO')
+Nevis.equals('foo', 'FOO');
 //=> false
-Nevis.equals('foo', 'FOO', { ignoreCase: true })
+Nevis.equals('foo', 'FOO', { ignoreCase: true });
 //=> true
-Nevis.equals(NaN, NaN)
+Nevis.equals(NaN, NaN);
 //=> true
-Nevis.equals(null, null)
+Nevis.equals(null, null);
 //=> true
-Nevis.equals(undefined, undefined)
+Nevis.equals(undefined, undefined);
 //=> true
-Nevis.equals(null, undefined)
+Nevis.equals(null, undefined);
 //=> false
-Nevis.equals(bob, null)
+Nevis.equals(bob, null);
 //=> false
-Nevis.equals(bob, undefined)
+Nevis.equals(bob, undefined);
 //=> false
 ```
 
@@ -279,73 +279,73 @@ The best way to describe it is by using an example that demonstrates it's API:
 
 ``` javascript
 var Animal = Nevis.extend('Animal', function(species) {
-  this.species = species
+  this.species = species;
 }, {
   equals: function(obj) {
     if (obj == null) {
-      return false
+      return false;
     }
 
     return new Nevis.EqualsBuilder()
       .append(this.species, obj.species)
-      .build()
+      .build();
   }
-})
+});
 var Human = Nevis.extend('Human', function(name, age) {
-  Human.super_.call(this, 'human')
+  Human.super_.call(this, 'human');
 
-  this.name = name
-  this.age = age
+  this.name = name;
+  this.age = age;
 }, {
   equals: function(obj) {
     if (obj == null) {
-      return false
+      return false;
     }
 
     return new Nevis.EqualsBuilder()
       .appendSuper(Human.super_.prototype.equals.call(this, obj))
       .append(this.name, obj.name)
       .append(this.age, obj.age)
-      .build()
+      .build();
   }
-})
+});
 var Lion = Nevis.extend('Lion', function(name, age) {
-  Lion.super_.call(this, 'lion')
+  Lion.super_.call(this, 'lion');
 
-  this.name = name
-  this.age = age
+  this.name = name;
+  this.age = age;
 }, {
   equals: function(obj) {
     if (obj == null) {
-      return false
+      return false;
     }
 
     return new Nevis.EqualsBuilder()
       .appendSuper(Lion.super_.prototype.equals.call(this, obj))
       .append(this.name, obj.name)
       .append(this.age, obj.age)
-      .build()
+      .build();
   }
-})
-var humanBob = new Human('Bob', 58)
-var humanSuzie = new Human('Suzie', 30)
-var lionBob = new Lion('Bob', 58)
+});
+var humanBob = new Human('Bob', 58);
+var humanSuzie = new Human('Suzie', 30);
+var lionBob = new Lion('Bob', 58);
 
-humanBob.equals(humanBob)
+humanBob.equals(humanBob);
 //=> true
-humanBob.equals(new Human('Bob', 58))
+humanBob.equals(new Human('Bob', 58));
 //=> true
-humanBob.equals(lionBob)
+humanBob.equals(lionBob);
 //=> false
-humanBob.equals(humanSuzie)
+humanBob.equals(humanSuzie);
 //=> false
-humanSuzie.name = 'Bob'
-humanSuzie.age = 58
-humanBob.equals(humanSuzie)
+humanSuzie.name = 'Bob';
+humanSuzie.age = 58;
+humanBob.equals(humanSuzie);
 //=> true
-humanBob.equals(null)
+humanBob.equals(null);
 //=> false
-humanBob.equals(undefined)
+humanBob.equals(undefined);
 //=> false
 ```
 
@@ -382,20 +382,20 @@ method is overridden, so as to maintain the above contract where equal objects m
 
 ``` javascript
 var Person = Nevis.extend('Person', function(name) {
-  this.name = name
+  this.name = name;
 }, {
   greet: function(name) {
-    return 'Hello ' + name + ', my name is ' + this.name
+    return 'Hello ' + name + ', my name is ' + this.name;
   }
-})
-var bob = new Person('Bob')
-var suzie = new Person('Suzie')
+});
+var bob = new Person('Bob');
+var suzie = new Person('Suzie');
 
-bob.hashCode()
-//=> 658009303
-suzie.hashCode()
-//=> 738315672
-bob.hashCode() === new Person('Bob').hashCode()
+bob.hashCode();
+//=> -469006311
+suzie.hashCode();
+//=> -388699942
+bob.hashCode() === new Person('Bob').hashCode();
 //=> true
 ```
 
@@ -433,21 +433,21 @@ The `options` parameter is entirely optional and supports the following:
 var obj = {
   foo: 'bar',
   doSomething: function() {
-    return 123
+    return 123;
   }
-}
+};
 
-Nevis.hashCode(obj)
-//=> 688071817
-Nevis.hashCode(obj, { ignoreMethods: true })
+Nevis.hashCode(obj);
+//=> 1343675198
+Nevis.hashCode(obj, { ignoreMethods: true });
 //=> 61653
-Nevis.hashCode(bob)
-//=> 658009303
-Nevis.hashCode('foo')
+Nevis.hashCode(bob);
+//=> -469006311
+Nevis.hashCode('foo');
 //=> 101574
-Nevis.hashCode(null)
+Nevis.hashCode(null);
 //=> 0
-Nevis.hashCode(undefined)
+Nevis.hashCode(undefined);
 //=> 0
 ```
 
@@ -470,57 +470,57 @@ The best way to describe it is by using an example that demonstrates it's API:
 
 ``` javascript
 var Animal = Nevis.extend('Animal', function(species) {
-  this.species = species
+  this.species = species;
 }, {
   hashCode: function() {
     return new Nevis.HashCodeBuilder()
       .append(this.species)
-      .build()
+      .build();
   }
-})
+});
 var Human = Nevis.extend('Human', function(name, age) {
-  Human.super_.call(this, 'human')
+  Human.super_.call(this, 'human');
 
-  this.name = name
-  this.age = age
+  this.name = name;
+  this.age = age;
 }, {
   hashCode: function() {
     return new Nevis.HashCodeBuilder()
       .appendSuper(Human.super_.prototype.hashCode.call(this))
       .append(this.name)
       .append(this.age)
-      .build()
+      .build();
   }
-})
+});
 var Lion = Nevis.extend('Lion', function(name, age) {
-  Lion.super_.call(this, 'lion')
+  Lion.super_.call(this, 'lion');
 
-  this.name = name
-  this.age = age
+  this.name = name;
+  this.age = age;
 }, {
   hashCode: function() {
     return new Nevis.HashCodeBuilder()
       .appendSuper(Lion.super_.prototype.hashCode.call(this))
       .append(this.name)
       .append(this.age)
-      .build()
+      .build();
   }
-})
-var humanBob = new Human('Bob', 58)
-var humanSuzie = new Human('Suzie', 30)
-var lionBob = new Lion('Bob', 58)
+});
+var humanBob = new Human('Bob', 58);
+var humanSuzie = new Human('Suzie', 30);
+var lionBob = new Lion('Bob', 58);
 
-humanBob.hashCode()
-//=> 1833817583205
-humanBob.hashCode() === new Human('Bob', 58).hashCode()
+humanBob.hashCode();
+//=> 1795252862788
+humanBob.hashCode() === new Human('Bob', 58).hashCode();
 //=> true
-lionBob.hashCode()
-//=> 1048852432588
-humanSuzie.hashCode()
-//=> 1946724180777
-humanSuzie.name = 'Bob'
-humanSuzie.age = 58
-humanBob.hashCode() === humanSuzie.hashCode()
+lionBob.hashCode();
+//=> -79783715387
+humanSuzie.hashCode();
+//=> 1908159460360
+humanSuzie.name = 'Bob';
+humanSuzie.age = 58;
+humanBob.hashCode() === humanSuzie.hashCode();
 //=> true
 ```
 
@@ -547,21 +547,21 @@ character (`@`), and the hexadecimal representation of the hash code of the inst
 
 ``` javascript
 var RandomHolder = Nevis.extend('RandomHolder', function() {
-  this.value = Math.random() * 100
+  this.value = Math.random() * 100;
 })
-var random = new RandomHolder()
+var random = new RandomHolder();
 
-random.toString()
-//=> "RandomHolder@8e53b013"
+random.toString();
+//=> "RandomHolder@f9fa743"
 
 var UnnamedObject = Nevis.extend({
   foo: 'bar',
   fu: 'baz'
-})
-var unnamed = new UnnamedObject()
+});
+var unnamed = new UnnamedObject();
 
-unnamed.toString()
-//=> "Nevis@222ce899"
+unnamed.toString();
+//=> "Nevis@-3fff8d24"
 ```
 
 ---
@@ -577,20 +577,20 @@ Returns the result of calling the `toString` method on the specified `value` whe
 If value is `null` or `undefined`, this method will return `"null"` or `"undefined"` respectively.
 
 ``` javascript
-Nevis.toString(random)
-//=> "RandomHolder@8e53b013"
-Nevis.toString(123)
+Nevis.toString(random);
+//=> "RandomHolder@f9fa743"
+Nevis.toString(123);
 //=> "123"
-Nevis.toString(null)
+Nevis.toString(null);
 //=> "null"
-Nevis.toString(undefined)
+Nevis.toString(undefined);
 //=> "undefined"
 ```
 
 ## Why Nevis?
 
-Because we are Scottish and it is named after [Ben Nevis](https://en.wikipedia.org/wiki/Ben_Nevis) since we felt like we
-conquered a mountain when creating this library.
+Because we love Scotland and it is named after [Ben Nevis](https://en.wikipedia.org/wiki/Ben_Nevis) since we felt like
+we conquered a mountain when creating this library.
 
 ## Migrating from Oopsy
 
@@ -603,18 +603,18 @@ Nevis.
 ## Bugs
 
 If you have any problems with Nevis or would like to see changes currently in development you can do so
-[here](https://github.com/Skelp/nevis/issues).
+[here](https://github.com/NotNinja/nevis/issues).
 
 ## Contributors
 
 If you want to contribute, you're a legend! Information on how you can do so can be found in
-[CONTRIBUTING.md](https://github.com/Skelp/nevis/blob/master/CONTRIBUTING.md). We want your suggestions and pull
+[CONTRIBUTING.md](https://github.com/NotNinja/nevis/blob/master/CONTRIBUTING.md). We want your suggestions and pull
 requests!
 
-A list of Nevis contributors can be found in [AUTHORS.md](https://github.com/Skelp/nevis/blob/master/AUTHORS.md).
+A list of Nevis contributors can be found in [AUTHORS.md](https://github.com/NotNinja/nevis/blob/master/AUTHORS.md).
 
 ## License
 
-See [LICENSE.md](https://github.com/Skelp/nevis/raw/master/LICENSE.md) for more information on our MIT license.
+See [LICENSE.md](https://github.com/NotNinja/nevis/raw/master/LICENSE.md) for more information on our MIT license.
 
-[![Copyright Skelp](https://cdn.rawgit.com/Skelp/skelp-branding/master/assets/footer/invert-filled/skelp-footer-invert-filled.svg)](https://skelp.io)
+[![Copyright !ninja](https://cdn.rawgit.com/NotNinja/branding/master/assets/copyright/base/not-ninja-copyright-186x25.png)](https://not.ninja)

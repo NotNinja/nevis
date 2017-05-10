@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var extend = require('./extend')
+var extend = require('./extend');
 
 /**
  * The base class from which all others should extend.
@@ -31,8 +31,8 @@ var extend = require('./extend')
  * @constructor
  */
 function Nevis() {}
-Nevis.class_ = 'Nevis'
-Nevis.super_ = Object
+Nevis.class_ = 'Nevis';
+Nevis.super_ = Object;
 
 /**
  * Extends the constructor to which this method is associated with the <code>prototype</code> and/or
@@ -57,6 +57,6 @@ Nevis.super_ = Object
  * @static
  * @memberof Nevis
  */
-Nevis.extend = extend
+Nevis.extend = extend;
 
-module.exports = Nevis
+module.exports = Nevis;

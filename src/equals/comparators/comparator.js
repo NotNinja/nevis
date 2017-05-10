@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var extend = require('../../extend')
+var extend = require('../../extend');
 
 /**
  * Responsible for comparing the values within a specific {@link EqualsContext} to check whether they are equal.
@@ -41,8 +41,8 @@ var extend = require('../../extend')
  * @constructor
  */
 function EqualsComparator() {}
-EqualsComparator.class_ = 'EqualsComparator'
-EqualsComparator.super_ = Object
+EqualsComparator.class_ = 'EqualsComparator';
+EqualsComparator.super_ = Object;
 
 /**
  * Extends the constructor to which this method is associated with the <code>prototype</code> and/or
@@ -67,7 +67,7 @@ EqualsComparator.super_ = Object
  * @static
  * @memberof EqualsComparator
  */
-EqualsComparator.extend = extend
+EqualsComparator.extend = extend;
 
 /**
  * Compares the values within the specified <code>context</code>.
@@ -82,7 +82,7 @@ EqualsComparator.extend = extend
  * @abstract
  * @memberof EqualsComparator#
  */
-EqualsComparator.prototype.compare = /* istanbul ignore next */ function compare(context) {}
+EqualsComparator.prototype.compare = /* istanbul ignore next */ function compare(context) {};
 
 /**
  * Returns whether this {@link EqualsComparator} supports the specified <code>context</code>.
@@ -97,6 +97,6 @@ EqualsComparator.prototype.compare = /* istanbul ignore next */ function compare
  * @abstract
  * @memberof EqualsComparator#
  */
-EqualsComparator.prototype.supports = /* istanbul ignore next */ function supports(context) {}
+EqualsComparator.prototype.supports = /* istanbul ignore next */ function supports(context) {};
 
-module.exports = EqualsComparator
+module.exports = EqualsComparator;

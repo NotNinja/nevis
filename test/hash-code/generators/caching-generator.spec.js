@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,95 +20,95 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var expect = require('chai').expect
+var expect = require('chai').expect;
 
-var CachingHashCodeGenerator = require('../../../src/hash-code/generators/caching-generator')
-var hashCode = require('../../../src/hash-code/index')
-var HashCodeContext = require('../../../src/hash-code/context')
-var HashCodeGenerator = require('../../../src/hash-code/generators/generator')
+var CachingHashCodeGenerator = require('../../../src/hash-code/generators/caching-generator');
+var hashCode = require('../../../src/hash-code/index');
+var HashCodeContext = require('../../../src/hash-code/context');
+var HashCodeGenerator = require('../../../src/hash-code/generators/generator');
 
 describe('hash-code/generators/caching-generator:CachingHashCodeGenerator', function() {
-  var generator
-  var value
+  var generator;
+  var value;
 
   before(function() {
     var TestGenerator = CachingHashCodeGenerator.extend({
       generateInternal: function(context) {
-        return context.value()
+        return context.value();
       }
-    })
+    });
 
-    generator = new TestGenerator()
+    generator = new TestGenerator();
     value = function() {
-      return Math.floor(Math.random() * 1000)
-    }
-  })
+      return Math.floor(Math.random() * 1000);
+    };
+  });
 
   beforeEach(function() {
-    generator.clearCache()
-  })
+    generator.clearCache();
+  });
 
   it('should be a HashCodeGenerator', function() {
-    expect(generator).to.be.an.instanceof(HashCodeGenerator)
-  })
+    expect(generator).to.be.an.instanceof(HashCodeGenerator);
+  });
 
   describe('#clearCache', function() {
     it('should clear the cache of previously generated hash codes', function() {
-      var hash1 = generator.generate(new HashCodeContext(value, hashCode))
+      var hash1 = generator.generate(new HashCodeContext(value, hashCode));
 
-      expect(hash1).to.be.a('number')
+      expect(hash1).to.be.a('number');
 
-      generator.clearCache()
+      generator.clearCache();
 
-      var hash2 = generator.generate(new HashCodeContext(value, hashCode))
+      var hash2 = generator.generate(new HashCodeContext(value, hashCode));
 
-      expect(hash2).to.be.a('number')
-      expect(hash2).to.not.equal(hash1)
-    })
-  })
+      expect(hash2).to.be.a('number');
+      expect(hash2).to.not.equal(hash1);
+    });
+  });
 
   describe('#generate', function() {
     it('should generate hash code via "generateInternal" method and cache it', function() {
-      var hash1 = generator.generate(new HashCodeContext(value, hashCode))
+      var hash1 = generator.generate(new HashCodeContext(value, hashCode));
 
-      expect(hash1).to.be.a('number')
+      expect(hash1).to.be.a('number');
 
-      var hash2 = generator.generate(new HashCodeContext(value, hashCode))
+      var hash2 = generator.generate(new HashCodeContext(value, hashCode));
 
-      expect(hash2).to.be.a('number')
-      expect(hash2).to.equal(hash1)
-    })
+      expect(hash2).to.be.a('number');
+      expect(hash2).to.equal(hash1);
+    });
 
     context('when "allowCache" option is disabled', function() {
       it('should not cache generated hash code', function() {
-        var hash1 = generator.generate(new HashCodeContext(value, hashCode, { allowCache: false }))
+        var hash1 = generator.generate(new HashCodeContext(value, hashCode, { allowCache: false }));
 
-        expect(hash1).to.be.a('number')
+        expect(hash1).to.be.a('number');
 
-        var hash2 = generator.generate(new HashCodeContext(value, hashCode, { allowCache: false }))
+        var hash2 = generator.generate(new HashCodeContext(value, hashCode, { allowCache: false }));
 
-        expect(hash2).to.be.a('number')
-        expect(hash2).to.not.equal(hash1)
-      })
+        expect(hash2).to.be.a('number');
+        expect(hash2).to.not.equal(hash1);
+      });
 
       it('should still return generated hash code previously cached', function() {
-        var hash1 = generator.generate(new HashCodeContext(value, hashCode))
+        var hash1 = generator.generate(new HashCodeContext(value, hashCode));
 
-        expect(hash1).to.be.a('number')
+        expect(hash1).to.be.a('number');
 
-        var hash2 = generator.generate(new HashCodeContext(value, hashCode, { allowCache: false }))
+        var hash2 = generator.generate(new HashCodeContext(value, hashCode, { allowCache: false }));
 
-        expect(hash2).to.be.a('number')
-        expect(hash2).to.equal(hash1)
-      })
-    })
-  })
+        expect(hash2).to.be.a('number');
+        expect(hash2).to.equal(hash1);
+      });
+    });
+  });
 
   describe('#generateInternal', function() {
     it('should be an abstract method', function() {
-      expect(CachingHashCodeGenerator.prototype.generateInternal).to.be.a('function')
-    })
-  })
-})
+      expect(CachingHashCodeGenerator.prototype.generateInternal).to.be.a('function');
+    });
+  });
+});

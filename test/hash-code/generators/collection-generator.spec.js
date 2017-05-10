@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,46 +20,46 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var expect = require('chai').expect
+var expect = require('chai').expect;
 
-var CollectionHashCodeGenerator = require('../../../src/hash-code/generators/collection-generator')
-var hashCode = require('../../../src/hash-code/index')
-var HashCodeContext = require('../../../src/hash-code/context')
-var HashCodeGenerator = require('../../../src/hash-code/generators/generator')
+var CollectionHashCodeGenerator = require('../../../src/hash-code/generators/collection-generator');
+var hashCode = require('../../../src/hash-code/index');
+var HashCodeContext = require('../../../src/hash-code/context');
+var HashCodeGenerator = require('../../../src/hash-code/generators/generator');
 
 describe('hash-code/generators/collection-generator:CollectionHashCodeGenerator', function() {
-  var generator
+  var generator;
 
   before(function() {
     var TestGenerator = CollectionHashCodeGenerator.extend({
       getElements: function(context) {
-        return context.value()
+        return context.value();
       }
-    })
+    });
 
-    generator = new TestGenerator()
-  })
+    generator = new TestGenerator();
+  });
 
   it('should be a HashCodeGenerator', function() {
-    expect(generator).to.be.an.instanceof(HashCodeGenerator)
-  })
+    expect(generator).to.be.an.instanceof(HashCodeGenerator);
+  });
 
   describe('#generate', function() {
     it('should generate hash code based on array provided by "getElements" method', function() {
       expect(generator.generate(new HashCodeContext(function() {
-        return []
-      }, hashCode))).to.equal(1)
+        return [];
+      }, hashCode))).to.equal(1);
       expect(generator.generate(new HashCodeContext(function() {
-        return [ 'foo', 123 ]
-      }, hashCode))).to.equal(3198445)
-    })
-  })
+        return [ 'foo', 123 ];
+      }, hashCode))).to.equal(3198445);
+    });
+  });
 
   describe('#getElements', function() {
     it('should be an abstract method', function() {
-      expect(CollectionHashCodeGenerator.prototype.getElements).to.be.a('function')
-    })
-  })
-})
+      expect(CollectionHashCodeGenerator.prototype.getElements).to.be.a('function');
+    });
+  });
+});

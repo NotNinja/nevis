@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,23 +20,23 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var expect = require('chai').expect
+var expect = require('chai').expect;
 
-var ArrayHashCodeGenerator = require('../../../src/hash-code/generators/array-generator')
-var BooleanHashCodeGenerator = require('../../../src/hash-code/generators/boolean-generator')
-var CachingHashCodeGenerator = require('../../../src/hash-code/generators/caching-generator')
-var CollectionHashCodeGenerator = require('../../../src/hash-code/generators/collection-generator')
-var DateHashCodeGenerator = require('../../../src/hash-code/generators/date-generator')
-var HashCodeGenerator = require('../../../src/hash-code/generators/generator')
-var generators = require('../../../src/hash-code/generators')
-var HashHashCodeGenerator = require('../../../src/hash-code/generators/hash-generator')
-var MapHashCodeGenerator = require('../../../src/hash-code/generators/map-generator')
-var ObjectHashCodeGenerator = require('../../../src/hash-code/generators/object-generator')
-var SetHashCodeGenerator = require('../../../src/hash-code/generators/set-generator')
-var StringHashCodeGenerator = require('../../../src/hash-code/generators/string-generator')
-var ToStringHashCodeGenerator = require('../../../src/hash-code/generators/to-string-generator')
+var ArrayHashCodeGenerator = require('../../../src/hash-code/generators/array-generator');
+var BooleanHashCodeGenerator = require('../../../src/hash-code/generators/boolean-generator');
+var CachingHashCodeGenerator = require('../../../src/hash-code/generators/caching-generator');
+var CollectionHashCodeGenerator = require('../../../src/hash-code/generators/collection-generator');
+var DateHashCodeGenerator = require('../../../src/hash-code/generators/date-generator');
+var HashCodeGenerator = require('../../../src/hash-code/generators/generator');
+var generators = require('../../../src/hash-code/generators');
+var HashHashCodeGenerator = require('../../../src/hash-code/generators/hash-generator');
+var MapHashCodeGenerator = require('../../../src/hash-code/generators/map-generator');
+var ObjectHashCodeGenerator = require('../../../src/hash-code/generators/object-generator');
+var SetHashCodeGenerator = require('../../../src/hash-code/generators/set-generator');
+var StringHashCodeGenerator = require('../../../src/hash-code/generators/string-generator');
+var ToStringHashCodeGenerator = require('../../../src/hash-code/generators/to-string-generator');
 
 describe('hash-code/generators/index', function() {
   it('should contain all hash code generator constructors', function() {
@@ -53,6 +53,6 @@ describe('hash-code/generators/index', function() {
       SetHashCodeGenerator: SetHashCodeGenerator,
       StringHashCodeGenerator: StringHashCodeGenerator,
       ToStringHashCodeGenerator: ToStringHashCodeGenerator
-    })
-  })
-})
+    });
+  });
+});

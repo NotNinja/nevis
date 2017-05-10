@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var EqualsComparator = require('./comparator')
+var EqualsComparator = require('./comparator');
 
 /**
  * An implementation of {@link EqualsComparator} that supports number values (including <code>NaN</code>).
@@ -39,7 +39,7 @@ var NumberEqualsComparator = EqualsComparator.extend({
    * @memberof NumberEqualsComparator#
    */
   compare: function compare(context) {
-    return context.value !== context.value ? context.other !== context.other : context.value === context.other
+    return context.value !== context.value ? context.other !== context.other : context.value === context.other;
   },
 
   /**
@@ -48,9 +48,9 @@ var NumberEqualsComparator = EqualsComparator.extend({
    * @memberof NumberEqualsComparator#
    */
   supports: function supports(context) {
-    return context.type === 'number'
+    return context.type === 'number';
   }
 
-})
+});
 
-module.exports = NumberEqualsComparator
+module.exports = NumberEqualsComparator;

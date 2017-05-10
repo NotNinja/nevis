@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,72 +20,72 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var expect = require('chai').expect
+var expect = require('chai').expect;
 
-var CollectionEqualsComparator = require('../../../src/equals/comparators/collection-comparator')
-var equals = require('../../../src/equals/index')
-var EqualsContext = require('../../../src/equals/context')
-var EqualsComparator = require('../../../src/equals/comparators/comparator')
+var CollectionEqualsComparator = require('../../../src/equals/comparators/collection-comparator');
+var equals = require('../../../src/equals/index');
+var EqualsContext = require('../../../src/equals/context');
+var EqualsComparator = require('../../../src/equals/comparators/comparator');
 
 describe('equals/comparators/collection-comparator:CollectionEqualsComparator', function() {
-  var comparator
+  var comparator;
 
   before(function() {
     var TestComparator = CollectionEqualsComparator.extend({
       getElements: function(collection) {
-        return collection()
+        return collection();
       }
-    })
+    });
 
-    comparator = new TestComparator()
-  })
+    comparator = new TestComparator();
+  });
 
   it('should be a EqualsComparator', function() {
-    expect(comparator).to.be.an.instanceof(EqualsComparator)
-  })
+    expect(comparator).to.be.an.instanceof(EqualsComparator);
+  });
 
   describe('#compare', function() {
     context('when arrays provided by "getElements" method are equal', function() {
       it('should return true', function() {
         expect(comparator.compare(new EqualsContext(function() {
-          return []
+          return [];
         }, function() {
-          return []
-        }, equals))).to.be.true
+          return [];
+        }, equals))).to.be.true;
         expect(comparator.compare(new EqualsContext(function() {
-          return [ 'foo', 'bar', 123 ]
+          return [ 'foo', 'bar', 123 ];
         }, function() {
-          return [ 'foo', 'bar', 123 ]
-        }, equals))).to.be.true
-      })
-    })
+          return [ 'foo', 'bar', 123 ];
+        }, equals))).to.be.true;
+      });
+    });
 
     context('when arrays provided by "getElements" method are not equal', function() {
       it('should return false', function() {
         expect(comparator.compare(new EqualsContext(function() {
-          return []
+          return [];
         }, function() {
-          return [ 'foo', 'bar', 123 ]
-        }, equals))).to.be.false
+          return [ 'foo', 'bar', 123 ];
+        }, equals))).to.be.false;
         expect(comparator.compare(new EqualsContext(function() {
-          return [ 'foo', 'bar', 123 ]
+          return [ 'foo', 'bar', 123 ];
         }, function() {
-          return [ 'fu', 'baz', 321 ]
-        }, equals))).to.be.false
+          return [ 'fu', 'baz', 321 ];
+        }, equals))).to.be.false;
         expect(comparator.compare(new EqualsContext(function() {
-          return [ 'foo', 'bar', 123 ]
+          return [ 'foo', 'bar', 123 ];
         }, function() {
-          return [ 123, 'bar', 'foo' ]
-        }, equals))).to.be.false
-      })
-    })
-  })
+          return [ 123, 'bar', 'foo' ];
+        }, equals))).to.be.false;
+      });
+    });
+  });
 
   describe('#getElements', function() {
     it('should be an abstract method', function() {
-      expect(CollectionEqualsComparator.prototype.getElements).to.be.a('function')
-    })
-  })
-})
+      expect(CollectionEqualsComparator.prototype.getElements).to.be.a('function');
+    });
+  });
+});

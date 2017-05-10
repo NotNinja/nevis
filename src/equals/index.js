@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,10 +20,10 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var comparators = require('./comparators')
-var EqualsContext = require('./context')
+var comparators = require('./comparators');
+var EqualsContext = require('./context');
 
 /**
  * The list of active equals comparators that will be checked for any that support the values.
@@ -40,7 +40,7 @@ var activeComparators = [
   new comparators.SetEqualsComparator(),
   new comparators.MapEqualsComparator(),
   new comparators.ObjectEqualsComparator()
-]
+];
 
 /**
  * Returns whether the specified <code>value</code> is "equal to" the <code>other</code> provided using the given
@@ -86,37 +86,37 @@ var activeComparators = [
  */
 function equals(value, other, options) {
   if (value === other) {
-    return true
+    return true;
   }
   if (value == null || other == null) {
-    return value === other
+    return value === other;
   }
 
-  var context = new EqualsContext(value, other, equals, options)
+  var context = new EqualsContext(value, other, equals, options);
 
   if (!context.options.ignoreEquals && typeof value.equals === 'function') {
-    return value.equals(other)
+    return value.equals(other);
   }
 
   if (!context.validate()) {
-    return false
+    return false;
   }
 
-  var comparator
-  var length = activeComparators.length
+  var comparator;
+  var length = activeComparators.length;
 
   for (var i = 0; i < length; i++) {
-    comparator = activeComparators[i]
+    comparator = activeComparators[i];
 
     if (comparator.supports(context)) {
-      return comparator.compare(context)
+      return comparator.compare(context);
     }
   }
 
-  return false
+  return false;
 }
 
-module.exports = equals
+module.exports = equals;
 
 /**
  * Called with the name and value of a property belonging to an object whose equality is being tested to determine

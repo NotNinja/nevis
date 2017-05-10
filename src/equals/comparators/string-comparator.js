@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var EqualsComparator = require('./comparator')
+var EqualsComparator = require('./comparator');
 
 /**
  * An implementation of {@link EqualsComparator} that supports string values.
@@ -39,15 +39,15 @@ var StringEqualsComparator = EqualsComparator.extend({
    * @memberof StringEqualsComparator#
    */
   compare: function compare(context) {
-    var other = context.other
-    var value = context.value
+    var other = context.other;
+    var value = context.value;
 
     if (context.options.ignoreCase) {
-      other = other.toLocaleUpperCase()
-      value = value.toLocaleUpperCase()
+      other = other.toLocaleUpperCase();
+      value = value.toLocaleUpperCase();
     }
 
-    return value === other
+    return value === other;
   },
 
   /**
@@ -56,9 +56,9 @@ var StringEqualsComparator = EqualsComparator.extend({
    * @memberof StringEqualsComparator#
    */
   supports: function supports(context) {
-    return context.type === 'string'
+    return context.type === 'string';
   }
 
-})
+});
 
-module.exports = StringEqualsComparator
+module.exports = StringEqualsComparator;

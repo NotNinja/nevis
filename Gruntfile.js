@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,12 +20,12 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
 module.exports = function(grunt) {
-  var commonjs = require('rollup-plugin-commonjs')
-  var nodeResolve = require('rollup-plugin-node-resolve')
-  var uglify = require('rollup-plugin-uglify')
+  var commonjs = require('rollup-plugin-commonjs');
+  var nodeResolve = require('rollup-plugin-node-resolve');
+  var uglify = require('rollup-plugin-uglify');
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -91,7 +91,7 @@ module.exports = function(grunt) {
             return [
               nodeResolve(),
               commonjs()
-            ]
+            ];
           }
         },
         files: {
@@ -105,7 +105,7 @@ module.exports = function(grunt) {
           moduleName: 'Nevis',
           sourceMap: true,
           sourceMapRelativePaths: true,
-          banner: '/*! Nevis v<%= pkg.version %> | (C) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>, Skelp | <%= pkg.license %> License */',
+          banner: '/*! Nevis v<%= pkg.version %> | (C) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>, !ninja | <%= pkg.license %> License */',
           plugins: function() {
             return [
               nodeResolve(),
@@ -113,11 +113,11 @@ module.exports = function(grunt) {
               uglify({
                 output: {
                   comments: function(node, comment) {
-                    return comment.type === 'comment2' && /^\!/.test(comment.value)
+                    return comment.type === 'comment2' && /^\!/.test(comment.value);
                   }
                 }
               })
-            ]
+            ];
           }
         },
         files: {
@@ -135,7 +135,7 @@ module.exports = function(grunt) {
             return [
               nodeResolve(),
               commonjs()
-            ]
+            ];
           }
         },
         files: {
@@ -149,7 +149,7 @@ module.exports = function(grunt) {
           moduleName: 'Nevis',
           sourceMap: true,
           sourceMapRelativePaths: true,
-          banner: '/*! Nevis Lite v<%= pkg.version %> | (C) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>, Skelp | <%= pkg.license %> License */',
+          banner: '/*! Nevis Lite v<%= pkg.version %> | (C) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>, !ninja | <%= pkg.license %> License */',
           plugins: function() {
             return [
               nodeResolve(),
@@ -157,11 +157,11 @@ module.exports = function(grunt) {
               uglify({
                 output: {
                   comments: function(node, comment) {
-                    return comment.type === 'comment2' && /^\!/.test(comment.value)
+                    return comment.type === 'comment2' && /^\!/.test(comment.value);
                   }
                 }
               })
-            ]
+            ];
           }
         },
         files: {
@@ -176,12 +176,12 @@ module.exports = function(grunt) {
         tasks: [ 'eslint', 'mochaTest:watch' ]
       }
     }
-  })
+  });
 
-  require('load-grunt-tasks')(grunt)
+  require('load-grunt-tasks')(grunt);
 
-  grunt.registerTask('default', [ 'ci' ])
-  grunt.registerTask('build', [ 'eslint', 'clean:build', 'rollup' ])
-  grunt.registerTask('ci', [ 'eslint', 'clean', 'rollup', 'mocha_istanbul' ])
-  grunt.registerTask('test', [ 'eslint', 'clean:test', 'mocha_istanbul' ])
-}
+  grunt.registerTask('default', [ 'ci' ]);
+  grunt.registerTask('build', [ 'eslint', 'clean:build', 'rollup' ]);
+  grunt.registerTask('ci', [ 'eslint', 'clean', 'rollup', 'mocha_istanbul' ]);
+  grunt.registerTask('test', [ 'eslint', 'clean:test', 'mocha_istanbul' ]);
+};

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var HashCodeGenerator = require('./generator')
+var HashCodeGenerator = require('./generator');
 
 /**
  * An implementation of {@link HashCodeGenerator} that supports date values.
@@ -39,7 +39,7 @@ var DateHashCodeGenerator = HashCodeGenerator.extend({
    * @memberof DateHashCodeGenerator#
    */
   generate: function generate(context) {
-    return context.value.getTime()
+    return context.value.getTime();
   },
 
   /**
@@ -48,9 +48,9 @@ var DateHashCodeGenerator = HashCodeGenerator.extend({
    * @memberof DateHashCodeGenerator#
    */
   supports: function supports(context) {
-    return context.string === '[object Date]'
+    return context.string === '[object Date]';
   }
 
-})
+});
 
-module.exports = DateHashCodeGenerator
+module.exports = DateHashCodeGenerator;

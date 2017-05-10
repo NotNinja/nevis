@@ -2,12 +2,12 @@
   "name": "nevis",
   "version": "0.4.0",
   "description": "Makes JavaScript more object-orientated",
-  "homepage": "https://github.com/Skelp/nevis",
+  "homepage": "https://github.com/NotNinja/nevis",
   "authors": [
     {
       "name": "Alasdair Mercer",
-      "email": "alasdair@skelp.io",
-      "homepage": "https://skelp.io"
+      "email": "mercer.alasdair@gmail.com",
+      "homepage": "https://not.ninja"
     }
   ],
   "license": "MIT",
@@ -26,7 +26,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Skelp/nevis.git"
+    "url": "https://github.com/NotNinja/nevis.git"
   },
   "main": "dist/nevis.js",
   "moduleType": [

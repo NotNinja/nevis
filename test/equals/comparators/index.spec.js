@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,22 +20,22 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
-var expect = require('chai').expect
+var expect = require('chai').expect;
 
-var ArrayEqualsComparator = require('../../../src/equals/comparators/array-comparator')
-var CollectionEqualsComparator = require('../../../src/equals/comparators/collection-comparator')
-var EqualsComparator = require('../../../src/equals/comparators/comparator')
-var comparators = require('../../../src/equals/comparators')
-var DateEqualsComparator = require('../../../src/equals/comparators/date-comparator')
-var HashEqualsComparator = require('../../../src/equals/comparators/hash-comparator')
-var MapEqualsComparator = require('../../../src/equals/comparators/map-comparator')
-var NumberEqualsComparator = require('../../../src/equals/comparators/number-comparator')
-var ObjectEqualsComparator = require('../../../src/equals/comparators/object-comparator')
-var SetEqualsComparator = require('../../../src/equals/comparators/set-comparator')
-var StringEqualsComparator = require('../../../src/equals/comparators/string-comparator')
-var ToStringEqualsComparator = require('../../../src/equals/comparators/to-string-comparator')
+var ArrayEqualsComparator = require('../../../src/equals/comparators/array-comparator');
+var CollectionEqualsComparator = require('../../../src/equals/comparators/collection-comparator');
+var EqualsComparator = require('../../../src/equals/comparators/comparator');
+var comparators = require('../../../src/equals/comparators');
+var DateEqualsComparator = require('../../../src/equals/comparators/date-comparator');
+var HashEqualsComparator = require('../../../src/equals/comparators/hash-comparator');
+var MapEqualsComparator = require('../../../src/equals/comparators/map-comparator');
+var NumberEqualsComparator = require('../../../src/equals/comparators/number-comparator');
+var ObjectEqualsComparator = require('../../../src/equals/comparators/object-comparator');
+var SetEqualsComparator = require('../../../src/equals/comparators/set-comparator');
+var StringEqualsComparator = require('../../../src/equals/comparators/string-comparator');
+var ToStringEqualsComparator = require('../../../src/equals/comparators/to-string-comparator');
 
 describe('equals/comparators/index', function() {
   it('should contain all equals comparator constructors', function() {
@@ -51,6 +51,6 @@ describe('equals/comparators/index', function() {
       SetEqualsComparator: SetEqualsComparator,
       StringEqualsComparator: StringEqualsComparator,
       ToStringEqualsComparator: ToStringEqualsComparator
-    })
-  })
-})
+    });
+  });
+});

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Alasdair Mercer, Skelp
+ * Copyright (C) 2017 Alasdair Mercer, !ninja
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-'use strict'
+'use strict';
 
 /**
  * Contains the value for which a hash code is to be generated as well string representation and type of the value which
@@ -35,7 +35,7 @@
  */
 function HashCodeContext(value, hashCode, options) {
   if (options == null) {
-    options = {}
+    options = {};
   }
 
   /**
@@ -44,7 +44,7 @@ function HashCodeContext(value, hashCode, options) {
    * @private
    * @type {Function}
    */
-  this._hashCode = hashCode
+  this._hashCode = hashCode;
 
   /**
    * The options to be used to generate the hash code for the value.
@@ -55,12 +55,12 @@ function HashCodeContext(value, hashCode, options) {
   this.options = {
     allowCache: options.allowCache !== false,
     filterProperty: options.filterProperty != null ? options.filterProperty : function() {
-      return true
+      return true;
     },
     ignoreHashCode: Boolean(options.ignoreHashCode),
     ignoreInherited: Boolean(options.ignoreInherited),
     ignoreMethods: Boolean(options.ignoreMethods)
-  }
+  };
 
   /**
    * The string representation of the value whose hash code is to be generated.
@@ -71,7 +71,7 @@ function HashCodeContext(value, hashCode, options) {
    * @public
    * @type {string}
    */
-  this.string = Object.prototype.toString.call(value)
+  this.string = Object.prototype.toString.call(value);
 
   /**
    * The type of the value whose hash code is to be generated.
@@ -81,7 +81,7 @@ function HashCodeContext(value, hashCode, options) {
    * @public
    * @type {string}
    */
-  this.type = typeof value
+  this.type = typeof value;
 
   /**
    * The value whose hash code is to be generated.
@@ -89,7 +89,7 @@ function HashCodeContext(value, hashCode, options) {
    * @public
    * @type {*}
    */
-  this.value = value
+  this.value = value;
 }
 
 /**
@@ -104,8 +104,8 @@ function HashCodeContext(value, hashCode, options) {
  * @memberof HashCodeContext#
  */
 HashCodeContext.prototype.copy = function copy(value) {
-  return new HashCodeContext(value, this._hashCode, this.options)
-}
+  return new HashCodeContext(value, this._hashCode, this.options);
+};
 
 /**
  * A convenient shorthand for calling {@link Nevis.hashCode} from within a {@link HashCodeGenerator}.
@@ -117,7 +117,7 @@ HashCodeContext.prototype.copy = function copy(value) {
  * @memberof HashCodeContext#
  */
 HashCodeContext.prototype.hashCode = function hashCode(value) {
-  return this._hashCode(value, this.options)
-}
+  return this._hashCode(value, this.options);
+};
 
-module.exports = HashCodeContext
+module.exports = HashCodeContext;
