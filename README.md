@@ -39,12 +39,12 @@ install that way instead of using `npm`. While equals should be compatible with 
 
 If you want to simply download the file to be used in the browser you can find them below:
 
-* [Development Version](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis.js) (81kb)
+* [Development Version](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis.js) (81kb - [Source Map](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis.js.map))
 * [Production Version](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis.min.js) (9.2kb - [Source Map](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis.min.js.map))
 
 If you're only wanting support for inheritance, you can use the *lite* version instead:
 
-* [Development Version - Lite](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis-lite.js) (7.5kb)
+* [Development Version - Lite](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis-lite.js) (7.5kb - [Source Map](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis-lite.js.map))
 * [Production Version - Lite](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis-lite.min.js) (980b - [Source Map](https://cdn.rawgit.com/Skelp/nevis/master/dist/nevis-lite.min.js.map))
 
 ## API
@@ -364,7 +364,7 @@ Nevis.prototype.hashCode()
 
 Returns the hash code for the instance. This method is supported for the benefit of hash tables.
 
-The general contract of `hashCode` is: 
+The general contract of `hashCode` is:
 
 * Whenever it is invoked on the same instance more than once during an execution of an application, the `hashCode`
   method must consistently return the same number, provided no information used to generate the hash code on the
@@ -375,7 +375,7 @@ The general contract of `hashCode` is:
 * It is not required that if two instances are unequal, that calling the `hashCode` method on each of the two instances
   must produce distinct number results. However, the programmer should be aware that producing distinct number results
   for unequal instances may improve the performance of hash tables.
- 
+
 The default implementation of this method will attempt to generate the hash code based on all of the fields on the
 instance. Please note that it is generally necessary to override the `Nevis.prototype.equals` method whenever this
 method is overridden, so as to maintain the above contract where equal objects must have equal hash codes.
@@ -411,7 +411,7 @@ Nevis.hashCode(value[, options])
 
 Returns a hash code for the specified `value` using the `options` provided. This method is supported for the benefit of
 hash tables and it has the same general contract as `Nevis.prototype.hashCode`.
- 
+
 If `value` is `null`, this method will always return zero. Otherwise, it will check whether `value` has a method named
 "hashCode" and, if so, return the result of calling that method. If no "hashCode" method exists on `value` or if the
 `ignoreHashCode` option is enabled, it will attempt to generate the hash code internally based on its type.
@@ -461,7 +461,7 @@ Nevis provides a builder to support generating hash codes for complex classes.
 Nevis.HashCodeBuilder([initial][, multipler])
 ```
 
-Ideally the `initial` value and `multiplier` should be different for each class, however, this is not vital. Prime 
+Ideally the `initial` value and `multiplier` should be different for each class, however, this is not vital. Prime
 numbers are preferred, especially for `multiplier`.
 
 If specified, both `initial` and `multiplier` *must* be odd numbers.
